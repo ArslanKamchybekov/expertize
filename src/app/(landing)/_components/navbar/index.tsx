@@ -1,6 +1,7 @@
-// import GlassSheet from "@/components/global/glass-sheet"
+import GlassSheet from "@/components/global/glass-sheet"
 import { Button } from "@/components/ui/button"
 import { Logout } from "@/icons"
+import { MenuIcon } from "lucide-react"
 import Link from "next/link"
 import Menu from "./menu"
 
@@ -21,7 +22,7 @@ const LandingPageNavbar = (props: Props) => {
                         Login
                     </Button>
                 </Link>
-                {/* <GlassSheet
+                <GlassSheet
                     triggerClass="lg:hidden"
                     trigger={
                         <Button
@@ -33,7 +34,7 @@ const LandingPageNavbar = (props: Props) => {
                     }
                 >
                     <Menu orientation="mobile" />
-                </GlassSheet> */}
+                </GlassSheet>
             </div>
         </div>
     )
