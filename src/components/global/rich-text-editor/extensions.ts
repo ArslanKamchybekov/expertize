@@ -8,12 +8,12 @@ import {
     TiptapLink,
     UpdatedImage,
 } from "novel/extensions"
-  
-  import { cx } from "class-variance-authority"
-  
-  import { UploadImagesPlugin } from "novel/plugins"
-  
-  const tiptapImage = TiptapImage.extend({
+
+import { cx } from "class-variance-authority"
+
+import { UploadImagesPlugin } from "novel/plugins"
+
+const tiptapImage = TiptapImage.extend({
     addProseMirrorPlugins() {
         return [
             UploadImagesPlugin({
@@ -21,42 +21,42 @@ import {
             }),
         ]
     },
-  }).configure({
+}).configure({
     allowBase64: true,
     HTMLAttributes: {
         class: cx("rounded-lg border border-muted"),
     },
-  })
-  
-  // You can overwrite the placeholder with your own configuration
-  const placeholder = Placeholder
-  const tiptapLink = TiptapLink.configure({
+})
+
+// You can overwrite the placeholder with your own configuration
+const placeholder = Placeholder
+const tiptapLink = TiptapLink.configure({
     HTMLAttributes: {
         class: cx(
             "text-muted-foreground underline underline-offset-[3px] hover:text-primary transition-colors cursor-pointer",
         ),
     },
-  })
-  
-  const taskList = TaskList.configure({
+})
+
+const taskList = TaskList.configure({
     HTMLAttributes: {
         class: cx("not-prose pl-2"),
     },
-  })
-  const taskItem = TaskItem.configure({
+})
+const taskItem = TaskItem.configure({
     HTMLAttributes: {
         class: cx("flex items-start my-4"),
     },
     nested: true,
-  })
-  
-  const horizontalRule = HorizontalRule.configure({
+})
+
+const horizontalRule = HorizontalRule.configure({
     HTMLAttributes: {
         class: cx("mt-4 mb-6 border-t border-muted-foreground"),
     },
-  })
-  
-  const starterKit = StarterKit.configure({
+})
+
+const starterKit = StarterKit.configure({
     bulletList: {
         HTMLAttributes: {
             class: cx("list-disc list-outside leading-3 -mt-2"),
@@ -94,9 +94,9 @@ import {
         width: 4,
     },
     gapcursor: false,
-  })
-  
-  export const defaultExtensions = [
+})
+
+export const defaultExtensions = [
     starterKit,
     placeholder,
     TiptapLink,
@@ -105,4 +105,4 @@ import {
     taskList,
     taskItem,
     horizontalRule,
-  ]
+]

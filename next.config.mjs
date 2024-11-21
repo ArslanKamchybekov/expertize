@@ -4,11 +4,11 @@ const nextConfig = {
     async headers() {
         return [
             {
-                source: '/(.*)',
+                source: "/(.*)",
                 headers: [
                     {
-                        key: 'Access-Control-Allow-Origin',
-                        value: '*',
+                        key: "Access-Control-Allow-Origin",
+                        value: "*",
                     },
                 ],
             },
@@ -22,7 +22,7 @@ const nextConfig = {
                 hostname: "ucarecdn.com",
             },
         ],
-    }
+    },
 }
 
 export default nextConfig

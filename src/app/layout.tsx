@@ -10,31 +10,32 @@ import "./global.css"
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "GrowthHungry AI",
-  description: "GrowthHungry AI is an educational platform that helps you learn and grow your skills.",
+    title: "GrowthHungry AI",
+    description:
+        "GrowthHungry AI is an educational platform that helps you learn and grow your skills.",
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode
+    children: React.ReactNode
 }>) {
-  return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${jakarta.className} bg-black`}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-          >
-            <ReduxProvider>
-              <ReactQueryProvider>{children}</ReactQueryProvider>
-            </ReduxProvider>
-            <Toaster />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
-  )
+    return (
+        <ClerkProvider>
+            <html lang="en" suppressHydrationWarning>
+                <body className={`${jakarta.className} bg-black`}>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="dark"
+                        disableTransitionOnChange
+                    >
+                        <ReduxProvider>
+                            <ReactQueryProvider>{children}</ReactQueryProvider>
+                        </ReduxProvider>
+                        <Toaster />
+                    </ThemeProvider>
+                </body>
+            </html>
+        </ClerkProvider>
+    )
 }
