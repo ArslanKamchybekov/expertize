@@ -4,8 +4,8 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { RefObject } from "react"
-  
-  type GlobalAccordionProps = {
+
+type GlobalAccordionProps = {
     id: string
     title: string
     ref?: RefObject<HTMLButtonElement>
@@ -13,9 +13,9 @@ import { RefObject } from "react"
     edit?: boolean
     editable?: React.ReactNode
     children: React.ReactNode
-  }
-  
-  export const GlobalAccordion = ({
+}
+
+export const GlobalAccordion = ({
     title,
     id,
     ref,
@@ -23,19 +23,19 @@ import { RefObject } from "react"
     edit,
     children,
     editable,
-  }: GlobalAccordionProps) => {
+}: GlobalAccordionProps) => {
     return (
-      <Accordion type="single" collapsible>
-        <AccordionItem className="border-none" value={id}>
-          <AccordionTrigger
-            className="font-bold capitalize"
-            onDoubleClick={onEdit}
-            ref={ref}
-          >
-            {edit ? editable : title}
-          </AccordionTrigger>
-          {children}
-        </AccordionItem>
-      </Accordion>
+        <Accordion type="single" collapsible>
+            <AccordionItem className="border-none" value={id}>
+                <AccordionTrigger
+                    className="font-bold capitalize"
+                    onDoubleClick={onEdit}
+                    ref={ref}
+                >
+                    {edit ? editable : title}
+                </AccordionTrigger>
+                {children}
+            </AccordionItem>
+        </Accordion>
     )
-  }
+}

@@ -7,22 +7,22 @@ import {
 import ExplorePageContent from "../_components/explore-content"
 
 const ExploreCategoryPage = async ({
-  params,
+    params,
 }: {
-  params: { category: string }
+    params: { category: string }
 }) => {
-  const query = new QueryClient()
+    const query = new QueryClient()
 
-  await query.prefetchQuery({
-    queryKey: ["groups"],
-    queryFn: () => onGetExploreGroup(params.category, 0),
-  })
+    await query.prefetchQuery({
+        queryKey: ["groups"],
+        queryFn: () => onGetExploreGroup(params.category, 0),
+    })
 
-  return (
-    <HydrationBoundary state={dehydrate(query)}>
-      <ExplorePageContent layout="LIST" category={params.category} />
-    </HydrationBoundary>
-  )
+    return (
+        <HydrationBoundary state={dehydrate(query)}>
+            <ExplorePageContent layout="LIST" category={params.category} />
+        </HydrationBoundary>
+    )
 }
 
 export default ExploreCategoryPage

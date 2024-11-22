@@ -8,83 +8,83 @@ import { Group } from "lucide-react"
 import Link from "next/link"
 
 type GroupDropDownProps = {
-  members?: {
-    Group: {
-      channel: {
-        id: string
-      }[]
-      id: string
-      name: string
-      icon: string | null
-    } | null
-  }[]
-  groups:
-    | {
-        status: number
-        groups: {
-          channel: {
+    members?: {
+        Group: {
+            channel: {
+                id: string
+            }[]
             id: string
-          }[]
-          id: string
-          name: string
-          icon: string | null
-        }[]
-      }
-    | {
-        status: number
-        groups?: undefined
-      }
+            name: string
+            icon: string | null
+        } | null
+    }[]
+    groups:
+        | {
+              status: number
+              groups: {
+                  channel: {
+                      id: string
+                  }[]
+                  id: string
+                  name: string
+                  icon: string | null
+              }[]
+          }
+        | {
+              status: number
+              groups?: undefined
+          }
 }
 
 export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
-  const { groups: userGroups } = groups
+    const { groups: userGroups } = groups
 
-  return (
-    <DropDown
-      title="Owned Groups"
-      trigger={
-        <Button
-          variant="ghost"
-          className="rounded-2xl hover:bg-themeGray font-medium flex gap-2"
+    return (
+        <DropDown
+            title="Owned Groups"
+            trigger={
+                <Button
+                    variant="ghost"
+                    className="rounded-2xl hover:bg-themeGray font-medium flex gap-2"
+                >
+                    GrowthHungry.
+                    <CarotSort />
+                </Button>
+            }
         >
-          GrowthHungry.
-          <CarotSort />
-        </Button>
-      }
-    >
-      {userGroups &&
-        userGroups.length > 0 &&
-        userGroups.map((item) => (
-          <Link
-            key={item.id}
-            href={`/group/${item.id}/channel/${item.channel[0].id}`}
-          >
-            <Button
-              variant="ghost"
-              className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
-            >
-              <Group />
-              {item.name}
-            </Button>
-          </Link>
-        ))}
-      <Separator orientation="horizontal" />
-      {members &&
-        members.length > 0 &&
-        members.map((member) => (
-          <Link
-            key={member.Group?.id}
-            href={`/group/${member.Group?.id}/channel/${member.Group?.channel[0].id}`}
-          >
-            <Button
-              variant="ghost"
-              className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
-            >
-              <Group />
-              {member.Group?.name}
-            </Button>
-          </Link>
-        ))}
-    </DropDown>
-  )
+            {userGroups &&
+                userGroups.length > 0 &&
+                userGroups.map((item) => (
+                    <Link
+                        key={item.id}
+                        href={`/group/${item.id}/channel/${item.channel[0].id}`}
+                    >
+                        <Button
+                            variant="ghost"
+                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+                        >
+                            <Group />
+                            {item.name}
+                        </Button>
+                    </Link>
+                ))}
+            <Separator orientation="horizontal" />
+            {members &&
+                members.length > 0 &&
+                members.map((member) => (
+                    <Link
+                        key={member.Group?.id}
+                        href={`/group/${member.Group?.id}/channel/${member.Group?.channel[0].id}`}
+                    >
+                        <Button
+                            variant="ghost"
+                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+                        >
+                            <Group />
+                            {member.Group?.name}
+                        </Button>
+                    </Link>
+                ))}
+        </DropDown>
+    )
 }

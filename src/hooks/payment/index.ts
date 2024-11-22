@@ -204,36 +204,36 @@ export const useJoinGroup = (groupid: string) => {
 }
 
 export const useGroupSubscription = (groupid: string) => {
-  const {
-    register,
-    formState: { errors },
-    reset,
-    handleSubmit,
-  } = useForm<z.infer<typeof CreateGroupSubscriptionSchema>>({
-    resolver: zodResolver(CreateGroupSubscriptionSchema),
-  })
+    const {
+        register,
+        formState: { errors },
+        reset,
+        handleSubmit,
+    } = useForm<z.infer<typeof CreateGroupSubscriptionSchema>>({
+        resolver: zodResolver(CreateGroupSubscriptionSchema),
+    })
 
-  const client = useQueryClient()
+    const client = useQueryClient()
 
-  const { mutate, isPending, variables } = useMutation({
-    mutationFn: (data: { price: string }) =>
-      onCreateNewGroupSubscription(groupid, data.price),
-    onMutate: () => reset(),
-    onSuccess: (data) =>
-      toast(data?.status === 200 ? "Success" : "Error", {
-        description: data?.message,
-      }),
-    onSettled: async () => {
-      return await client.invalidateQueries({
-        queryKey: ["group-subscriptions"],
-      })
-    },
-  })
+    const { mutate, isPending, variables } = useMutation({
+        mutationFn: (data: { price: string }) =>
+            onCreateNewGroupSubscription(groupid, data.price),
+        onMutate: () => reset(),
+        onSuccess: (data) =>
+            toast(data?.status === 200 ? "Success" : "Error", {
+                description: data?.message,
+            }),
+        onSettled: async () => {
+            return await client.invalidateQueries({
+                queryKey: ["group-subscriptions"],
+            })
+        },
+    })
 
-  const onCreateNewSubscription = handleSubmit(async (values) =>
-    mutate({ ...values }),
-  )
-  return { register, errors, onCreateNewSubscription, isPending, variables }
+    const onCreateNewSubscription = handleSubmit(async (values) =>
+        mutate({ ...values }),
+    )
+    return { register, errors, onCreateNewSubscription, isPending, variables }
 }
 
 export const useAllSubscriptions = (groupid: string) => {

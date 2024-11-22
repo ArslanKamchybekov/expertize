@@ -5,57 +5,55 @@ import ExploreSlider from "./explore-slider"
 import GroupList from "./group-list"
 
 type Props = {
-  layout: "SLIDER" | "LIST"
-  category?: string
+    layout: "SLIDER" | "LIST"
+    category?: string
 }
 
 const SearchGroups = dynamic(
-  () =>
-    import("./searched-groups").then((components) => components.SearchGroups),
-  {
-    ssr: false,
-  },
+    () =>
+        import("./searched-groups").then(
+            (components) => components.SearchGroups,
+        ),
+    {
+        ssr: false,
+    },
 )
 
 const ExplorePageContent = ({ layout, category }: Props) => {
-  const { isSearching, data, status, debounce } = useAppSelector(
-    (state) => state.searchReducer,
-  )
+    const { isSearching, data, status, debounce } = useAppSelector(
+        (state) => state.searchReducer,
+    )
 
-  return (
-    <div className="flex flex-col">
-      {isSearching || debounce ? (
-        <SearchGroups
-          searching={isSearching as boolean}
-          data={data!}
-          query={debounce}
-        />
-      ) : (
-        status !== 200 &&
-        (layout === "SLIDER" ? (
-          <>
-            <ExploreSlider
-              label="Fitness"
-              text=""
-              query="fitness"
-            />
-            <ExploreSlider
-              label="Tech"
-              text=""
-              query="tech"
-            />
-            <ExploreSlider
-              label="Business"
-              text=""
-              query="business"
-            />
-          </>
-        ) : (
-          <GroupList category={category as string} />
-        ))
-      )}
-    </div>
-  )
+    return (
+        <div className="flex flex-col">
+            {isSearching || debounce ? (
+                <SearchGroups
+                    searching={isSearching as boolean}
+                    data={data!}
+                    query={debounce}
+                />
+            ) : (
+                status !== 200 &&
+                (layout === "SLIDER" ? (
+                    <>
+                        <ExploreSlider
+                            label="Fitness"
+                            text=""
+                            query="fitness"
+                        />
+                        <ExploreSlider label="Tech" text="" query="tech" />
+                        <ExploreSlider
+                            label="Business"
+                            text=""
+                            query="business"
+                        />
+                    </>
+                ) : (
+                    <GroupList category={category as string} />
+                ))
+            )}
+        </div>
+    )
 }
 
 export default ExplorePageContent
