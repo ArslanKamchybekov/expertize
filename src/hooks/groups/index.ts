@@ -14,14 +14,14 @@ import {
 // import { AddCustomDomainSchema } from "@/components/forms/domain/schema"
 import { GroupSettingsSchema } from "@/components/forms/group-settings/schema"
 // import { SendNewMessageSchema } from "@/components/forms/huddles/schema"
-// import { UpdateGallerySchema } from "@/components/forms/media-gallery/schema"
+import { UpdateGallerySchema } from "@/components/forms/media-gallery/schema"
 import { upload } from "@/lib/uploadcare"
 import { supabaseClient, validateURLString } from "@/lib/utils"
 // import { onChat } from "@/redux/slices/chats-slices"
-// import {
-//     onClearList,
-//     onInfiniteScroll,
-// } from "@/redux/slices/infinite-scroll-slice"
+import {
+    onClearList,
+    onInfiniteScroll,
+} from "@/redux/slices/infinite-scroll-slice"
 import { onOnline } from "@/redux/slices/online-member-slice"
 import {
     GroupStateProps,

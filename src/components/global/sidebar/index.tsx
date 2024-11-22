@@ -76,7 +76,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                 <DropDown
                     title="Groups"
                     trigger={
-                        <div className="w-full flex items-center justify-between text-themeTextGray md:border-[1px] border-themeGray p-3 rounded-xl">
+                        <div className="w-full flex items-center justify-between text-themeTextWhite md:border-[1px] border-themeGray p-3 rounded-xl">
                             <div className="flex gap-x-3 items-center">
                                 <img
                                     src={`https://ucarecdn.com/${groupInfo.group?.icon as string}/`}
@@ -102,7 +102,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                             >
                                 <Button
                                     variant="ghost"
-                                    className="flex gap-2 w-full justify-start hover:bg-themeGray items-center"
+                                    className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                                 >
                                     <Group />
                                     {item.name}

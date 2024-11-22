@@ -37,12 +37,13 @@ const PaymentForm = ({ affiliate, userId, stripeId }: Props) => {
 
     return (
         <Loader loading={creatingIntent}>
-            <form className="pt-5" onSubmit={onCreateGroup}>
+            <form className="" onSubmit={onCreateGroup}>
                 <GroupList
                     selected={isCategory}
                     register={register}
                     label="Select Category"
                     slidesOffsetBefore={28}
+                    className="my-2"
                 />
                 <div className="px-7 mb-2">
                     <ErrorMessage

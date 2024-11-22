@@ -18,47 +18,74 @@ export const PricingSection = (props: Props) => {
                     className="text-4xl font-semibold text-center"
                     element="H2"
                 >
-                    Pricing Plans That Fit Your Needs
+                    Plans That Fit Your Needs
                 </GradientText>
-                <p className="text-sm md:text-center text-left text-muted-foreground">
-                    GrowthHungry is a vibrant online education platform that
-                    empowers people to connect,{" "}
-                    <br className="hidden md:block" />
-                    collaborate, and cultivate meaningful relationships to drive
-                    personal and professional growth
-                </p>
             </BackdropGradient>
-            <Card className="p-7 mt-10 md:w-auto w-full bg-themeBlack border-themeGray">
-                <div className="flex flex-col gap-2">
-                    <CardTitle>99$ / month</CardTitle>
-                    <CardDescription className="text-[#B4B0AE]">
-                        Great if you’re just getting started
-                    </CardDescription>
-                    <Link href="#" className="w-full mt-3">
-                        <Button
-                            variant="default"
-                            className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
-                        >
-                            Try a 7-day FREE trial
-                        </Button>
-                    </Link>
-                </div>
-                <div className="flex flex-col gap-2 text-[#B4B0AE] mt-5">
-                    <p>Features</p>
-                    <span className="flex gap-2 mt-3 items-center">
-                        <Check />
-                        Feature number 1
-                    </span>
-                    <span className="flex gap-2 items-center">
-                        <Check />
-                        Feature number 1
-                    </span>
-                    <span className="flex gap-2 items-center">
-                        <Check />
-                        Feature number 1
-                    </span>
-                </div>
-            </Card>
+            <div className="flex flex-col md:flex-row gap-5">
+                <Card className="p-7 mt-10 md:w-auto w-full bg-themeBlack border-themeGray">
+                    <div className="flex flex-col gap-2">
+                        <CardTitle>10$ / month</CardTitle>
+                        <CardDescription className="text-[#B4B0AE]">
+                            Great if you’re just getting started
+                        </CardDescription>
+                        <Link href="#" className="w-full mt-3">
+                            <Button
+                                variant="default"
+                                className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
+                            >
+                                Try a 14-day free trial
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className="flex flex-col gap-2 text-[#B4B0AE] mt-5">
+                        <p>Features</p>
+                        <span className="flex gap-2 mt-3 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                    </div>
+                </Card>
+
+                <Card className="p-7 mt-10 md:w-auto w-full bg-themeBlack border-themeGray">
+                    <div className="flex flex-col gap-2">
+                        <CardTitle>49$ / month</CardTitle>
+                        <CardDescription className="text-[#B4B0AE]">
+                            Great if you’re just getting started
+                        </CardDescription>
+                        <Link href="#" className="w-full mt-3">
+                            <Button
+                                variant="default"
+                                className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
+                            >
+                                Try a 14-day free trial
+                            </Button>
+                        </Link>
+                    </div>
+                    <div className="flex flex-col gap-2 text-[#B4B0AE] mt-5">
+                        <p>Features</p>
+                        <span className="flex gap-2 mt-3 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Feature number 1
+                        </span>
+                    </div>
+                </Card>
+            </div>
         </div>
     )
 }
