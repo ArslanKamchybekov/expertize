@@ -12,6 +12,11 @@ const ExplorePage = async (props: Props) => {
     const query = new QueryClient()
 
     await query.prefetchQuery({
+        queryKey: ["all"],
+        queryFn: () => onGetExploreGroup("all", 0),
+    })
+
+    await query.prefetchQuery({
         queryKey: ["fitness"],
         queryFn: () => onGetExploreGroup("fitness", 0),
     })
@@ -24,6 +29,26 @@ const ExplorePage = async (props: Props) => {
     await query.prefetchQuery({
         queryKey: ["business"],
         queryFn: () => onGetExploreGroup("business", 0),
+    })
+
+    await query.prefetchQuery({
+        queryKey: ["music"],
+        queryFn: () => onGetExploreGroup("music", 0),
+    })
+
+    await query.prefetchQuery({
+        queryKey: ["lifestyle"],
+        queryFn: () => onGetExploreGroup("lifestyle", 0),
+    })
+
+    await query.prefetchQuery({
+        queryKey: ["personal-development"],
+        queryFn: () => onGetExploreGroup("personal-development", 0),
+    })
+
+    await query.prefetchQuery({
+        queryKey: ["social-media"],
+        queryFn: () => onGetExploreGroup("social-media", 0),
     })
 
     return (

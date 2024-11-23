@@ -17,7 +17,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                     </h5>
                     <GradientText
                         element="H2"
-                        className="text-4xl font-semibold py-1"
+                        className="text-4xl font-semibold py-1 my-4"
                     >
                         Create Your Group
                     </GradientText>

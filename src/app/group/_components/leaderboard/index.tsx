@@ -14,7 +14,7 @@ export const LeaderBoardCard = ({ light }: LeaderBoardCardProps) => {
             )}
         >
             <h2 className="text-themeTextWhite text-xl font-bold">
-                leaderboard (30-days)
+                Leaderboard
             </h2>
             <p className="text-themeTextGray text-sm">
                 See who performed the best this month.

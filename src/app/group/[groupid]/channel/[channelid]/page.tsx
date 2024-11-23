@@ -37,9 +37,10 @@ const GroupChannelPage = async ({ params }: Props) => {
             <div className="grid lg:grid-cols-4 grid-cols-1 w-full flex-1 h-0 gap-x-5 px-5 s">
                 <div className="col-span-1 lg:inline relative hidden py-5">
                     <LeaderBoardCard light />
+                    {/* <LeaderBoard/> */}
                 </div>
                 <div className="lg:col-span-2 flex flex-col gap-y-5 py-5">
-                    <Menu orientation="desktop" />
+                    <Menu orientation="desktop" groupid={params.groupid} />
                     <CreateNewPost
                         userImage={user?.imageUrl!}
                         channelid={params.channelid}
@@ -52,7 +53,7 @@ const GroupChannelPage = async ({ params }: Props) => {
                     />
                 </div>
                 <div className="col-span-1 hidden lg:inline relative py-5">
-                    <GroupSideWidget light />
+                    <GroupSideWidget light groupid={params.groupid} userid={authUser.id!} />
                 </div>
             </div>
         </HydrationBoundary>

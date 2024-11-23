@@ -35,7 +35,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
                     container="items-center"
                 >
                     <Search
-                        placeholder="Search for anything"
+                        placeholder="Search for groups"
                         searchType="GROUPS"
                         glass
                         inputStyle="lg:w-[500px] text-lg h-auto z-[9999]"

@@ -30,7 +30,7 @@ const GroupCard = ({
                 <img
                     src={preview || `https://ucarecdn.com/${thumbnail}/`}
                     alt="thumbnail"
-                    className="w-full opacity-70 h-56"
+                    className="w-full h-48 object-cover"
                 />
                 <div className="p-6">
                     <h3 className="text-lg text-themeTextGray font-bold">

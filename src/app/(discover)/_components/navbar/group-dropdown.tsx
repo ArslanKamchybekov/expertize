@@ -37,11 +37,11 @@ type GroupDropDownProps = {
 }
 
 export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
-    const { groups: userGroups } = groups
+    const { groups: ownedGroups } = groups
 
     return (
         <DropDown
-            title="Owned Groups"
+            title="Groups"
             trigger={
                 <Button
                     variant="ghost"
@@ -52,39 +52,51 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                 </Button>
             }
         >
-            {userGroups &&
-                userGroups.length > 0 &&
-                userGroups.map((item) => (
-                    <Link
-                        key={item.id}
-                        href={`/group/${item.id}/channel/${item.channel[0].id}`}
-                    >
-                        <Button
-                            variant="ghost"
-                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+            {ownedGroups && ownedGroups.length > 0 && (
+                <>
+                    <h4 className="px-4 py-2 text-sm font-bold text-themeTextGray">
+                        Owned Groups
+                    </h4>
+                    {ownedGroups.map((item) => (
+                        <Link
+                            key={item.id}
+                            href={`/group/${item.id}/channel/${item.channel[0].id}`}
                         >
-                            <Group />
-                            {item.name}
-                        </Button>
-                    </Link>
-                ))}
+                            <Button
+                                variant="ghost"
+                                className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+                            >
+                                <Group />
+                                {item.name}
+                            </Button>
+                        </Link>
+                    ))}
+                </>
+            )}
+
             <Separator orientation="horizontal" />
-            {members &&
-                members.length > 0 &&
-                members.map((member) => (
-                    <Link
-                        key={member.Group?.id}
-                        href={`/group/${member.Group?.id}/channel/${member.Group?.channel[0].id}`}
-                    >
-                        <Button
-                            variant="ghost"
-                            className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+
+            {members && members.length > 0 && (
+                <>
+                    <h4 className="px-4 py-2 text-sm font-bold text-themeTextGray">
+                        Member Groups
+                    </h4>
+                    {members.map((member) => (
+                        <Link
+                            key={member.Group?.id}
+                            href={`/group/${member.Group?.id}/channel/${member.Group?.channel[0].id}`}
                         >
-                            <Group />
-                            {member.Group?.name}
-                        </Button>
-                    </Link>
-                ))}
+                            <Button
+                                variant="ghost"
+                                className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+                            >
+                                <Group />
+                                {member.Group?.name}
+                            </Button>
+                        </Link>
+                    ))}
+                </>
+            )}
         </DropDown>
     )
 }

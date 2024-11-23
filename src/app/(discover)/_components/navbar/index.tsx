@@ -43,7 +43,7 @@ export const Navbar = async () => {
                     </Button>
                 </Link>
                 {user.status === 200 ? (
-                    <UserWidget image={user.image!} />
+                    <UserWidget image={user.image!} userid={user.id!} />
                 ) : (
                     <Link href="/sign-in">
                         <Button

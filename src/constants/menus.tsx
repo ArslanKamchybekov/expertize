@@ -1,6 +1,5 @@
 import {
     AffiliateDuoToneBlack,
-    Buisness,
     Chat,
     Courses,
     CreditCard,
@@ -10,7 +9,7 @@ import {
     Home,
     IDuotoneBlack,
     PersonalDevelopment,
-    ZapDouToneBlack,
+    ZapDouToneBlack
 } from "@/icons"
 
 export type MenuProps = {
@@ -53,42 +52,29 @@ export const LANDING_PAGE_MENU: MenuProps[] = [
 ]
 export const GROUP_PAGE_MENU: MenuProps[] = [
     {
-        id: 0,
-        label: "Group",
-        icon: <Home />,
-        path: "/",
-        section: true,
+        id: 4,
+        label: "About",
+        icon: <Document />,
+        path: "/about",
     },
     {
         id: 1,
         label: "Courses",
         icon: <Courses />,
-        path: "#pricing",
+        path: "/courses",
         section: true,
-    },
-    {
-        id: 2,
-        label: "Events",
-        icon: <Buisness />,
-        path: "/explore",
     },
     {
         id: 3,
         label: "Members",
         icon: <PersonalDevelopment />,
-        path: "/explore",
-    },
-    {
-        id: 4,
-        label: "About",
-        icon: <Document />,
-        path: "/explore",
+        path: "/members",
     },
     {
         id: 5,
         label: "Huddle",
         icon: <Chat />,
-        path: "/explore",
+        path: "/huddle",
     },
 ]
 
