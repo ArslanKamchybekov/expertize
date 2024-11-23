@@ -29,7 +29,7 @@ const Menu = ({ orientation, groupid }: MenuProps) => {
                                         case "About":
                                             return `/about/${groupid}`
                                         case "Huddle":
-                                            return `/group/${groupid}/messages`    
+                                            return `/group/${groupid}/messages`
                                         default:
                                             return `/group/${groupid}`
                                     }

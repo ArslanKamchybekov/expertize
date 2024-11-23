@@ -9,7 +9,7 @@ import {
     Home,
     IDuotoneBlack,
     PersonalDevelopment,
-    ZapDouToneBlack
+    ZapDouToneBlack,
 } from "@/icons"
 
 export type MenuProps = {

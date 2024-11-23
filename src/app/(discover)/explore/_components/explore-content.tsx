@@ -36,30 +36,19 @@ const ExplorePageContent = ({ layout, category }: Props) => {
                 status !== 200 &&
                 (layout === "SLIDER" ? (
                     <>
-                        <ExploreSlider
-                            label="All"
-                            text=""
-                            query="all"
-                        />
+                        <ExploreSlider label="All" text="" query="all" />
                         <ExploreSlider
                             label="Fitness"
                             text=""
                             query="fitness"
                         />
-                        <ExploreSlider 
-                            label="Tech" 
-                            text="" 
-                            query="tech" />
+                        <ExploreSlider label="Tech" text="" query="tech" />
                         <ExploreSlider
                             label="Business"
                             text=""
                             query="business"
                         />
-                        <ExploreSlider
-                            label="Music"
-                            text=""
-                            query="music"
-                        />
+                        <ExploreSlider label="Music" text="" query="music" />
                         <ExploreSlider
                             label="Lifestyle"
                             text=""

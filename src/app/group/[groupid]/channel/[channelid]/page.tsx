@@ -53,7 +53,11 @@ const GroupChannelPage = async ({ params }: Props) => {
                     />
                 </div>
                 <div className="col-span-1 hidden lg:inline relative py-5">
-                    <GroupSideWidget light groupid={params.groupid} userid={authUser.id!} />
+                    <GroupSideWidget
+                        light
+                        groupid={params.groupid}
+                        userid={authUser.id!}
+                    />
                 </div>
             </div>
         </HydrationBoundary>

@@ -50,7 +50,9 @@ export const PostFeed = ({ channelid, userid }: PostFeedProps) => {
                     channelname={post.channel.name!}
                     title={post.title!}
                     html={post.htmlContent!}
-                    username={post.author.firstname + " " + post.author.lastname}
+                    username={
+                        post.author.firstname + " " + post.author.lastname
+                    }
                     userimage={post.author.image!}
                     likes={post._count.likes}
                     comments={post._count.comments}
