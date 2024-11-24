@@ -30,7 +30,8 @@ export const PricingSection = (props: Props) => {
                             Perfect for individuals and small groups
                         </CardDescription>
                         <p className="text-[#B4B0AE]">
-                            <span className="text-2xl font-bold">$10</span> / month
+                            <span className="text-2xl font-bold">$10</span> /
+                            month
                         </p>
                         <Link href="#" className="w-full mt-3">
                             <Button
@@ -70,7 +71,8 @@ export const PricingSection = (props: Props) => {
                             Designed for growing businesses and power users
                         </CardDescription>
                         <p className="text-[#B4B0AE]">
-                            <span className="text-2xl font-bold">$25</span> / month
+                            <span className="text-2xl font-bold">$25</span> /
+                            month
                         </p>
                         <Link href="#" className="w-full mt-3">
                             <Button
