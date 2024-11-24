@@ -9,7 +9,7 @@ import {
     Home,
     IDuotoneBlack,
     PersonalDevelopment,
-    ZapDouToneBlack,
+    ZapDouToneBlack
 } from "@/icons"
 
 export type MenuProps = {
@@ -44,11 +44,12 @@ export const LANDING_PAGE_MENU: MenuProps[] = [
         section: true,
     },
     {
-        id: 1,
+        id: 3,
         label: "Explore",
         icon: <Explore />,
         path: "/explore",
-    },
+    }
+
 ]
 export const GROUP_PAGE_MENU: MenuProps[] = [
     {

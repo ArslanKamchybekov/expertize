@@ -14,7 +14,7 @@ const CallToAction = (props: Props) => {
             >
                 Build your future with us
             </GradientText>
-            <p className="text-sm md:text-center text-left text-muted-foreground">
+            <p className="text-sm md:text-center text-left text-muted-foreground my-4">
                 GrowthHungry is a vibrant online education platform that
                 empowers <br className="md:hidden" />
                 people to connect, <br className="hidden md:block" />{" "}

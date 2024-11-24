@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { useSideBar } from "@/hooks/navigation"
 import { Logout, PersonalDevelopment, Settings } from "@/icons"
 import { supabaseClient } from "@/lib/utils"
 import { onOffline } from "@/redux/slices/online-member-slice"
@@ -20,6 +21,8 @@ type UserWidgetProps = {
 export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
     const { signOut } = useClerk()
 
+    const { groupInfo } =useSideBar(groupid!)
+
     const untrackPresence = async () => {
         await supabaseClient.channel("tracking").untrack()
     }
@@ -33,8 +36,6 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
     }
 
     return (
-        // if groupid is not passed, don't render settings
-
         <DropDown
             title="Account"
             trigger={
@@ -53,7 +54,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                     Profile
                 </Button>
             </Link>
-            {groupid && (
+            {groupid && userid === groupInfo?.group?.userId && (
                 <Link href={`/group/${groupid}/settings`}>
                     <Button
                         variant="ghost"
