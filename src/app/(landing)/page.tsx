@@ -42,7 +42,10 @@ export default function Home() {
                         rel="noreferrer"
                         className="text-themeBlue underline"
                     >
-                        Arslan Kamchybekov | GrowthHungry
+                        Arslan Kamchybekov |{" "}
+                    </a>
+                    <a href="https://www.growthhungry.life/en" target="_blank" rel="noreferrer">
+                        <span className="text-themeBlue underline">GrowthHungry</span>
                     </a>
                 </p>
             </footer>

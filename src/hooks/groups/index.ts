@@ -6,6 +6,7 @@ import {
     onGetDomainConfig,
     onGetExploreGroup,
     onGetGroupInfo,
+    onGetUserGroups,
     onSearchGroups,
     onSendMessage,
     onUpDateGroupSettings,
@@ -720,4 +721,23 @@ export const useCustomDomain = (groupid: string) => {
         errors,
         data,
     }
+}
+
+
+export const useGroupMembers = (groupid: string) => {
+    const { data } = useQuery({
+        queryKey: ["group-members"],
+        queryFn: () => onGetAllGroupMembers(groupid),
+    })
+
+    return { data }
+}
+
+export const useUserGroups = (userid: string) => {
+    const { data } = useQuery({
+        queryKey: ["user-groups"],
+        queryFn: () => onGetUserGroups(userid),
+    })
+
+    return { data }
 }

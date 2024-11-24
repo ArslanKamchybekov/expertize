@@ -220,3 +220,23 @@ export const onGetStripeIntegration = async () => {
         console.log(error)
     }
 }
+
+export const onGetUserSubscriptions = async (userid: string) => {
+    try {
+        const subscriptions = await client.subscription.findMany({
+            where: {
+                Group: {
+                    User: {
+                        id: userid,
+                    },
+                },
+            },
+        })
+
+        if (subscriptions) {
+            return subscriptions
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
