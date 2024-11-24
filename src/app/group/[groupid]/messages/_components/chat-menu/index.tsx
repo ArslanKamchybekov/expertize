@@ -16,15 +16,15 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
     const router = useRouter()
 
     const onOpenChat = (memberId: string) => {
-        const currentPath = window.location.pathname;
-        const basePath = pathname.split("/").slice(0, -1).join("/"); // Remove any trailing memberId
-        const newPath = `${basePath}/${memberId}`;
-    
+        const currentPath = window.location.pathname
+        const basePath = pathname.split("/").slice(0, -1).join("/") // Remove any trailing memberId
+        const newPath = `${basePath}/${memberId}`
+
         // Redirect only if the current path doesn't already match the intended path
         if (currentPath !== newPath) {
-            router.push(`${pathname}/${memberId}`);
+            router.push(`${pathname}/${memberId}`)
         }
-    };    
+    }
 
     return (
         <div className="flex flex-col">
@@ -63,7 +63,6 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
         </div>
     )
 }
-
 
 // add user profile
 // get all members of the group
