@@ -21,7 +21,7 @@ type UserWidgetProps = {
 export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
     const { signOut } = useClerk()
 
-    const { groupInfo } =useSideBar(groupid!)
+    const { groupInfo } = useSideBar(groupid!)
 
     const untrackPresence = async () => {
         await supabaseClient.channel("tracking").untrack()

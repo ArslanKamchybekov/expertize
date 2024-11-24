@@ -31,8 +31,8 @@ export default function Home() {
             {/* Footer */}
             <footer className="text-white text-center">
                 <p>
-                    &copy; 2025 <span className="font-bold">GrowthHungry.</span> All
-                    rights reserved.
+                    &copy; 2025 <span className="font-bold">GrowthHungry.</span>{" "}
+                    All rights reserved.
                 </p>
                 <p className="text-sm mt-2">
                     Built by{" "}
