@@ -25,7 +25,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
 
     // Check if the user is already a member
     const isMember = Object.values(data?.members || {}).some(
-        (member) => member === userid
+        (member) => member === userid,
     )
 
     // If the user is the owner
@@ -52,8 +52,9 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
             <GlassModal
                 trigger={
                     <Button className="w-full p-8" variant="ghost">
-                        <p className="text-lg text-green-500"
-                        >${data.subscription.price} / month</p>
+                        <p className="text-lg text-green-500">
+                            ${data.subscription.price} / month
+                        </p>
                     </Button>
                 }
                 title="Join group"
@@ -61,7 +62,8 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
             >
                 <StripeElements>
                     <p className="text-sm text-gray-500 text-center">
-                        By subscribing, you agree to our terms and conditions. Payments are handled securely through Stripe.
+                        By subscribing, you agree to our terms and conditions.
+                        Payments are handled securely through Stripe.
                     </p>
                     <JoinGroupPaymentForm groupid={groupid} />
                 </StripeElements>

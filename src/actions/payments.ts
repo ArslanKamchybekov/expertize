@@ -55,7 +55,7 @@ export const onGetActiveSubscription = async (groupId: string) => {
             where: {
                 groupId: groupId,
             },
-        })      
+        })
 
         const memberIds = members.map((member) => member.userId)
 
@@ -243,7 +243,11 @@ export const onGetUserSubscriptions = async (userid: string) => {
         const subscriptions = await client.subscription.findMany({
             where: {
                 groupId: {
-                    in: memberships.map((membership) => membership.groupId).filter((groupId): groupId is string => groupId !== null),
+                    in: memberships
+                        .map((membership) => membership.groupId)
+                        .filter(
+                            (groupId): groupId is string => groupId !== null,
+                        ),
                 },
             },
         })

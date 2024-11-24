@@ -55,13 +55,9 @@ const UserProfileLayout = async ({
                                         className="w-10 h-10 rounded-lg"
                                     />
                                     {group?.userId === user.id ? (
-                                        <p className="text-gray-400">
-                                            Owner
-                                        </p>
+                                        <p className="text-gray-400">Owner</p>
                                     ) : (
-                                        <p className="text-gray-400">
-                                            Member
-                                        </p>
+                                        <p className="text-gray-400">Member</p>
                                     )}
                                     <h3 className="text-xl font-semibold text-white">
                                         {group?.name}

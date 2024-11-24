@@ -183,7 +183,7 @@ export const onGetUserGroups = async (id: string) => {
         // Combine both groups (owned and member groups)
         const allGroups = [
             ...(groups?.group || []), // Owned groups
-            ...(groups?.membership.map(m => m.Group) || []), // Member groups
+            ...(groups?.membership.map((m) => m.Group) || []), // Member groups
         ]
 
         if (allGroups.length > 0) {

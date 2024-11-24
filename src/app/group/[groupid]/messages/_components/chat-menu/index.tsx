@@ -17,20 +17,19 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
 
     const onOpenChat = (memberId: string) => {
         const currentPath = window.location.pathname
-    
+
         // Remove '/messages' from the path if it exists, but avoid removing it from the group path
-        const basePath = currentPath.includes("/messages") 
-            ? currentPath.split("/messages")[0]  // Remove the trailing '/messages' part
+        const basePath = currentPath.includes("/messages")
+            ? currentPath.split("/messages")[0] // Remove the trailing '/messages' part
             : currentPath
-    
+
         const newPath = `${basePath}/messages/${memberId}`
-    
+
         // Redirect only if the current path doesn't already match the intended path
         if (currentPath !== newPath) {
             router.push(newPath)
         }
     }
-    
 
     return (
         <div className="flex flex-col">

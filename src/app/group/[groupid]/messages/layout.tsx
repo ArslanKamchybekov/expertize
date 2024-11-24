@@ -1,7 +1,7 @@
-import GlassSheet from "@/components/global/glass-sheet";
-import { Menu } from "lucide-react";
-import dynamic from "next/dynamic";
-import React from "react";
+import GlassSheet from "@/components/global/glass-sheet"
+import { Menu } from "lucide-react"
+import dynamic from "next/dynamic"
+import React from "react"
 
 const GroupChatMenu = dynamic(
     () =>
@@ -11,12 +11,12 @@ const GroupChatMenu = dynamic(
     {
         ssr: false,
     },
-);
+)
 
 type HuddlesLayoutProps = {
-    children: React.ReactNode;
-    params: { groupid: string };
-};
+    children: React.ReactNode
+    params: { groupid: string }
+}
 
 const HuddlesLayout = ({ children, params }: HuddlesLayoutProps) => {
     return (
@@ -36,7 +36,7 @@ const HuddlesLayout = ({ children, params }: HuddlesLayoutProps) => {
                 <GroupChatMenu groupid={params.groupid} />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default HuddlesLayout;
+export default HuddlesLayout
