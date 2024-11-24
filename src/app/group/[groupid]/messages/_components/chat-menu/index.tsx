@@ -47,9 +47,6 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                         </div>
                         <div className="flex flex-col">
                             <h3>{`${member.User?.firstname} ${member.User?.lastname}`}</h3>
-                            <p className="text-sm text-themeTextGray">
-                                No active chat found...
-                            </p>
                         </div>
                     </Link>
                 ))}
