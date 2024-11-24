@@ -5,7 +5,11 @@ import GradientText from "@/components/global/gradient-text"
 import { redirect } from "next/navigation"
 import React from "react"
 
-const UserProfileLayout = async ({ children }: { children: React.ReactNode }) => {
+const UserProfileLayout = async ({
+    children,
+}: {
+    children: React.ReactNode
+}) => {
     // Fetch authenticated user
     const user = await onAuthenticatedUser()
     if (!user?.id) redirect("/sign-in")
@@ -13,7 +17,7 @@ const UserProfileLayout = async ({ children }: { children: React.ReactNode }) =>
     // Fetch user groups server-side
     const userGroups = await onGetUserGroups(user.id)
     // Fetch user subscriptions server-side
-    const userSubscriptions = await onGetUserSubscriptions(user.id) || []
+    const userSubscriptions = (await onGetUserSubscriptions(user.id)) || []
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-12">
@@ -80,13 +84,19 @@ const UserProfileLayout = async ({ children }: { children: React.ReactNode }) =>
                                         {sub.price} $ / month
                                     </h3>
                                     <p className="text-gray-400 mt-2">
-                                        {userGroups.groups?.find((group) => group.id === sub.groupId)?.name}
+                                        {
+                                            userGroups.groups?.find(
+                                                (group) =>
+                                                    group.id === sub.groupId,
+                                            )?.name
+                                        }
                                     </p>
                                     <p className="text-gray-400 mt-2">
                                         {sub.active ? "Active" : "Inactive"}
                                     </p>
                                     <p className="text-gray-400 mt-2">
-                                        Date: {sub.createdAt.toLocaleDateString()}
+                                        Date:{" "}
+                                        {sub.createdAt.toLocaleDateString()}
                                     </p>
                                 </div>
                             ))
