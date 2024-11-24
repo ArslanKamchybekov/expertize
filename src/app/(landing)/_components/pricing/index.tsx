@@ -22,18 +22,22 @@ export const PricingSection = (props: Props) => {
                 </GradientText>
             </BackdropGradient>
             <div className="flex flex-col md:flex-row gap-5">
+                {/* Starter Plan */}
                 <Card className="p-7 mt-10 md:w-auto w-full bg-themeBlack border-themeGray">
                     <div className="flex flex-col gap-2">
-                        <CardTitle>10$ / month</CardTitle>
+                        <CardTitle>STARTER</CardTitle>
                         <CardDescription className="text-[#B4B0AE]">
-                            Great if you’re just getting started
+                            Perfect for individuals and small groups
                         </CardDescription>
+                        <p className="text-[#B4B0AE]">
+                            <span className="text-2xl font-bold">$10</span> / month
+                        </p>
                         <Link href="#" className="w-full mt-3">
                             <Button
                                 variant="default"
                                 className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
                             >
-                                Try a 14-day free trial
+                                Try a 7-day free trial
                             </Button>
                         </Link>
                     </div>
@@ -41,31 +45,39 @@ export const PricingSection = (props: Props) => {
                         <p>Features</p>
                         <span className="flex gap-2 mt-3 items-center">
                             <Check />
-                            Feature number 1
+                            Real-time chat for groups
                         </span>
                         <span className="flex gap-2 items-center">
                             <Check />
-                            Feature number 1
+                            Create and join free groups
                         </span>
                         <span className="flex gap-2 items-center">
                             <Check />
-                            Feature number 1
+                            Post creation, likes, and comments
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Basic affiliate marketing tools
                         </span>
                     </div>
                 </Card>
 
+                {/* Pro Plan */}
                 <Card className="p-7 mt-10 md:w-auto w-full bg-themeBlack border-themeGray">
                     <div className="flex flex-col gap-2">
-                        <CardTitle>49$ / month</CardTitle>
+                        <CardTitle>PRO</CardTitle>
                         <CardDescription className="text-[#B4B0AE]">
-                            Great if you’re just getting started
+                            Designed for growing businesses and power users
                         </CardDescription>
+                        <p className="text-[#B4B0AE]">
+                            <span className="text-2xl font-bold">$25</span> / month
+                        </p>
                         <Link href="#" className="w-full mt-3">
                             <Button
                                 variant="default"
                                 className="bg-[#333337] w-full rounded-2xl text-white hover:text-[#333337]"
                             >
-                                Try a 14-day free trial
+                                Try a 7-day free trial
                             </Button>
                         </Link>
                     </div>
@@ -73,15 +85,27 @@ export const PricingSection = (props: Props) => {
                         <p>Features</p>
                         <span className="flex gap-2 mt-3 items-center">
                             <Check />
-                            Feature number 1
+                            Everything in Starter
                         </span>
                         <span className="flex gap-2 items-center">
                             <Check />
-                            Feature number 1
+                            Host paid groups
                         </span>
                         <span className="flex gap-2 items-center">
                             <Check />
-                            Feature number 1
+                            Create and host course modules
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Custom domain hosting with white-labeling
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Advanced affiliate marketing tools
+                        </span>
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            Node-based text editor (Notion-like)
                         </span>
                     </div>
                 </Card>

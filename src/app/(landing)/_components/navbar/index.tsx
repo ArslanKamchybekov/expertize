@@ -27,7 +27,6 @@ const LandingPageNavbar = (props: Props) => {
                         variant="destructive"
                         className="bg-white text-black rounded-2xl flex gap-2 border-themeGray hover:bg-themeGray hover:text-white"
                     >
-                        {/* <Logout /> */}
                         Sign Up
                     </Button>
                 </Link>
