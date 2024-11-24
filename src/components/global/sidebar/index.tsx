@@ -71,7 +71,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                     : "w-full flex",
             )}
         >
-            {groups.groups && groups.groups.length > 0 && (
+            {groups?.groups && groups.groups.length > 0 && (
                 <DropDown
                     title="Groups"
                     trigger={

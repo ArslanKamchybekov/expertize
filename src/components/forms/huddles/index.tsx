@@ -27,10 +27,10 @@ export const HuddlesForm = ({ recieverid }: HuddlesFormProps) => {
                 </div>
                 <Button
                     variant="ghost"
-                    className="p-0 hover:bg-transparent"
+                    className="p-4 hover:bg-transparent"
                     type="submit"
                 >
-                    <Send className="text-themeGray hover:text-themeTextGray" />
+                    <Send className="text-themeTextWhite" />
                 </Button>
             </form>
         </div>

@@ -129,12 +129,11 @@ export const usePayments = (
 }
 
 export const useActiveGroupSubscription = (groupId: string) => {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["active-subscription"],
         queryFn: () => onGetActiveSubscription(groupId),
     })
-
-    return { data }
+    return { data, isLoading }
 }
 
 export const useJoinFree = (groupid: string) => {
@@ -190,9 +189,7 @@ export const useJoinGroup = (groupid: string) => {
                 const member = await onJoinGroup(groupid)
                 if (member?.status === 200) {
                     const channels = await onGetGroupChannels(groupid)
-                    router.push(
-                        `/group/${groupid}/channel/${channels?.channels?.[0].id}`,
-                    )
+                    router.push("/explore")
                 }
             }
         },

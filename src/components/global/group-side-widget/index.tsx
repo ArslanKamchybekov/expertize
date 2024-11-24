@@ -37,6 +37,7 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
                 <JoinButton
                     groupid={groupid}
                     owner={group.userId === userid ? true : false}
+                    userid={userid ?? ""}
                 />
             )}
         </Card>

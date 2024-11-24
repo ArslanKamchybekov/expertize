@@ -7,14 +7,29 @@ import { useActiveGroupSubscription, useJoinFree } from "@/hooks/payment"
 type JoinButtonProps = {
     owner: boolean
     groupid: string
+    userid: string
 }
 
-export const JoinButton = ({ owner, groupid }: JoinButtonProps) => {
+export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     const { data } = useActiveGroupSubscription(groupid)
     const { onJoinFreeGroup } = useJoinFree(groupid)
 
+    // Handle error state
+    if (!data) {
+        return (
+            <div className="w-full p-10 text-center text-green-500">
+                Loading...
+            </div>
+        )
+    }
+
+    // Check if the user is already a member
+    const isMember = Object.values(data?.members || {}).some(
+        (member) => member === userid
+    )
+
+    // If the user is the owner
     if (owner) {
-        // If the user is the owner, disable the button and show "Owner"
         return (
             <Button disabled className="w-full p-10" variant="ghost">
                 Owner
@@ -22,8 +37,8 @@ export const JoinButton = ({ owner, groupid }: JoinButtonProps) => {
         )
     }
 
-    if (data?.status === 200) {
-        // If the user has already joined the group
+    // If the user is already a member
+    if (isMember) {
         return (
             <div className="w-full p-10 text-center text-themeTextGray">
                 Already a member
@@ -31,27 +46,30 @@ export const JoinButton = ({ owner, groupid }: JoinButtonProps) => {
         )
     }
 
-    // If the user has not joined, display the appropriate join button
-    if (data?.subscription?.price) {
-        // Show subscription join button
+    // If the group requires a subscription
+    if (data.subscription?.price) {
         return (
             <GlassModal
                 trigger={
-                    <Button className="w-full p-10" variant="ghost">
-                        <p>Join ${data.subscription.price}/Month</p>
+                    <Button className="w-full p-8" variant="ghost">
+                        <p className="text-lg text-green-500"
+                        >${data.subscription.price} / month</p>
                     </Button>
                 }
-                title="Join this group"
+                title="Join group"
                 description="Pay now to join this community"
             >
                 <StripeElements>
+                    <p className="text-sm text-gray-500 text-center">
+                        By subscribing, you agree to our terms and conditions. Payments are handled securely through Stripe.
+                    </p>
                     <JoinGroupPaymentForm groupid={groupid} />
                 </StripeElements>
             </GlassModal>
         )
     }
 
-    // Show free join button
+    // Free group join button
     return (
         <Button
             onClick={onJoinFreeGroup}

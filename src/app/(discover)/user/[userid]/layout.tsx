@@ -16,6 +16,7 @@ const UserProfileLayout = async ({
 
     // Fetch user groups server-side
     const userGroups = await onGetUserGroups(user.id)
+    console.log(userGroups)
     // Fetch user subscriptions server-side
     const userSubscriptions = (await onGetUserSubscriptions(user.id)) || []
 
@@ -45,16 +46,25 @@ const UserProfileLayout = async ({
                         {userGroups.groups && userGroups.groups.length > 0 ? (
                             userGroups.groups.map((group) => (
                                 <div
-                                    key={group.id}
+                                    key={group?.id}
                                     className="p-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col items-center gap-4"
                                 >
                                     <img
-                                        src={`https://ucarecdn.com/${group.icon as string}/`}
+                                        src={`https://ucarecdn.com/${group?.icon as string}/`}
                                         alt="icon"
                                         className="w-10 h-10 rounded-lg"
                                     />
+                                    {group?.userId === user.id ? (
+                                        <p className="text-gray-400">
+                                            Owner
+                                        </p>
+                                    ) : (
+                                        <p className="text-gray-400">
+                                            Member
+                                        </p>
+                                    )}
                                     <h3 className="text-xl font-semibold text-white">
-                                        {group.name}
+                                        {group?.name}
                                     </h3>
                                 </div>
                             ))
@@ -87,7 +97,7 @@ const UserProfileLayout = async ({
                                         {
                                             userGroups.groups?.find(
                                                 (group) =>
-                                                    group.id === sub.groupId,
+                                                    group?.id === sub.groupId,
                                             )?.name
                                         }
                                     </p>

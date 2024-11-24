@@ -146,6 +146,7 @@ export const onGetUserGroups = async (id: string) => {
                         id: true,
                         name: true,
                         icon: true,
+                        userId: true,
                         channel: {
                             where: {
                                 name: "general",
@@ -163,6 +164,7 @@ export const onGetUserGroups = async (id: string) => {
                                 id: true,
                                 icon: true,
                                 name: true,
+                                userId: true,
                                 channel: {
                                     where: {
                                         name: "general",
@@ -178,14 +180,16 @@ export const onGetUserGroups = async (id: string) => {
             },
         })
 
-        if (
-            groups &&
-            (groups.group.length > 0 || groups.membership.length > 0)
-        ) {
+        // Combine both groups (owned and member groups)
+        const allGroups = [
+            ...(groups?.group || []), // Owned groups
+            ...(groups?.membership.map(m => m.Group) || []), // Member groups
+        ]
+
+        if (allGroups.length > 0) {
             return {
                 status: 200,
-                groups: groups.group,
-                members: groups.membership,
+                groups: allGroups,
             }
         }
 

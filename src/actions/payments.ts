@@ -51,8 +51,16 @@ export const onGetActiveSubscription = async (groupId: string) => {
             },
         })
 
+        const members = await client.members.findMany({
+            where: {
+                groupId: groupId,
+            },
+        })      
+
+        const memberIds = members.map((member) => member.userId)
+
         if (subscription) {
-            return { status: 200, subscription }
+            return { status: 200, subscription, members: memberIds }
         }
     } catch (error) {
         return { status: 404 }
@@ -223,12 +231,19 @@ export const onGetStripeIntegration = async () => {
 
 export const onGetUserSubscriptions = async (userid: string) => {
     try {
+        const memberships = await client.members.findMany({
+            where: {
+                userId: userid,
+            },
+            select: {
+                groupId: true,
+            },
+        })
+
         const subscriptions = await client.subscription.findMany({
             where: {
-                Group: {
-                    User: {
-                        id: userid,
-                    },
+                groupId: {
+                    in: memberships.map((membership) => membership.groupId).filter((groupId): groupId is string => groupId !== null),
                 },
             },
         })
