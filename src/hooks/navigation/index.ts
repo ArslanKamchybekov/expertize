@@ -19,26 +19,26 @@ export const useNavigation = () => {
 export const useSideBar = (groupid: string) => {
     const { data: groups = { groups: [] } } = useQuery({
         queryKey: ["user-groups"],
-    }) as { data: IGroups };
+    }) as { data: IGroups }
 
     const { data: groupInfo = { group: undefined, status: 0 } } = useQuery({
         queryKey: ["group-info"],
-    }) as { data: IGroupInfo };
+    }) as { data: IGroupInfo }
 
     const { data: channels = { channels: [] } } = useQuery({
         queryKey: ["group-channels"],
         queryFn: () => onGetGroupChannels(groupid),
-    });
+    })
 
-    const client = useQueryClient();
+    const client = useQueryClient()
 
     const { isPending, mutate, isError, variables } = useMutation({
         mutationFn: (data: {
-            id: string;
-            name: string;
-            icon: string;
-            createdAt: Date;
-            groupId: string | null;
+            id: string
+            name: string
+            icon: string
+            createdAt: Date
+            groupId: string | null
         }) =>
             onCreateNewChannel(groupid, {
                 id: data.id,
@@ -48,22 +48,22 @@ export const useSideBar = (groupid: string) => {
         onSettled: async () => {
             return await client.invalidateQueries({
                 queryKey: ["group-channels"],
-            });
+            })
         },
-    });
+    })
 
     // Display success or error toasts
     if (isPending) {
         toast("Success", {
             description: "Channel created",
-        });
+        })
     }
 
     if (isError) {
         toast("Error", {
             description: "Oops! Something went wrong",
-        });
+        })
     }
 
-    return { groupInfo, groups, mutate, variables, isPending, channels };
+    return { groupInfo, groups, mutate, variables, isPending, channels }
 }

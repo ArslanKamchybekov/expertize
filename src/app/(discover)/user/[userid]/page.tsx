@@ -1,8 +1,7 @@
 type Props = {}
 
 const UserProfile = async (props: Props) => {
-    return <>
-    </>
+    return <></>
 }
 
 export default UserProfile
