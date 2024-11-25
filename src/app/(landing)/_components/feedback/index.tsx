@@ -12,8 +12,12 @@ export const FeedbackSection = (props: Props) => {
         >
             <section className="bg-themeBlue text-white py-20">
                 <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold mb-4 text-center
-                    ">Feedback</h2>
+                    <h2
+                        className="text-3xl font-bold mb-4 text-center
+                    "
+                    >
+                        Feedback
+                    </h2>
                     <p className="text-lg my-8">
                         We are always looking for ways to improve our platform.
                         If you have any feedback, please let us know.

@@ -186,7 +186,6 @@ export const onActivateSubscription = async (id: string) => {
     }
 }
 
-
 export const onGetStripeIntegration = async () => {
     try {
         const user = await onAuthenticatedUser()
