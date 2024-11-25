@@ -1,7 +1,6 @@
 import { onGetDomainConfig } from "@/actions/groups"
 import { CustomDomainForm } from "@/components/forms/domain"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
 import {
     HydrationBoundary,
     QueryClient,
@@ -28,7 +27,7 @@ const DomainConfigPage = async ({ params }: Props) => {
                     </CardDescription>
                     <CustomDomainForm groupid={params.groupid} />
                 </Card>
-                <Card className="border-themeGray bg-[#1A1A1D] p-5">
+                {/* <Card className="border-themeGray bg-[#1A1A1D] p-5">
                     <CardTitle className="text-3xl">Manual Config</CardTitle>
                     <CardDescription className="text-themeTextGray">
                         Setup your domain manually{" "}
@@ -53,7 +52,7 @@ const DomainConfigPage = async ({ params }: Props) => {
                             </span>
                         </Label>
                     </div>
-                </Card>
+                </Card> */}
             </div>
         </HydrationBoundary>
     )

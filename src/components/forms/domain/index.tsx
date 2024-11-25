@@ -32,7 +32,7 @@ export const CustomDomainForm = ({ groupid }: CustomDomainFormProps) => {
                     placeholder={data?.domain ? data.domain : "e.g example.com"}
                 />
                 <Button
-                    className="bg-themeBlack border-themeGray"
+                    className="bg-themeBlack border-themeGray mb-1"
                     variant="outline"
                 >
                     <Loader loading={isPending}>Add Domain</Loader>

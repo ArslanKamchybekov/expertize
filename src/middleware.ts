@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 const isProtectedRoute = createRouteMatcher(["/group(.*)"])
 
 export default clerkMiddleware(async (auth, req) => {
-    const baseHost = "localhost:3000"
+    const baseHost = ["localhost:3000", process.env.NEXT_PUBLIC_API_URL]
     const host = req.headers.get("host")
     const reqPath = req.nextUrl.pathname
     const origin = req.nextUrl.origin
@@ -18,7 +18,7 @@ export default clerkMiddleware(async (auth, req) => {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "http://localhost:3000", // Allow your frontend origin
+                "Access-Control-Allow-Origin": origin, // Allow the origin
                 "Access-Control-Allow-Credentials": "true", // Allow cookies or auth headers
             },
             credentials: "include", // Ensure credentials are passed if needed
