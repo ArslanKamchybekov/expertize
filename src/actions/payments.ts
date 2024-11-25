@@ -136,78 +136,56 @@ export const onCreateNewGroupSubscription = async (
 
 export const onActivateSubscription = async (id: string) => {
     try {
+        // Check if the subscription exists
         const status = await client.subscription.findUnique({
-            where: {
-                id,
-            },
-            select: {
-                active: true,
-            },
+            where: { id },
+            select: { active: true },
         })
-        if (status) {
-            if (status.active) {
-                return { status: 200, message: "Plan already active" }
-            }
-            if (!status.active) {
-                const current = await client.subscription.findFirst({
-                    where: {
-                        active: true,
-                    },
-                    select: {
-                        id: true,
-                    },
+
+        if (!status) {
+            return { status: 404, message: "Subscription not found" }
+        }
+
+        // If the subscription is already active, return early
+        if (status.active) {
+            return { status: 200, message: "Plan already active" }
+        }
+
+        // Use a transaction to ensure atomicity
+        const result = await client.$transaction(async (tx) => {
+            // Deactivate the currently active subscription, if any
+            const current = await tx.subscription.findFirst({
+                where: { active: true },
+                select: { id: true },
+            })
+
+            if (current?.id) {
+                await tx.subscription.update({
+                    where: { id: current.id },
+                    data: { active: false },
                 })
-                if (current && current.id) {
-                    const deactivate = await client.subscription.update({
-                        where: {
-                            id: current.id,
-                        },
-                        data: {
-                            active: false,
-                        },
-                    })
-
-                    if (deactivate) {
-                        const activateNew = await client.subscription.update({
-                            where: {
-                                id,
-                            },
-                            data: {
-                                active: true,
-                            },
-                        })
-
-                        if (activateNew) {
-                            return {
-                                status: 200,
-                                message: "New plan activated",
-                            }
-                        }
-                    }
-                } else {
-                    const activateNew = await client.subscription.update({
-                        where: {
-                            id,
-                        },
-                        data: {
-                            active: true,
-                        },
-                    })
-
-                    if (activateNew) {
-                        return {
-                            status: 200,
-                            message: "New plan activated",
-                        }
-                    }
-                }
             }
+
+            // Activate the new subscription
+            const activateNew = await tx.subscription.update({
+                where: { id },
+                data: { active: true },
+            })
+
+            return activateNew
+        })
+
+        // If the transaction was successful
+        return {
+            status: 200,
+            message: "New plan activated",
         }
     } catch (error) {
-        console.log(error)
-        return { status: 400, message: "Oops something went wrong" }
+        console.error("Error activating subscription:", error)
+        return { status: 400, message: "Oops, something went wrong" }
     }
 }
+
 
 export const onGetStripeIntegration = async () => {
     try {

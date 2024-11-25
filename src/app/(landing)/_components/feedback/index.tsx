@@ -12,8 +12,9 @@ export const FeedbackSection = (props: Props) => {
         >
             <section className="bg-themeBlue text-white py-20">
                 <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold mb-4">Feedback</h2>
-                    <p className="text-lg mb-8">
+                    <h2 className="text-3xl font-bold mb-4 text-center
+                    ">Feedback</h2>
+                    <p className="text-lg my-8">
                         We are always looking for ways to improve our platform.
                         If you have any feedback, please let us know.
                     </p>
@@ -34,15 +35,16 @@ export const FeedbackSection = (props: Props) => {
                     >
                         <textarea
                             name="feedback"
-                            className="w-full h-40 p-4 bg-white rounded-lg text-themeBlack"
-                            placeholder="Enter your feedback here"
+                            id="feedback"
+                            className="w-full h-40 bg-white rounded-md p-4 text-black"
+                            placeholder="Enter your feedback here..."
                         ></textarea>
                         <Button
                             type="submit"
-                            variant="outline"
-                            className="w-40 bg-white text-themeBlack hover:bg-themeDarkGray hover:text-white"
+                            variant="secondary"
+                            className="w-full"
                         >
-                            Submit
+                            Submit Feedback
                         </Button>
                     </form>
                 </div>

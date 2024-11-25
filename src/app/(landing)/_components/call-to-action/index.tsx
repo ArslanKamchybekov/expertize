@@ -1,6 +1,5 @@
 import GradientText from "@/components/global/gradient-text"
 import { Button } from "@/components/ui/button"
-import { BadgePlus } from "@/icons"
 import Link from "next/link"
 
 type Props = {}
@@ -23,15 +22,15 @@ const CallToAction = (props: Props) => {
                 relationships to drive personal and professional growth
             </p>
             <div className="flex md:flex-row flex-col md:justify-center gap-5 md:mt-5 w-full">
-                <Button
+                {/* <Button
                     variant="outline"
                     className="rounded-xl bg-transparent text-base"
                 >
                     Watch Demo
-                </Button>
+                </Button> */}
                 <Link href="/sign-in">
-                    <Button className="rounded-xl text-base flex gap-2 w-full">
-                        <BadgePlus /> Get Started
+                    <Button className="rounded-xl text-base flex gap-2 w-full font-bold justify-center px-6">
+                        Get Started
                     </Button>
                 </Link>
             </div>
