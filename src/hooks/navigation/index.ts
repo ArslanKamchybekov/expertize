@@ -17,31 +17,28 @@ export const useNavigation = () => {
 }
 
 export const useSideBar = (groupid: string) => {
-    const { data: groups } = useQuery({
+    const { data: groups = { groups: [] } } = useQuery({
         queryKey: ["user-groups"],
-    }) as { data: IGroups }
+    }) as { data: IGroups };
 
-    const { data: groupInfo } = useQuery({
+    const { data: groupInfo = { group: undefined, status: 0 } } = useQuery({
         queryKey: ["group-info"],
-    }) as { data: IGroupInfo }
+    }) as { data: IGroupInfo };
 
-    const { data: channels } = useQuery({
+    const { data: channels = { channels: [] } } = useQuery({
         queryKey: ["group-channels"],
         queryFn: () => onGetGroupChannels(groupid),
-    })
+    });
 
-    const client = useQueryClient()
-
-    //we use usemutation to optimistically add a channel
-    //once the mutation is settled or complete we invalidate the group-channel query and trigger a refetch //this makes the optimistic ui seamless
+    const client = useQueryClient();
 
     const { isPending, mutate, isError, variables } = useMutation({
         mutationFn: (data: {
-            id: string
-            name: string
-            icon: string
-            createdAt: Date
-            groupId: string | null
+            id: string;
+            name: string;
+            icon: string;
+            createdAt: Date;
+            groupId: string | null;
         }) =>
             onCreateNewChannel(groupid, {
                 id: data.id,
@@ -51,19 +48,22 @@ export const useSideBar = (groupid: string) => {
         onSettled: async () => {
             return await client.invalidateQueries({
                 queryKey: ["group-channels"],
-            })
+            });
         },
-    })
+    });
 
-    if (isPending)
+    // Display success or error toasts
+    if (isPending) {
         toast("Success", {
             description: "Channel created",
-        })
+        });
+    }
 
-    if (isError)
+    if (isError) {
         toast("Error", {
-            description: "Oops! something went wrong",
-        })
+            description: "Oops! Something went wrong",
+        });
+    }
 
-    return { groupInfo, groups, mutate, variables, isPending, channels }
+    return { groupInfo, groups, mutate, variables, isPending, channels };
 }

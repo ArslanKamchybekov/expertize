@@ -133,6 +133,7 @@ export const useActiveGroupSubscription = (groupId: string) => {
         queryKey: ["active-subscription"],
         queryFn: () => onGetActiveSubscription(groupId),
     })
+
     return { data, isLoading }
 }
 

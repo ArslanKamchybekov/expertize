@@ -85,7 +85,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
                 groupUserid={group.userId}
             />
             {userid !== group.userId ? (
-                <HtmlParser html={group.htmlDescription || "<></>"} />
+                <HtmlParser html={group.htmlDescription || ""} />
             ) : (
                 <form
                     ref={editor}

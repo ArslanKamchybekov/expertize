@@ -87,7 +87,7 @@ const UserProfileLayout = async ({
                                     className="p-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
                                 >
                                     <h3 className="text-xl font-semibold text-white">
-                                        {sub.price} $ / month
+                                        ${sub.price} / month
                                     </h3>
                                     <p className="text-gray-400 mt-2">
                                         {

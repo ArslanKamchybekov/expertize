@@ -81,4 +81,5 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
             Join now
         </Button>
     )
+    
 }

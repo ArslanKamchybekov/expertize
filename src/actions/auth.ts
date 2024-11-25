@@ -1,7 +1,7 @@
 "use server"
 
 import { client } from "@/lib/prisma"
-import { currentUser } from "@clerk/nextjs/server"
+import { clerkClient, currentUser } from "@clerk/nextjs/server"
 
 export const onAuthenticatedUser = async () => {
     try {
@@ -113,6 +113,35 @@ export const onSignInUser = async (clerkId: string) => {
         return {
             status: 400,
             message: "User could not be logged in! Try again",
+        }
+    } catch (error) {
+        return {
+            status: 400,
+            message: "Oops! something went wrong. Try again",
+        }
+    }
+}
+
+export const onDeleteUser = async (id: string) => {
+    try {
+        const deletedUser = await client.user.delete({
+            where: {
+                id,
+            },
+        })
+
+        if (deletedUser) {
+            return {
+                status: 200,
+                message: "User successfully deleted",
+            }
+        }
+
+        await clerkClient.users.deleteUser(id)
+
+        return {
+            status: 400,
+            message: "User could not be deleted! Try again",
         }
     } catch (error) {
         return {
