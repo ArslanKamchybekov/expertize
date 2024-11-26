@@ -91,7 +91,8 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                             }
                                         />
                                         {editSection &&
-                                        activeSection === section.id && groupOwner?.groupOwner ? (
+                                        activeSection === section.id &&
+                                        groupOwner?.groupOwner ? (
                                             <Input
                                                 ref={sectionInputRef}
                                                 className="flex-1 bg-transparent border-none p-0"
@@ -112,7 +113,9 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     {pendingSection && sectionVariables && (
                                         <Link
                                             onClick={() =>
-                                                setActiveSection(sectionVariables.sectionid)
+                                                setActiveSection(
+                                                    sectionVariables.sectionid,
+                                                )
                                             }
                                             className="flex gap-x-3 items-center"
                                             href={`/group/${groupid}/courses/${courseId}/${sectionVariables.sectionid}`}

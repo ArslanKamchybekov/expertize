@@ -1,25 +1,25 @@
-"use client";
+"use client"
 
-import { AIChat } from "@/components/global/ai-chat";
-import { HtmlParser } from "@/components/global/html-parser";
-import { Loader } from "@/components/global/loader";
-import BlockTextEditor from "@/components/global/rich-text-editor";
-import { Button } from "@/components/ui/button";
-import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses";
-import { useState } from "react";
+import { AIChat } from "@/components/global/ai-chat"
+import { HtmlParser } from "@/components/global/html-parser"
+import { Loader } from "@/components/global/loader"
+import BlockTextEditor from "@/components/global/rich-text-editor"
+import { Button } from "@/components/ui/button"
+import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses"
+import { useState } from "react"
 
 type CourseContentFormProps = {
-    sectionid: string;
-    userid: string;
-    groupid: string;
-};
+    sectionid: string
+    userid: string
+    groupid: string
+}
 
 export const CourseContentForm = ({
     sectionid,
     userid,
     groupid,
 }: CourseContentFormProps) => {
-    const { data } = useCourseSectionInfo(sectionid);
+    const { data } = useCourseSectionInfo(sectionid)
 
     const {
         errors,
@@ -34,21 +34,21 @@ export const CourseContentForm = ({
         sectionid,
         data?.section?.content || null,
         data?.section?.JsonContent || null,
-        data?.section?.htmlContent || null
-    );
+        data?.section?.htmlContent || null,
+    )
 
-    const [isEditing, setIsEditing] = useState(false); // State to track if the description is being edited
-    const lectureContent = data?.section?.htmlContent || "";
+    const [isEditing, setIsEditing] = useState(false) // State to track if the description is being edited
+    const lectureContent = data?.section?.htmlContent || ""
 
     // Handle when the user clicks on the description to edit
     const handleDescriptionClick = () => {
-        setIsEditing(true);
-    };
+        setIsEditing(true)
+    }
 
     // Handle when the user exits editing
     const handleDescriptionBlur = () => {
-        setIsEditing(false);
-    };
+        setIsEditing(false)
+    }
 
     return groupid === userid ? (
         <form
@@ -95,5 +95,5 @@ export const CourseContentForm = ({
             <HtmlParser html={data?.section?.htmlContent!} />
             <AIChat lectureContent={lectureContent} />
         </form>
-    );
-};
+    )
+}
