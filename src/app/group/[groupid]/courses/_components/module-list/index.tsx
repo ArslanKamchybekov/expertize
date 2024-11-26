@@ -52,7 +52,11 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                 className="bg-themeBlack border-themeGray"
                             />
                         }
-                        onEdit={() => onEditModule(module.id)}
+                        onEdit={() => {
+                            if (groupOwner?.groupOwner) {
+                                onEditModule(module.id)
+                            }
+                        }}
                         id={module.id}
                         key={module.id}
                         title={isPending ? variables?.content! : module.title}
@@ -62,7 +66,9 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                 module.section.map((section) => (
                                     <Link
                                         ref={contentRef}
-                                        onDoubleClick={onEditSection}
+                                        onDoubleClick={() => {
+                                            onEditSection()
+                                        }}
                                         onClick={() =>
                                             setActiveSection(section.id)
                                         }
@@ -85,7 +91,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                             }
                                         />
                                         {editSection &&
-                                        activeSection === section.id ? (
+                                        activeSection === section.id && groupOwner?.groupOwner ? (
                                             <Input
                                                 ref={sectionInputRef}
                                                 className="flex-1 bg-transparent border-none p-0"
@@ -106,9 +112,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     {pendingSection && sectionVariables && (
                                         <Link
                                             onClick={() =>
-                                                setActiveSection(
-                                                    sectionVariables.sectionid,
-                                                )
+                                                setActiveSection(sectionVariables.sectionid)
                                             }
                                             className="flex gap-x-3 items-center"
                                             href={`/group/${groupid}/courses/${courseId}/${sectionVariables.sectionid}`}

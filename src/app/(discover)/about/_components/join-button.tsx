@@ -41,7 +41,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     if (isMember) {
         return (
             <div className="w-full p-10 text-center text-themeTextGray">
-                Already a member
+                Member
             </div>
         )
     }

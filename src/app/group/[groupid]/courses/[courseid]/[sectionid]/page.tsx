@@ -11,11 +11,13 @@ const CourseModuleSection = async ({ params }: Props) => {
     const group = await onGetGroupInfo(params.groupid)
 
     return (
-        <CourseContentForm
-            groupid={group.group?.userId!}
-            sectionid={params.sectionid}
-            userid={user.id!}
-        />
+        <div>
+            <CourseContentForm
+                groupid={group.group?.userId!}
+                sectionid={params.sectionid}
+                userid={user.id!}
+            />
+        </div>
     )
 }
 
