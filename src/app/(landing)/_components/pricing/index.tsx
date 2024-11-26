@@ -107,7 +107,12 @@ export const PricingSection = (props: Props) => {
                         </span>
                         <span className="flex gap-2 items-center">
                             <Check />
-                            Node-based text editor (Notion-like)
+                            Node-based text editor
+                        </span>
+
+                        <span className="flex gap-2 items-center">
+                            <Check />
+                            GrowthHungry AI capabilities
                         </span>
                     </div>
                 </Card>
