@@ -22,9 +22,9 @@ Welcome to **GrowthHungry AI**, a powerful learning management system (LMS) and 
 
 -   **Clerk** integration for secure authentication, custom sign-in, and sign-out flow to ensure seamless user management.
 
-### 🤝 **Affiliate Marketing Systems for Groups & Our App**
+### 🤝 **Affiliate Marketing System for Our App**
 
--   Built-in affiliate marketing features to help users grow their groups and promote the app.
+-   Built-in affiliate marketing features to promote the app.
 
 ### 💥 **Custom Domain Hosting Inside the App**
 
@@ -70,13 +70,9 @@ Welcome to **GrowthHungry AI**, a powerful learning management system (LMS) and 
 
 -   Built-in calendar feature for groups to schedule events, workshops, and important dates.
 
-### 💬 **Real-Time Chat for Groups** (if we have time)
+### 💬 **Chat for Groups**
 
--   Real-time messaging to facilitate communication within groups.
-
-### 📄 **Beautiful Landing Page for the App**
-
--   A visually appealing **landing page** that highlights the platform’s features and capabilities, designed to convert visitors into users.
+-   Messaging to facilitate communication within groups.
 
 ### 🗺️ **Explore Page for All Groups**
 
