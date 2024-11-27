@@ -26,7 +26,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                         Create Your Group
                     </GradientText>
                     <p className="text-themeTextGray">
-                        Free for 14 days, then $10/month. Cancel anytime.
+                        Free for 7 days, then $10/month. Cancel anytime.
                         <br />
                         All features. Unlimited everything. No hidden fees.
                     </p>
