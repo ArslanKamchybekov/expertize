@@ -32,7 +32,7 @@ Welcome to **GrowthHungry AI**, a powerful learning management system (LMS) and 
 
 ### 🏝️ **New Pricing Model for Groups**
 
--   Simple pricing model: 1 group for **$99/month**. Transparent, scalable pricing that grows with your needs.
+-   Simple pricing model for groups. Transparent, scalable pricing that grows with your needs.
 
 ### 🎁 **Free and Paid Groups**
 
@@ -81,10 +81,6 @@ Welcome to **GrowthHungry AI**, a powerful learning management system (LMS) and 
 ### 🗺️ **Explore Page for All Groups**
 
 -   A dedicated **explore page** for users to discover all available groups and communities.
-
-### 🔍 **Performant Search Features**
-
--   Powerful and **fast search functionality** to find groups, content, and users quickly.
 
 ### 🛝 **Custom Infinite Carousels with Infinite Scroll**
 
