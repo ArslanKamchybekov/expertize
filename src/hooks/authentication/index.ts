@@ -197,6 +197,7 @@ export const useGoogleAuth = () => {
         if (!LoadedSignIn) return
         try {
             return signIn.authenticateWithRedirect({
+                // @ts-ignore
                 strategy,
                 redirectUrl: "/callback",
                 redirectUrlComplete: "/callback/sign-in",
@@ -210,6 +211,7 @@ export const useGoogleAuth = () => {
         if (!LoadedSignUp) return
         try {
             return signUp.authenticateWithRedirect({
+                // @ts-ignore
                 strategy,
                 redirectUrl: "/callback",
                 redirectUrlComplete: "/callback/complete",

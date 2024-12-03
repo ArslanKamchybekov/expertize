@@ -16,8 +16,9 @@ export const Navbar = async () => {
     return (
         <div className="flex px-5 py-5 items-center bg-themeBlack border-b-[1px] border-themeDarkGray fixed z-50 w-full bg-clip-padding backdrop--blur__safari backdrop-filter backdrop-blur-2xl bg-opacity-60">
             <div className="hidden lg:inline">
-                {user.status === 200 ? (
-                    <GroupDropDown groups={groups} members={groups.members} />
+            {user.status === 200 ? (
+                // @ts-ignore
+                <GroupDropDown members={groups.members} groups={groups} />
                 ) : (
                     <p>GrowthHungry.</p>
                 )}
