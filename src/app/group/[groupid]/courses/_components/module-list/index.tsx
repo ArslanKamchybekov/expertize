@@ -106,7 +106,9 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     </Link>
                                 ))
                             ) : (
-                                <></>
+                                <div className="text-themeTextGray">
+                                    No sections
+                                </div>
                             )}
                             {groupOwner?.groupOwner && (
                                 <>

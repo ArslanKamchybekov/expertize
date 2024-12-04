@@ -34,7 +34,7 @@ const CourseCreate = ({ groupid }: Props) => {
 
     const handlePrivacySelect = (value: string) => {
         setSelectedPrivacy(value)
-        setValue("privacy", value) // Ensure it's set in the form as well
+        setValue("privacy", value)
     }
 
     if (data?.groupOwner) {

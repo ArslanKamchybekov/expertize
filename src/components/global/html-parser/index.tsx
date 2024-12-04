@@ -1,12 +1,12 @@
 import parse from "html-react-parser"
 import { useEffect, useState } from "react"
+import { Loader } from "../loader"
 
 type HtmlParserProps = {
     html: string
 }
 
 export const HtmlParser = ({ html }: HtmlParserProps) => {
-    //use effect to avoid hydragtion error with ssr html data
     const [mounted, setMounted] = useState<boolean>(false)
 
     useEffect(() => {
@@ -16,7 +16,15 @@ export const HtmlParser = ({ html }: HtmlParserProps) => {
 
     return (
         <div className="[&_h1]:text-4xl [&_h2]:text-3xl [&_blockqoute]:italic [&_iframe]:aspect-video [&_h3]:text-2xl text-themeTextGray flex flex-col gap-y-3">
-            {mounted && parse(html)}
+            {mounted ? (
+                typeof html === "string" && html.trim() ? (
+                    parse(html)
+                ) : (
+                    <p>No content available</p>
+                )
+            ) : (
+                <Loader loading={true}>Loading...</Loader>
+            )}
         </div>
     )
 }
