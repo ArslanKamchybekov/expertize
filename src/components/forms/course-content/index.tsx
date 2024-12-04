@@ -87,7 +87,7 @@ export const CourseContentForm = ({
                 </Button>
             )}
 
-            {!isEditing && <AIChat lectureContent={lectureContent} /> }
+            {!isEditing && <AIChat lectureContent={lectureContent} />}
             {!isEditing && <QuizGenerator lectureContent={lectureContent} />}
         </form>
     ) : (
