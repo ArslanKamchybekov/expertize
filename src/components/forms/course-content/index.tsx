@@ -3,6 +3,7 @@
 import { AIChat } from "@/components/global/ai-chat"
 import { HtmlParser } from "@/components/global/html-parser"
 import { Loader } from "@/components/global/loader"
+import { QuizGenerator } from "@/components/global/quiz-generator"
 import BlockTextEditor from "@/components/global/rich-text-editor"
 import { Button } from "@/components/ui/button"
 import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses"
@@ -37,15 +38,14 @@ export const CourseContentForm = ({
         data?.section?.htmlContent || null,
     )
 
-    const [isEditing, setIsEditing] = useState(false) // State to track if the description is being edited
+    const [isEditing, setIsEditing] = useState(false)
     const lectureContent = data?.section?.htmlContent || ""
 
-    // Handle when the user clicks on the description to edit
     const handleDescriptionClick = () => {
+        console.log(lectureContent)
         setIsEditing(true)
     }
 
-    // Handle when the user exits editing
     const handleDescriptionBlur = () => {
         setIsEditing(false)
     }
@@ -57,9 +57,9 @@ export const CourseContentForm = ({
             ref={editor}
         >
             <div
-                onClick={handleDescriptionClick} // Allow user to start editing by clicking
-                onBlur={handleDescriptionBlur} // Stop editing when clicking outside
-                tabIndex={0} // Ensures onBlur is triggered when the input loses focus
+                onClick={handleDescriptionClick}
+                onBlur={handleDescriptionBlur}
+                tabIndex={0}
             >
                 <BlockTextEditor
                     onEdit={onEditDescription}
@@ -87,13 +87,14 @@ export const CourseContentForm = ({
                 </Button>
             )}
 
-            {/* Show AIChat only when not editing */}
-            {!isEditing && <AIChat lectureContent={lectureContent} />}
+            {!isEditing && <AIChat lectureContent={lectureContent} /> }
+            {!isEditing && <QuizGenerator lectureContent={lectureContent} />}
         </form>
     ) : (
         <form className="p-4 flex flex-col gap-4">
             <HtmlParser html={data?.section?.htmlContent!} />
             <AIChat lectureContent={lectureContent} />
+            <QuizGenerator lectureContent={lectureContent} />
         </form>
     )
 }
