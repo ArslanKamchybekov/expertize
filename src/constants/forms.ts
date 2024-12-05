@@ -54,3 +54,30 @@ export const SIGN_IN_FORM: AuthFormProps[] = [
         type: "password",
     },
 ]
+
+export const FORGOT_PASSWORD_FORM: AuthFormProps[] = [
+    {
+        id: "1",
+        inputType: "input",
+        placeholder: "Email",
+        name: "email",
+        type: "email",
+    },
+]
+
+export const RESET_PASSWORD_FORM: AuthFormProps[] = [
+    {
+        id: "1",
+        inputType: "input",
+        placeholder: "New Password",
+        name: "password",
+        type: "password",
+    },
+    {
+        id: "2",
+        inputType: "input",
+        placeholder: "Confirm Password",
+        name: "confirmPassword",
+        type: "password",
+    },
+]

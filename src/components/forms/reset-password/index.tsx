@@ -4,19 +4,19 @@ import { FormGenerator } from "@/components/global/form-generator"
 import { Loader } from "@/components/global/loader"
 import { Button } from "@/components/ui/button"
 import { GROUPLE_CONSTANTS } from "@/constants"
-import { useAuthSignIn } from "@/hooks/authentication"
+import { useAuthResetPassword } from "@/hooks/authentication"
 
 type Props = {}
 
-const SignInForm = (props: Props) => {
-    const { isPending, onAuthenticateUser, register, errors } = useAuthSignIn()
+const ResetPasswordForm = (props: Props) => {
+    const { register, errors, onResetPassword, isResetting } = useAuthResetPassword()
 
     return (
         <form
-            className="flex flex-col gap-3 mt-10"
-            onSubmit={onAuthenticateUser}
+            className="flex flex-col gap-3 mt-4"
+            onSubmit={onResetPassword}
         >
-            {GROUPLE_CONSTANTS.signInForm.map((field) => (
+            {GROUPLE_CONSTANTS.forgotPasswordForm.map((field) => (
                 <FormGenerator
                     {...field}
                     key={field.id}
@@ -24,14 +24,11 @@ const SignInForm = (props: Props) => {
                     errors={errors}
                 />
             ))}
-            <div className="text-themeTextGray text-xs text-right mb-3">
-                <a href="/forgot-password">Forgot password?</a>
-            </div>
             <Button type="submit" className="rounded-2xl">
-                <Loader loading={isPending}>Sign In</Loader>
+                <Loader loading={isResetting}>Reset Password</Loader>
             </Button>
         </form>
     )
 }
 
-export default SignInForm
+export default ResetPasswordForm

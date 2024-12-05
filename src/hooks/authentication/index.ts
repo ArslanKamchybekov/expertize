@@ -9,6 +9,8 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { z } from "zod"
+import { ForgotPasswordSchema } from "../../components/forms/forgot-password/schema"
+import { ResetPasswordSchema } from "../../components/forms/reset-password/schema"
 import { SignInSchema } from "../../components/forms/sign-in/schema"
 
 export const useAuthSignIn = () => {
@@ -222,4 +224,97 @@ export const useGoogleAuth = () => {
     }
 
     return { signUpWith, signInWith }
+}
+
+export const useAuthForgotPassword = () => {
+    const { isLoaded, signIn } = useSignIn()
+    const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof ForgotPasswordSchema>>({
+        resolver: zodResolver(ForgotPasswordSchema),
+        mode: "onBlur",
+    })
+    
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+
+    const onSendResetLink = handleSubmit(async ({ email }) => {
+        if (!isLoaded) {
+            return toast("Error", {
+                description: "Oops! something went wrong",
+            })
+        }
+
+        try {
+            setIsSubmitting(true)
+            await signIn.create({
+                strategy: 'reset_password_email_code',
+                identifier: email,
+            })
+                
+            toast("Success", {
+                description: "A reset link has been sent to your email.",
+            })
+        } catch (error) {
+            toast("Error", {
+                description: "Could not send reset link. Please try again.",
+            })
+            console.error(error)
+        } finally {
+            setIsSubmitting(false)
+        }
+    })
+
+    return {
+        register,
+        errors,
+        onSendResetLink,
+        isSubmitting,
+    }
+}
+
+export const useAuthResetPassword = () => {
+    const { isLoaded, signIn } = useSignIn()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<z.infer<typeof ResetPasswordSchema>>({
+        resolver: zodResolver(ResetPasswordSchema),
+        mode: "onBlur",
+    })
+
+    const [isResetting, setIsResetting] = useState<boolean>(false)
+
+    const onResetPassword = handleSubmit(async ({ password, confirmPassword }) => {
+        if (!isLoaded) {
+            return toast("Error", {
+                description: "Oops! something went wrong",
+            })
+        }
+
+        try {
+            setIsResetting(true)
+            await signIn.attemptFirstFactor({
+                strategy: 'reset_password_email_code',
+                code: password,
+                password: confirmPassword,
+            })
+
+            toast("Success", {
+                description: "Your password has been successfully reset.",
+            })
+        } catch (error) {
+            toast("Error", {
+                description: "Failed to reset password. Please try again.",
+            })
+            console.error(error)
+        } finally {
+            setIsResetting(false)
+        }
+    })
+
+    return {
+        register,
+        errors,
+        onResetPassword,
+        isResetting,
+    }
 }
