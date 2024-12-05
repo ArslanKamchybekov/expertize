@@ -171,6 +171,7 @@ export const onUpdateSection = async (
     sectionId: string,
     type: "NAME" | "COMPLETE",
     content: string,
+    userId: string,
 ) => {
     try {
         if (type === "NAME") {
@@ -185,21 +186,40 @@ export const onUpdateSection = async (
 
             return { status: 200, message: "Section successfully updated" }
         }
+
         if (type === "COMPLETE") {
-            await client.section.update({
+            const existingCompletion = await client.sectionCompletion.findFirst({
                 where: {
-                    id: sectionId,
-                },
-                data: {
-                    complete: true,
+                    sectionId,
+                    userId,
                 },
             })
 
-            return { status: 200, message: "Section successfully completed" }
+            if (!existingCompletion) {
+                await client.sectionCompletion.create({
+                    data: {
+                        sectionId,
+                        userId,
+                        completed: true,
+                        completedAt: new Date(),
+                    },
+                })
+            } else if (!existingCompletion.completed) {
+                await client.sectionCompletion.update({
+                    where: { id: existingCompletion.id },
+                    data: {
+                        completed: true,
+                        completedAt: new Date(),
+                    },
+                })
+            }
+
+            return { status: 200, message: "Section successfully completed for the user" }
         }
 
         return { status: 404, message: "Section not found" }
     } catch (error) {
+        console.error(error)
         return { status: 400, message: "Something went wrong!" }
     }
 }

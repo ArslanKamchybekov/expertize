@@ -41,7 +41,6 @@ export async function POST(req: Request) {
         })
 
         const rawContent = response.choices[0].message?.content || "[]"
-        console.log("Raw OpenAI Response:", rawContent)
 
         let quiz = []
         try {

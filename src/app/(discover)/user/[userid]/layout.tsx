@@ -10,14 +10,12 @@ const UserProfileLayout = async ({
 }: {
     children: React.ReactNode
 }) => {
-    // Fetch authenticated user
     const user = await onAuthenticatedUser()
+    
     if (!user?.id) redirect("/sign-in")
 
-    // Fetch user groups server-side
     const userGroups = await onGetUserGroups(user.id)
-    console.log(userGroups)
-    // Fetch user subscriptions server-side
+
     const userSubscriptions = (await onGetUserSubscriptions(user.id)) || []
 
     return (
@@ -26,9 +24,9 @@ const UserProfileLayout = async ({
                 {/* Profile Section */}
                 <div className="flex flex-col items-center text-center gap-4">
                     <img
-                        src={user.image || "/default-avatar.png"}
+                        src={user.image}
                         alt={`${user.username}'s avatar`}
-                        className="w-24 h-24 rounded-full border-4 border-blue-500 object-cover shadow-lg"
+                        className="w-24 h-24 rounded-full border-4 object-cover shadow-lg"
                     />
                     <div>
                         <GradientText className="text-4xl font-extrabold">

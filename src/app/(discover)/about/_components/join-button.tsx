@@ -17,7 +17,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     // Handle error state
     if (!data) {
         return (
-            <div className="w-full p-10 text-center text-green-500">
+            <div className="w-full p-8 text-center text-green-500">
                 Loading...
             </div>
         )
@@ -31,7 +31,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     // If the user is the owner
     if (owner) {
         return (
-            <Button disabled className="w-full p-10" variant="ghost">
+            <Button disabled className="w-full p-8" variant="ghost">
                 Owner
             </Button>
         )
@@ -40,7 +40,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     // If the user is already a member
     if (isMember) {
         return (
-            <div className="w-full p-10 text-center text-themeTextGray">
+            <div className="w-full p-8 text-center text-themeTextGray">
                 Member
             </div>
         )
@@ -52,7 +52,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
             <GlassModal
                 trigger={
                     <Button className="w-full p-8" variant="ghost">
-                        <p className="text-lg text-green-500">
+                        <p className="text-lg text-green-500 font-bold">
                             ${data.subscription.price} / month
                         </p>
                     </Button>
@@ -75,7 +75,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     return (
         <Button
             onClick={onJoinFreeGroup}
-            className="w-full p-10"
+            className="w-full p-8"
             variant="ghost"
         >
             Join now

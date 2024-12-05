@@ -21,13 +21,13 @@ model User {
   clerkId   String   @unique
   image     String?
   stripeId  String?
-
   group      Group[]
   membership Members[]
   posts      Post[]
   likes      Like[]
   comments   Comment[]
   message    Message[]
+  sectionCompletion SectionCompletion[]
 }
 
 model Subscription {
@@ -69,7 +69,6 @@ model Members {
   Group     Group?   @relation(fields: [groupId], references: [id])
   groupId   String?  @db.Uuid
   createdAt DateTime @default(now())
-
   @@index([userId, groupId])
 }
 
@@ -106,7 +105,6 @@ model Comment {
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String    @db.Uuid
   replied   Boolean?  @default(false)
-  //self relation 1 to many for comments
   reply     Comment[] @relation(name: "CommentToComment")
   Comment   Comment?  @relation(name: "CommentToComment", fields: [commentId], references: [id])
   commentId String?   @db.Uuid
@@ -155,6 +153,18 @@ model Section {
   content     String?
   htmlContent String?
   JsonContent String?
+  sectionCompletion SectionCompletion[]
+}
+
+model SectionCompletion {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String?  @db.Uuid
+  Section   Section? @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId String?  @db.Uuid
+  completed Boolean  @default(false)
+  completedAt DateTime?
 }
 
 model Affiliate {

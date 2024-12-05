@@ -26,7 +26,6 @@ const GroupSettingsForm = ({ groupId }: Props) => {
         setOnDescription,
         onDescription,
     } = useGroupSettings(groupId)
-    console.log(data?.group, onJsonDescription)
     return (
         <form
             className="flex flex-col h-full w-full items-start gap-y-5"

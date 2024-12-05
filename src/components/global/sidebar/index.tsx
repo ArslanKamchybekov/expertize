@@ -80,9 +80,9 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                                 <img
                                     src={`https://ucarecdn.com/${groupInfo.group?.icon as string}/`}
                                     alt="icon"
-                                    className="w-10 rounded-lg"
+                                    className="w-8 rounded-lg"
                                 />
-                                <p className="text-sm">
+                                <p className="text-sm overflow-scroll">
                                     {groupInfo.group?.name}
                                 </p>
                             </div>

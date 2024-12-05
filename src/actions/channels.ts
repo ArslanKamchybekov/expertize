@@ -163,7 +163,7 @@ export const onUpdateChannelInfo = async (
             }
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { status: 400, message: "Oops! something went wrong" }
     }
 }
@@ -251,7 +251,7 @@ export const onLikeChannelPost = async (postid: string, likeid: string) => {
 
         return { status: 404, message: "Post not found!" }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { status: 400, message: "Something went wrong" }
     }
 }

@@ -68,7 +68,6 @@ export const onGetActiveSubscription = async (groupId: string) => {
 }
 
 export const onGetGroupSubscriptionPaymentIntent = async (groupid: string) => {
-    console.log("running")
     try {
         const price = await client.subscription.findFirst({
             where: {
@@ -90,7 +89,6 @@ export const onGetGroupSubscriptionPaymentIntent = async (groupid: string) => {
         })
 
         if (price && price.price) {
-            console.log("🟣", price.Group?.User.stripeId)
             const paymentIntent = await stripe.paymentIntents.create({
                 currency: "usd",
                 amount: price.price * 100,
@@ -202,7 +200,7 @@ export const onGetStripeIntegration = async () => {
             return stripeId.stripeId
         }
     } catch (error) {
-        console.log(error)
+        console.error("Error getting stripe integration:", error)
     }
 }
 
@@ -233,6 +231,6 @@ export const onGetUserSubscriptions = async (userid: string) => {
             return subscriptions
         }
     } catch (error) {
-        console.log(error)
+        console.error("Error getting user subscriptions:", error)
     }
 }

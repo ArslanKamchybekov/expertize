@@ -50,7 +50,6 @@ export const useGroupChatOnline = (userid: string) => {
         channel
             .on("presence", { event: "sync" }, () => {
                 const state: any = channel.presenceState()
-                console.log(state)
                 for (const user in state) {
                     dispatch(
                         onOnline({
@@ -211,7 +210,6 @@ export const useGroupSettings = (groupid: string) => {
                 }
             }
             if (values.icon && values.icon.length > 0) {
-                console.log("icon")
                 const uploaded = await upload.uploadFile(values.icon[0])
                 const updated = await onUpDateGroupSettings(
                     groupid,
@@ -238,7 +236,6 @@ export const useGroupSettings = (groupid: string) => {
                     })
                 }
             }
-            console.log("DESCRIPTION")
 
             if (values.description) {
                 const updated = await onUpDateGroupSettings(
@@ -567,7 +564,6 @@ export const useMediaGallery = (groupid: string) => {
                         })
                         break
                     }
-                    console.log("increment")
                     count++
                 }
             }

@@ -72,7 +72,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                         onClick={() =>
                                             setActiveSection(section.id)
                                         }
-                                        className="flex gap-x-3 items-center capitalize"
+                                        className="flex gap-x-3 items-center capitalize overflow-scroll"
                                         key={section.id}
                                         href={`/group/${groupid}/courses/${courseId}/${section.id}`}
                                     >

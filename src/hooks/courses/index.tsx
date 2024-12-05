@@ -13,16 +13,17 @@ import { onGetGroupInfo } from "@/actions/groups"
 import { CourseContentSchema } from "@/components/forms/course-content/schema"
 import { CreateCourseSchema } from "@/components/global/create-course/schema"
 import { upload } from "@/lib/uploadcare"
+import { useUser } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { usePathname } from "next/navigation"
-
 import { JSONContent } from "novel"
 import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 import { v4 } from "uuid"
 import { z } from "zod"
+
 
 export const useCreateCourse = (groupid: string) => {
     const [onPrivacy, setOnPrivacy] = useState<string | undefined>("open")
@@ -185,6 +186,8 @@ export const useCourseModule = (courseId: string, groupid: string) => {
 
     const client = useQueryClient()
 
+    const user = useUser()
+
     const { variables, mutate, isPending } = useMutation({
         mutationFn: (data: { type: "NAME" | "DATA"; content: string }) =>
             onUpdateModule(moduleId!, data.type, data.content),
@@ -206,8 +209,9 @@ export const useCourseModule = (courseId: string, groupid: string) => {
         isPending: sectionUpdatePending,
         variables: updateVariables,
     } = useMutation({
-        mutationFn: (data: { type: "NAME"; content: string }) =>
-            onUpdateSection(activeSection!, data.type, data.content),
+        
+        mutationFn: async (data: { type: "NAME"; content: string }) =>
+            onUpdateSection(activeSection!, data.type, data.content, user.user?.id!),
         onMutate: () => setEditSection(false),
         onSuccess: (data) => {
             toast(data.status === 200 ? "Success" : "Error", {
@@ -330,9 +334,10 @@ export const useSectionNavBar = (sectionid: string) => {
     })
 
     const client = useQueryClient()
+    const user = useUser()
 
     const { isPending, mutate } = useMutation({
-        mutationFn: () => onUpdateSection(sectionid, "COMPLETE", ""),
+        mutationFn: async () => onUpdateSection(sectionid, "COMPLETE", "", user.user?.id!),
         onSuccess: (data) => {
             toast(data.status === 200 ? "Success" : "Error", {
                 description: data.message,

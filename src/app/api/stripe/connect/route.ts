@@ -20,7 +20,6 @@ export async function GET(req: NextRequest) {
         })
 
         if (account) {
-            console.log(account)
             const user = await onAuthenticatedUser()
             const integrateStripeAccount = await client.user.update({
                 where: {
@@ -38,7 +37,6 @@ export async function GET(req: NextRequest) {
                     return_url: `${process.env.NEXT_PUBLIC_API_URL}/group/${groupid}/settings/integrations`,
                     type: "account_onboarding",
                 })
-                console.log(accountLink)
                 return NextResponse.json({
                     url: accountLink.url,
                 })

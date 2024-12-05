@@ -23,7 +23,7 @@ type UserWidgetProps = {
 }
 
 export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
-    const { signOut } = useClerk()
+    const { signOut, user } = useClerk()
     const dispatch: AppDispatch = useDispatch()
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -53,7 +53,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                 trigger={
                     <Avatar className="cursor-pointer">
                         <AvatarImage src={image} alt="user" />
-                        <AvatarFallback>U</AvatarFallback>
+                        <AvatarFallback>{''}</AvatarFallback>
                     </Avatar>
                 }
             >

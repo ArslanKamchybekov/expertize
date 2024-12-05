@@ -7,7 +7,8 @@ import { QuizGenerator } from "@/components/global/quiz-generator"
 import BlockTextEditor from "@/components/global/rich-text-editor"
 import { Button } from "@/components/ui/button"
 import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { YoutubeTranscript } from "youtube-transcript"
 
 type CourseContentFormProps = {
     sectionid: string
@@ -39,10 +40,29 @@ export const CourseContentForm = ({
     )
 
     const [isEditing, setIsEditing] = useState(false)
+    const [transcriptText, setTranscriptText] = useState<string>("")
     const lectureContent = data?.section?.htmlContent || ""
 
+    useEffect(() => {
+        const fetchTranscript = async () => {
+            const videoIdMatch = lectureContent.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/)
+            const videoId = videoIdMatch ? videoIdMatch[1] : null
+
+            if (videoId) {
+                try {
+                    const transcript = await YoutubeTranscript.fetchTranscript(videoId)
+                    const combinedText = transcript.map((item) => item.text).join(" ")
+                    setTranscriptText(combinedText)
+                } catch (error) {
+                    console.error("Failed to fetch transcript:", error)
+                }
+            }
+        }
+
+        fetchTranscript()
+    }, [lectureContent])
+
     const handleDescriptionClick = () => {
-        console.log(lectureContent)
         setIsEditing(true)
     }
 
@@ -87,14 +107,14 @@ export const CourseContentForm = ({
                 </Button>
             )}
 
-            {!isEditing && <AIChat lectureContent={lectureContent} />}
-            {!isEditing && <QuizGenerator lectureContent={lectureContent} />}
+            {!isEditing && <AIChat lectureContent={transcriptText || lectureContent} />}
+            {!isEditing && <QuizGenerator lectureContent={transcriptText || lectureContent} />}
         </form>
     ) : (
         <form className="p-4 flex flex-col gap-4">
             <HtmlParser html={data?.section?.htmlContent!} />
-            <AIChat lectureContent={lectureContent} />
-            <QuizGenerator lectureContent={lectureContent} />
+            <AIChat lectureContent={transcriptText || lectureContent} />
+            <QuizGenerator lectureContent={transcriptText || lectureContent} />
         </form>
     )
 }

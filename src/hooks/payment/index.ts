@@ -180,7 +180,7 @@ export const useJoinGroup = (groupid: string) => {
             )
 
             if (error) {
-                console.log(error)
+                console.error(error)
                 return toast("Error", {
                     description: "Oops! something went wrong, try again later",
                 })
@@ -275,7 +275,7 @@ export const useStripeConnect = (groupid: string) => {
                 }
             }
         } catch (error) {
-            console.log(error)
+            console.error("Error connecting to stripe:", error)
         }
     }
     return { onStripeConnect, onStripeAccountPending }

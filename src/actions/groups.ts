@@ -334,7 +334,6 @@ export const onUpDateGroupSettings = async (
                     icon: content,
                 },
             })
-            console.log("uploaded image")
         }
         if (type === "DESCRIPTION") {
             await client.group.update({
@@ -379,7 +378,7 @@ export const onUpDateGroupSettings = async (
         revalidatePath(path)
         return { status: 200 }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { status: 400 }
     }
 }
@@ -766,7 +765,7 @@ export const onGetDomainConfig = async (groupId: string) => {
 
         return { status: 404 }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { status: 400 }
     }
 }
@@ -809,7 +808,7 @@ export const onAddCustomDomain = async (groupid: string, domain: string) => {
 
         return { status: 404, message: "Group not found" }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return { status: 400, message: "Oops something went wrong" }
     }
 }

@@ -143,16 +143,6 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                             Your Score: {score}/{quiz.length}
                         </p>
                     )}
-
-                    {score === quiz.length ? (
-                        <p className="mt-2 text-green-400">
-                            Congratulations! You got all answers correct!
-                        </p>
-                    ) : (
-                        <p className="mt-2 text-green-400">
-                            Better luck next time!
-                        </p>
-                    )}
                 </div>
             )}
         </div>
