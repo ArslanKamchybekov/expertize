@@ -24,7 +24,6 @@ import { toast } from "sonner"
 import { v4 } from "uuid"
 import { z } from "zod"
 
-
 export const useCreateCourse = (groupid: string) => {
     const [onPrivacy, setOnPrivacy] = useState<string | undefined>("open")
     const buttonRef = useRef<HTMLButtonElement | null>(null)
@@ -209,9 +208,13 @@ export const useCourseModule = (courseId: string, groupid: string) => {
         isPending: sectionUpdatePending,
         variables: updateVariables,
     } = useMutation({
-        
         mutationFn: async (data: { type: "NAME"; content: string }) =>
-            onUpdateSection(activeSection!, data.type, data.content, user.user?.id!),
+            onUpdateSection(
+                activeSection!,
+                data.type,
+                data.content,
+                user.user?.id!,
+            ),
         onMutate: () => setEditSection(false),
         onSuccess: (data) => {
             toast(data.status === 200 ? "Success" : "Error", {
@@ -337,7 +340,8 @@ export const useSectionNavBar = (sectionid: string) => {
     const user = useUser()
 
     const { isPending, mutate } = useMutation({
-        mutationFn: async () => onUpdateSection(sectionid, "COMPLETE", "", user.user?.id!),
+        mutationFn: async () =>
+            onUpdateSection(sectionid, "COMPLETE", "", user.user?.id!),
         onSuccess: (data) => {
             toast(data.status === 200 ? "Success" : "Error", {
                 description: data.message,

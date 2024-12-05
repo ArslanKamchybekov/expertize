@@ -11,7 +11,8 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
     title: "GrowthHungry AI",
-    description: "GrowthHungry AI is an educational platform that helps you learn and grow your skills.",
+    description:
+        "GrowthHungry AI is an educational platform that helps you learn and grow your skills.",
 }
 
 export default function RootLayout({

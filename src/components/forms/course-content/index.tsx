@@ -45,13 +45,18 @@ export const CourseContentForm = ({
 
     useEffect(() => {
         const fetchTranscript = async () => {
-            const videoIdMatch = lectureContent.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]+)/)
+            const videoIdMatch = lectureContent.match(
+                /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+            )
             const videoId = videoIdMatch ? videoIdMatch[1] : null
 
             if (videoId) {
                 try {
-                    const transcript = await YoutubeTranscript.fetchTranscript(videoId)
-                    const combinedText = transcript.map((item) => item.text).join(" ")
+                    const transcript =
+                        await YoutubeTranscript.fetchTranscript(videoId)
+                    const combinedText = transcript
+                        .map((item) => item.text)
+                        .join(" ")
                     setTranscriptText(combinedText)
                 } catch (error) {
                     console.error("Failed to fetch transcript:", error)
@@ -107,8 +112,14 @@ export const CourseContentForm = ({
                 </Button>
             )}
 
-            {!isEditing && <AIChat lectureContent={transcriptText || lectureContent} />}
-            {!isEditing && <QuizGenerator lectureContent={transcriptText || lectureContent} />}
+            {!isEditing && (
+                <AIChat lectureContent={transcriptText || lectureContent} />
+            )}
+            {!isEditing && (
+                <QuizGenerator
+                    lectureContent={transcriptText || lectureContent}
+                />
+            )}
         </form>
     ) : (
         <form className="p-4 flex flex-col gap-4">

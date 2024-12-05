@@ -53,7 +53,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                 trigger={
                     <Avatar className="cursor-pointer">
                         <AvatarImage src={image} alt="user" />
-                        <AvatarFallback>{''}</AvatarFallback>
+                        <AvatarFallback>{""}</AvatarFallback>
                     </Avatar>
                 }
             >

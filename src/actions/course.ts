@@ -188,12 +188,14 @@ export const onUpdateSection = async (
         }
 
         if (type === "COMPLETE") {
-            const existingCompletion = await client.sectionCompletion.findFirst({
-                where: {
-                    sectionId,
-                    userId,
+            const existingCompletion = await client.sectionCompletion.findFirst(
+                {
+                    where: {
+                        sectionId,
+                        userId,
+                    },
                 },
-            })
+            )
 
             if (!existingCompletion) {
                 await client.sectionCompletion.create({
@@ -214,7 +216,10 @@ export const onUpdateSection = async (
                 })
             }
 
-            return { status: 200, message: "Section successfully completed for the user" }
+            return {
+                status: 200,
+                message: "Section successfully completed for the user",
+            }
         }
 
         return { status: 404, message: "Section not found" }

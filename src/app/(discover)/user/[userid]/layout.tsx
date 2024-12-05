@@ -11,7 +11,7 @@ const UserProfileLayout = async ({
     children: React.ReactNode
 }) => {
     const user = await onAuthenticatedUser()
-    
+
     if (!user?.id) redirect("/sign-in")
 
     const userGroups = await onGetUserGroups(user.id)
