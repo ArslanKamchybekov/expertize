@@ -228,11 +228,15 @@ export const useGoogleAuth = () => {
 
 export const useAuthForgotPassword = () => {
     const { isLoaded, signIn } = useSignIn()
-    const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<z.infer<typeof ForgotPasswordSchema>>({
         resolver: zodResolver(ForgotPasswordSchema),
         mode: "onBlur",
     })
-    
+
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
 
     const onSendResetLink = handleSubmit(async ({ email }) => {
@@ -245,10 +249,10 @@ export const useAuthForgotPassword = () => {
         try {
             setIsSubmitting(true)
             await signIn.create({
-                strategy: 'reset_password_email_code',
+                strategy: "reset_password_email_code",
                 identifier: email,
             })
-                
+
             toast("Success", {
                 description: "A reset link has been sent to your email.",
             })
@@ -283,33 +287,35 @@ export const useAuthResetPassword = () => {
 
     const [isResetting, setIsResetting] = useState<boolean>(false)
 
-    const onResetPassword = handleSubmit(async ({ password, confirmPassword }) => {
-        if (!isLoaded) {
-            return toast("Error", {
-                description: "Oops! something went wrong",
-            })
-        }
+    const onResetPassword = handleSubmit(
+        async ({ password, confirmPassword }) => {
+            if (!isLoaded) {
+                return toast("Error", {
+                    description: "Oops! something went wrong",
+                })
+            }
 
-        try {
-            setIsResetting(true)
-            await signIn.attemptFirstFactor({
-                strategy: 'reset_password_email_code',
-                code: password,
-                password: confirmPassword,
-            })
+            try {
+                setIsResetting(true)
+                await signIn.attemptFirstFactor({
+                    strategy: "reset_password_email_code",
+                    code: password,
+                    password: confirmPassword,
+                })
 
-            toast("Success", {
-                description: "Your password has been successfully reset.",
-            })
-        } catch (error) {
-            toast("Error", {
-                description: "Failed to reset password. Please try again.",
-            })
-            console.error(error)
-        } finally {
-            setIsResetting(false)
-        }
-    })
+                toast("Success", {
+                    description: "Your password has been successfully reset.",
+                })
+            } catch (error) {
+                toast("Error", {
+                    description: "Failed to reset password. Please try again.",
+                })
+                console.error(error)
+            } finally {
+                setIsResetting(false)
+            }
+        },
+    )
 
     return {
         register,

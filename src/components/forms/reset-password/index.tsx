@@ -9,13 +9,11 @@ import { useAuthResetPassword } from "@/hooks/authentication"
 type Props = {}
 
 const ResetPasswordForm = (props: Props) => {
-    const { register, errors, onResetPassword, isResetting } = useAuthResetPassword()
+    const { register, errors, onResetPassword, isResetting } =
+        useAuthResetPassword()
 
     return (
-        <form
-            className="flex flex-col gap-3 mt-4"
-            onSubmit={onResetPassword}
-        >
+        <form className="flex flex-col gap-3 mt-4" onSubmit={onResetPassword}>
             {GROUPLE_CONSTANTS.forgotPasswordForm.map((field) => (
                 <FormGenerator
                     {...field}

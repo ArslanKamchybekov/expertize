@@ -111,7 +111,7 @@ export const FormGenerator = ({
                         )}
                     />
                 </Label>
-            )    
+            )
         default:
             return <></>
     }

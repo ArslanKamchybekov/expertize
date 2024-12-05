@@ -9,13 +9,11 @@ import { useAuthForgotPassword } from "@/hooks/authentication"
 type Props = {}
 
 const ForgotPasswordForm = (props: Props) => {
-    const { register, errors, onSendResetLink, isSubmitting } = useAuthForgotPassword()
+    const { register, errors, onSendResetLink, isSubmitting } =
+        useAuthForgotPassword()
 
     return (
-        <form
-            className="flex flex-col gap-3 mt-4"
-            onSubmit={onSendResetLink}
-        >
+        <form className="flex flex-col gap-3 mt-4" onSubmit={onSendResetLink}>
             {GROUPLE_CONSTANTS.forgotPasswordForm.map((field) => (
                 <FormGenerator
                     {...field}

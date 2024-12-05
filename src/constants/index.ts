@@ -1,4 +1,9 @@
-import { AuthFormProps, FORGOT_PASSWORD_FORM, SIGN_IN_FORM, SIGN_UP_FORM } from "./forms"
+import {
+    AuthFormProps,
+    FORGOT_PASSWORD_FORM,
+    SIGN_IN_FORM,
+    SIGN_UP_FORM,
+} from "./forms"
 import {
     GROUP_PAGE_MENU,
     GroupMenuProps,
