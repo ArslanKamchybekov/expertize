@@ -10,6 +10,6 @@ export const SignInSchema = z.object({
         })
         .refine(
             (value) => /^[a-zA-Z0-9_.-]*$/.test(value ?? ""),
-            "password should contain only alphabets and numbers",
+            "Password should contain only alphabets and numbers",
         ),
 })

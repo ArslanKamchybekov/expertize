@@ -3,10 +3,10 @@ import { z } from "zod"
 export const SignUpSchema = z.object({
     firstname: z
         .string()
-        .min(3, { message: "first name must be atleast 3 characters" }),
+        .min(3, { message: "First name must be atleast 3 characters" }),
     lastname: z
         .string()
-        .min(3, { message: "last name must be atleast 3 characters" }),
+        .min(3, { message: "Last name must be atleast 3 characters" }),
     email: z.string().email("You must give a valid email"),
     password: z
         .string()
@@ -16,6 +16,6 @@ export const SignUpSchema = z.object({
         })
         .refine(
             (value) => /^[a-zA-Z0-9_.-]*$/.test(value ?? ""),
-            "password should contain only alphabets and numbers",
+            "Password should contain only alphabets and numbers",
         ),
 })

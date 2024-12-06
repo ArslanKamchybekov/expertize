@@ -14,7 +14,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
         <div className="flex-1 flex flex-col">
             <div className="flex flex-col items-center mt-36 px-10">
                 <GradientText
-                    className="text-[90px] font-semibold leading-none"
+                    className="text-5xl font-bold my-4"
                     element="H2"
                 >
                     Explore Groups
@@ -25,7 +25,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
                         href={
                             user.status === 200 ? `/group/create` : "/sign-in"
                         }
-                        className="underline"
+                        className="text-themeTextGray font-bold underline my-4"
                     >
                         create your own
                     </Link>
@@ -39,7 +39,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
                         searchType="GROUPS"
                         glass
                         inputStyle="lg:w-[500px] text-lg h-auto z-[9999]"
-                        className="rounded-3xl border-themeGray py-2 px-5 mt-10 mb-3"
+                        className="rounded-3xl border-themeGray px-5 mt-6 mb-3"
                     />
                     <div className="w-full md:w-[800px]">
                         <GroupListSlider overlay route />

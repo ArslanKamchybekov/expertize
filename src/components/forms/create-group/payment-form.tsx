@@ -88,7 +88,7 @@ const PaymentForm = ({ affiliate, userId, stripeId }: Props) => {
                         accept our terms.
                     </p>
                     <Link
-                        className="text-sm text-themeTextGray"
+                        className="text-sm text-themeTextGray font-bold"
                         href={"/explore"}
                     >
                         Skip for now
