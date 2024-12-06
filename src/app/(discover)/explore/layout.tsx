@@ -13,10 +13,7 @@ const ExploreLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="flex-1 flex flex-col">
             <div className="flex flex-col items-center mt-36 px-10">
-                <GradientText
-                    className="text-5xl font-bold my-4"
-                    element="H2"
-                >
+                <GradientText className="text-5xl font-bold my-4" element="H2">
                     Explore Groups
                 </GradientText>
                 <p className="text-themeTextGray leading-none pt-2">
