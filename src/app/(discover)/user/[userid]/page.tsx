@@ -1,52 +1,31 @@
-import { Button } from "@/components/ui/button"
+import { onAuthenticatedUser } from "@/actions/auth";
+import { onGetUserGroups } from "@/actions/groups";
+import { onGetUserSubscriptions } from "@/actions/payments";
+import Subscriptions from "@/components/global/subscriptions";
+import { redirect } from "next/navigation";
 
-type Props = {
-    user: {
-        id: string
-        username: string
-        image: string
-    }
-    groups: {
-        id: string
-        name: string
-        icon: string
-        userId: string
-    }[]
-    subscriptions: {
-        id: string
-        price: number
-        groupId: string
-        active: boolean
-        createdAt: number
-    }[]
-}
+export default async function UserProfilePage() {
+    const user = await onAuthenticatedUser();
 
-const UserProfilePage = async (props: Props) => {
-    // Add detailed logging
+    if (!user?.id) redirect("/sign-in");
 
-    console.log("Received User:", props.user)
-    console.log("Received Groups:", props.groups)
-    console.log("Received Subscriptions:", props.subscriptions)
+    const userGroups = await onGetUserGroups(user.id);
+    const userSubscriptions = await onGetUserSubscriptions(user.id);
 
-    const { user, groups, subscriptions } = props
+    const groups = (userGroups.groups ?? []).filter(group => group !== null).map((group) => ({
+        id: group!.id,
+        name: group!.name,
+        icon: group!.icon || "",
+        userId: group!.userId,
+    }));
 
-    // Early return if no user
-    if (!user) {
-        return <div>Loading or no user found</div>
-    }
-
-    const handleCancelSubscription = async (
-        subscriptionId: string,
-        groupId: string,
-    ) => {
-        try {
-            console.log(
-                `Cancelling subscription ${subscriptionId} for group ${groupId}`,
-            )
-        } catch (error) {
-            console.error("Failed to cancel subscription:", error)
-        }
-    }
+    const subscriptions = (userSubscriptions ?? []).map((sub) => ({
+        id: sub.id,
+        price: sub.price ?? 0,
+        groupId: sub.groupId ?? "",
+        active: sub.active,
+        createdAt: sub.createdAt.getTime(),
+    }));
 
     return (
         <>
@@ -62,9 +41,7 @@ const UserProfilePage = async (props: Props) => {
 
             {/* Groups Section */}
             <section className="w-full mt-10">
-                <h2 className="text-2xl font-bold text-white mb-6">
-                    Your Groups
-                </h2>
+                <h2 className="text-2xl font-bold text-white mb-6">Your Groups</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {groups.length > 0 ? (
                         groups.map((group) => (
@@ -73,14 +50,12 @@ const UserProfilePage = async (props: Props) => {
                                 className="p-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col items-center gap-4"
                             >
                                 <img
-                                    src={`https://ucarecdn.com/${group.icon || ""}/`}
+                                    src={`https://ucarecdn.com/${group.icon}/`}
                                     alt="icon"
                                     className="w-10 h-10 rounded-lg"
                                 />
                                 <p className="text-gray-400">
-                                    {group.userId === user.id
-                                        ? "Owner"
-                                        : "Member"}
+                                    {group.userId === user.id ? "Owner" : "Member"}
                                 </p>
                                 <h3 className="text-xl font-semibold text-white">
                                     {group.name}
@@ -97,66 +72,7 @@ const UserProfilePage = async (props: Props) => {
                 </div>
             </section>
 
-            {/* Subscriptions Section */}
-            <section className="w-full mt-12">
-                <h2 className="text-2xl font-bold text-white mb-6">
-                    Your Subscriptions
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {subscriptions.length > 0 ? (
-                        subscriptions.map((subscription) => (
-                            <div
-                                key={subscription.id}
-                                className="p-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200"
-                            >
-                                <h3 className="text-xl font-semibold text-white">
-                                    ${subscription.price} / month
-                                </h3>
-                                <p className="text-gray-400 mt-2">
-                                    {
-                                        groups.find(
-                                            (group) =>
-                                                group.id ===
-                                                subscription.groupId,
-                                        )?.name
-                                    }
-                                </p>
-                                <p className="text-gray-400 mt-2">
-                                    {subscription.active
-                                        ? "Active"
-                                        : "Inactive"}
-                                </p>
-                                <p className="text-gray-400 mt-2">
-                                    Date:{" "}
-                                    {new Date(
-                                        subscription.createdAt,
-                                    ).toLocaleDateString()}
-                                </p>
-                                <Button
-                                    className="mt-4"
-                                    variant="outline"
-                                    onClick={() =>
-                                        handleCancelSubscription(
-                                            subscription.id,
-                                            subscription.groupId,
-                                        )
-                                    }
-                                >
-                                    Cancel Subscription
-                                </Button>
-                            </div>
-                        ))
-                    ) : (
-                        <div className="col-span-full text-center">
-                            <p className="text-gray-400">
-                                You have no active subscriptions.
-                            </p>
-                        </div>
-                    )}
-                </div>
-            </section>
+            <Subscriptions subscriptions={subscriptions} groups={groups} />
         </>
-    )
+    );
 }
-
-export default UserProfilePage
