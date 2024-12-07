@@ -1,44 +1,45 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
 
 type Props = {
     subscriptions: {
-        id: string;
-        price: number;
-        groupId: string;
-        active: boolean;
-        createdAt: number;
-    }[];
+        id: string
+        price: number
+        groupId: string
+        active: boolean
+        createdAt: number
+    }[]
     groups: {
-        id: string;
-        name: string;
-        icon: string;
-        userId: string;
-    }[];
-};
+        id: string
+        name: string
+        icon: string
+        userId: string
+    }[]
+}
 
 export default function Subscriptions({ subscriptions, groups }: Props) {
-    const [currentSubscriptions, setCurrentSubscriptions] = useState(
-        subscriptions
-    );
+    const [currentSubscriptions, setCurrentSubscriptions] =
+        useState(subscriptions)
 
     const handleCancelSubscription = async (subscriptionId: string) => {
         try {
-            console.log(`Cancelling subscription ${subscriptionId}`);
+            console.log(`Cancelling subscription ${subscriptionId}`)
             // Simulate API call or actual cancellation logic
             setCurrentSubscriptions((prev) =>
-                prev.filter((sub) => sub.id !== subscriptionId)
-            );
+                prev.filter((sub) => sub.id !== subscriptionId),
+            )
         } catch (error) {
-            console.error("Failed to cancel subscription:", error);
+            console.error("Failed to cancel subscription:", error)
         }
-    };
+    }
 
     return (
         <section className="w-full mt-12">
-            <h2 className="text-2xl font-bold text-white mb-6">Your Subscriptions</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">
+                Your Subscriptions
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentSubscriptions.length > 0 ? (
                     currentSubscriptions.map((subscription) => (
@@ -52,7 +53,8 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
                             <p className="text-gray-400 mt-2">
                                 {
                                     groups.find(
-                                        (group) => group.id === subscription.groupId
+                                        (group) =>
+                                            group.id === subscription.groupId,
                                     )?.name
                                 }
                             </p>
@@ -61,12 +63,16 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
                             </p>
                             <p className="text-gray-400 mt-2">
                                 Date:{" "}
-                                {new Date(subscription.createdAt).toLocaleDateString()}
+                                {new Date(
+                                    subscription.createdAt,
+                                ).toLocaleDateString()}
                             </p>
                             <Button
                                 className="mt-4"
                                 variant="outline"
-                                onClick={() => handleCancelSubscription(subscription.id)}
+                                onClick={() =>
+                                    handleCancelSubscription(subscription.id)
+                                }
                             >
                                 Cancel Subscription
                             </Button>
@@ -74,10 +80,12 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
                     ))
                 ) : (
                     <div className="col-span-full text-center">
-                        <p className="text-gray-400">You have no active subscriptions.</p>
+                        <p className="text-gray-400">
+                            You have no active subscriptions.
+                        </p>
                     </div>
                 )}
             </div>
         </section>
-    );
+    )
 }

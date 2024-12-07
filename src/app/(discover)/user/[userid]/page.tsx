@@ -1,23 +1,25 @@
-import { onAuthenticatedUser } from "@/actions/auth";
-import { onGetUserGroups } from "@/actions/groups";
-import { onGetUserSubscriptions } from "@/actions/payments";
-import Subscriptions from "@/components/global/subscriptions";
-import { redirect } from "next/navigation";
+import { onAuthenticatedUser } from "@/actions/auth"
+import { onGetUserGroups } from "@/actions/groups"
+import { onGetUserSubscriptions } from "@/actions/payments"
+import Subscriptions from "@/components/global/subscriptions"
+import { redirect } from "next/navigation"
 
 export default async function UserProfilePage() {
-    const user = await onAuthenticatedUser();
+    const user = await onAuthenticatedUser()
 
-    if (!user?.id) redirect("/sign-in");
+    if (!user?.id) redirect("/sign-in")
 
-    const userGroups = await onGetUserGroups(user.id);
-    const userSubscriptions = await onGetUserSubscriptions(user.id);
+    const userGroups = await onGetUserGroups(user.id)
+    const userSubscriptions = await onGetUserSubscriptions(user.id)
 
-    const groups = (userGroups.groups ?? []).filter(group => group !== null).map((group) => ({
-        id: group!.id,
-        name: group!.name,
-        icon: group!.icon || "",
-        userId: group!.userId,
-    }));
+    const groups = (userGroups.groups ?? [])
+        .filter((group) => group !== null)
+        .map((group) => ({
+            id: group!.id,
+            name: group!.name,
+            icon: group!.icon || "",
+            userId: group!.userId,
+        }))
 
     const subscriptions = (userSubscriptions ?? []).map((sub) => ({
         id: sub.id,
@@ -25,7 +27,7 @@ export default async function UserProfilePage() {
         groupId: sub.groupId ?? "",
         active: sub.active,
         createdAt: sub.createdAt.getTime(),
-    }));
+    }))
 
     return (
         <>
@@ -41,7 +43,9 @@ export default async function UserProfilePage() {
 
             {/* Groups Section */}
             <section className="w-full mt-10">
-                <h2 className="text-2xl font-bold text-white mb-6">Your Groups</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                    Your Groups
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {groups.length > 0 ? (
                         groups.map((group) => (
@@ -55,7 +59,9 @@ export default async function UserProfilePage() {
                                     className="w-10 h-10 rounded-lg"
                                 />
                                 <p className="text-gray-400">
-                                    {group.userId === user.id ? "Owner" : "Member"}
+                                    {group.userId === user.id
+                                        ? "Owner"
+                                        : "Member"}
                                 </p>
                                 <h3 className="text-xl font-semibold text-white">
                                     {group.name}
@@ -74,5 +80,5 @@ export default async function UserProfilePage() {
 
             <Subscriptions subscriptions={subscriptions} groups={groups} />
         </>
-    );
+    )
 }
