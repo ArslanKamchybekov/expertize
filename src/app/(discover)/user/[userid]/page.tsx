@@ -40,23 +40,31 @@ export default async function UserProfilePage() {
                             src={user.image}
                             alt={`${user.username}'s avatar`}
                             className={`w-24 h-24 rounded-full border-4 ${
-                                user.status === 200 ? "border-green-500" : "border-red-500"
+                                user.status === 200
+                                    ? "border-green-500"
+                                    : "border-red-500"
                             } shadow-lg object-cover`}
                         />
                         <span
                             className={`absolute bottom-2 right-2 w-5 h-5 rounded-full border-2 border-white ${
-                                user.status === 200 ? "bg-green-500" : "bg-red-500"
+                                user.status === 200
+                                    ? "bg-green-500"
+                                    : "bg-red-500"
                             }`}
                             title={user.status === 200 ? "Active" : "Inactive"}
                         ></span>
                     </div>
 
-                    <h1 className="text-3xl font-bold text-white">{user.username}</h1>
+                    <h1 className="text-3xl font-bold text-white">
+                        {user.username}
+                    </h1>
                 </div>
             </div>
 
             <section className="w-full mt-8">
-                <h2 className="text-2xl font-bold text-white mb-6">Your Groups</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                    Your Groups
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {groups.length > 0 ? (
                         groups.map((group) => (

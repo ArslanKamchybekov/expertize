@@ -70,17 +70,16 @@ export const useChannelInfo = () => {
         onSuccess: (data) => {
             toast(data.status !== 200 ? "Error" : "Success", {
                 description: data.message,
-            });
+            })
 
             if (data.status === 200) router.push("/explore")
         },
         onSettled: async () => {
             return await client.invalidateQueries({
                 queryKey: ["group-channels"],
-            });
+            })
         },
-    });
-
+    })
 
     const onEndChannelEdit = (event: Event) => {
         if (inputRef.current && channelRef.current && triggerRef.current) {

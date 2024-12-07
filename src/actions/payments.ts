@@ -235,14 +235,12 @@ export const onGetUserSubscriptions = async (userid: string) => {
     }
 }
 
-export const onCancelSubscription = async (
-    subscriptionId: string,
-) => {
+export const onCancelSubscription = async (subscriptionId: string) => {
     try {
         const subscription = await client.subscription.delete({
             where: {
                 id: subscriptionId,
-            }
+            },
         })
 
         if (subscription) {
