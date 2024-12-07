@@ -1,49 +1,52 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"
 
 type Props = {
     user: {
-        id: string;
-        username: string;
-        image: string;
-    };
+        id: string
+        username: string
+        image: string
+    }
     groups: {
-        id: string;
-        name: string;
-        icon: string;
-        userId: string;
-    }[];
+        id: string
+        name: string
+        icon: string
+        userId: string
+    }[]
     subscriptions: {
-        id: string;
-        price: number;
-        groupId: string;
-        active: boolean;
-        createdAt: number;
-    }[];
-};
+        id: string
+        price: number
+        groupId: string
+        active: boolean
+        createdAt: number
+    }[]
+}
 
-const UserProfilePage = async (
-    props: Props
-) => {
+const UserProfilePage = async (props: Props) => {
     // Add detailed logging
-   
-    console.log('Received User:', props.user);
-    console.log('Received Groups:', props.groups);
-    console.log('Received Subscriptions:', props.subscriptions);
 
-    const { user, groups, subscriptions } = props;
+    console.log("Received User:", props.user)
+    console.log("Received Groups:", props.groups)
+    console.log("Received Subscriptions:", props.subscriptions)
+
+    const { user, groups, subscriptions } = props
 
     // Early return if no user
     if (!user) {
-        return <div>Loading or no user found</div>;
+        return <div>Loading or no user found</div>
     }
 
-    const handleCancelSubscription = async (subscriptionId: string, groupId: string) => {
+    const handleCancelSubscription = async (
+        subscriptionId: string,
+        groupId: string,
+    ) => {
         try {
-            console.log(`Cancelling subscription ${subscriptionId} for group ${groupId}`);
+            console.log(
+                `Cancelling subscription ${subscriptionId} for group ${groupId}`,
+            )
         } catch (error) {
-            console.error("Failed to cancel subscription:", error);
+            console.error("Failed to cancel subscription:", error)
         }
-    };
+    }
 
     return (
         <>
@@ -59,7 +62,9 @@ const UserProfilePage = async (
 
             {/* Groups Section */}
             <section className="w-full mt-10">
-                <h2 className="text-2xl font-bold text-white mb-6">Your Groups</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                    Your Groups
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {groups.length > 0 ? (
                         groups.map((group) => (
@@ -73,14 +78,20 @@ const UserProfilePage = async (
                                     className="w-10 h-10 rounded-lg"
                                 />
                                 <p className="text-gray-400">
-                                    {group.userId === user.id ? "Owner" : "Member"}
+                                    {group.userId === user.id
+                                        ? "Owner"
+                                        : "Member"}
                                 </p>
-                                <h3 className="text-xl font-semibold text-white">{group.name}</h3>
+                                <h3 className="text-xl font-semibold text-white">
+                                    {group.name}
+                                </h3>
                             </div>
                         ))
                     ) : (
                         <div className="col-span-full text-center">
-                            <p className="text-gray-400">You are not a member of any groups yet.</p>
+                            <p className="text-gray-400">
+                                You are not a member of any groups yet.
+                            </p>
                         </div>
                     )}
                 </div>
@@ -88,7 +99,9 @@ const UserProfilePage = async (
 
             {/* Subscriptions Section */}
             <section className="w-full mt-12">
-                <h2 className="text-2xl font-bold text-white mb-6">Your Subscriptions</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">
+                    Your Subscriptions
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {subscriptions.length > 0 ? (
                         subscriptions.map((subscription) => (
@@ -102,15 +115,22 @@ const UserProfilePage = async (
                                 <p className="text-gray-400 mt-2">
                                     {
                                         groups.find(
-                                            (group) => group.id === subscription.groupId,
+                                            (group) =>
+                                                group.id ===
+                                                subscription.groupId,
                                         )?.name
                                     }
                                 </p>
                                 <p className="text-gray-400 mt-2">
-                                    {subscription.active ? "Active" : "Inactive"}
+                                    {subscription.active
+                                        ? "Active"
+                                        : "Inactive"}
                                 </p>
                                 <p className="text-gray-400 mt-2">
-                                    Date: {new Date(subscription.createdAt).toLocaleDateString()}
+                                    Date:{" "}
+                                    {new Date(
+                                        subscription.createdAt,
+                                    ).toLocaleDateString()}
                                 </p>
                                 <Button
                                     className="mt-4"
@@ -128,13 +148,15 @@ const UserProfilePage = async (
                         ))
                     ) : (
                         <div className="col-span-full text-center">
-                            <p className="text-gray-400">You have no active subscriptions.</p>
+                            <p className="text-gray-400">
+                                You have no active subscriptions.
+                            </p>
                         </div>
                     )}
                 </div>
             </section>
         </>
-    );
-};
+    )
+}
 
-export default UserProfilePage;
+export default UserProfilePage

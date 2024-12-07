@@ -33,7 +33,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
     if (!data?.members) {
         return (
             <div className="flex flex-col items-center justify-center h-full">
-                <Empty/>
+                <Empty />
                 <h3 className="mt-4">No members found</h3>
             </div>
         )

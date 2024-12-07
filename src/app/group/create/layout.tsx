@@ -37,7 +37,9 @@ const CreateGroupLayout = ({ children }: Props) => {
                                     className="flex gap-3"
                                     key={placeholder.id}
                                 >
-                                    <div className="mt-1">{placeholder.icon}</div>
+                                    <div className="mt-1">
+                                        {placeholder.icon}
+                                    </div>
                                     <p className="text-themeTextGray">
                                         {placeholder.label}
                                     </p>

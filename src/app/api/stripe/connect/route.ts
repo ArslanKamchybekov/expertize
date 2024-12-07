@@ -47,7 +47,7 @@ export async function GET(req: NextRequest) {
             JSON.stringify({
                 status: 500,
                 message: error,
-            })
+            }),
         )
     }
 }

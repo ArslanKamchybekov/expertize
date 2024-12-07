@@ -55,5 +55,5 @@ export const CREATE_GROUP_PLACEHOLDER: CreateGroupPlaceholderProps[] = [
         id: "7",
         label: "AI powered learning tools",
         icon: <Tech />,
-    }
+    },
 ]

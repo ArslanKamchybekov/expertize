@@ -1,71 +1,67 @@
-"use client";
-import { onGetAllGroupMembers } from "@/actions/groups";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { DialogClose } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { useCreateCourse } from "@/hooks/courses";
-import { cn } from "@/lib/utils";
-import { BadgePlus } from "lucide-react";
-import { useEffect, useState } from "react";
-import { FormGenerator } from "../form-generator";
-import { GlassModal } from "../glass-modal";
+"use client"
+import { onGetAllGroupMembers } from "@/actions/groups"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { DialogClose } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
+import { useCreateCourse } from "@/hooks/courses"
+import { cn } from "@/lib/utils"
+import { BadgePlus } from "lucide-react"
+import { useEffect, useState } from "react"
+import { FormGenerator } from "../form-generator"
+import { GlassModal } from "../glass-modal"
 
 type Props = {
-    groupid: string;
-};
+    groupid: string
+}
 
 const CourseCreate = ({ groupid }: Props) => {
-    const {
-        onCreateCourse,
-        register,
-        errors,
-        buttonRef,
-        setValue,
-        data,
-    } = useCreateCourse(groupid);
+    const { onCreateCourse, register, errors, buttonRef, setValue, data } =
+        useCreateCourse(groupid)
 
-    const [selectedPrivacy, setSelectedPrivacy] = useState<string>("");
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    const [selectedUsers, setSelectedUsers] = useState<{ id: number; name: string }[]>([]);
-    const [members, setMembers] = useState<any[]>([]);
+    const [selectedPrivacy, setSelectedPrivacy] = useState<string>("")
+    const [searchTerm, setSearchTerm] = useState<string>("")
+    const [selectedUsers, setSelectedUsers] = useState<
+        { id: number; name: string }[]
+    >([])
+    const [members, setMembers] = useState<any[]>([])
 
     useEffect(() => {
         const fetchMembers = async () => {
-            const result = await onGetAllGroupMembers(groupid);
+            const result = await onGetAllGroupMembers(groupid)
             if (result?.members) {
-                console.log(result.members);
+                console.log(result.members)
                 setMembers(
                     result.members.map((member: any) => ({
                         id: member.User.id,
                         name: `${member.User.firstname} ${member.User.lastname}`,
-                    }))
-                );
+                    })),
+                )
             }
-        };
-        fetchMembers();
-    }, [groupid]);
+        }
+        fetchMembers()
+    }, [groupid])
 
     const handlePrivacySelect = (value: string) => {
-        setSelectedPrivacy(value);
-        setValue("privacy", value);
-    };
+        setSelectedPrivacy(value)
+        setValue("privacy", value)
+    }
 
     const handleUserSelect = (user: { id: number; name: string }) => {
         if (!selectedUsers.some((selected) => selected.id === user.id)) {
-            setSelectedUsers((prev) => [...prev, user]);
+            setSelectedUsers((prev) => [...prev, user])
         }
-    };
+    }
 
     const handleRemoveUser = (userId: number) => {
-        setSelectedUsers((prev) => prev.filter((user) => user.id !== userId));
-    };
+        setSelectedUsers((prev) => prev.filter((user) => user.id !== userId))
+    }
 
     const filteredUsers = members.filter((user: any) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+    )
 
     if (data?.groupOwner) {
         return (
@@ -116,7 +112,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                         {...register("privacy")}
                                         id={`r-${privacy}`}
                                         value={privacy}
-                                        onChange={() => handlePrivacySelect(privacy)}
+                                        onChange={() =>
+                                            handlePrivacySelect(privacy)
+                                        }
                                     />
                                     <Card
                                         className={cn(
@@ -126,7 +124,8 @@ const CourseCreate = ({ groupid }: Props) => {
                                             "py-5 flex justify-center border-themeGray font-bold text-themeTextGray cursor-pointer",
                                         )}
                                     >
-                                        {privacy.charAt(0).toUpperCase() + privacy.slice(1)}
+                                        {privacy.charAt(0).toUpperCase() +
+                                            privacy.slice(1)}
                                     </Card>
                                 </span>
                             </Label>
@@ -150,7 +149,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                         <div
                                             key={user.id}
                                             className="p-2 cursor-pointer hover:bg-themeDarkGray"
-                                            onClick={() => handleUserSelect(user)}
+                                            onClick={() =>
+                                                handleUserSelect(user)
+                                            }
                                         >
                                             {user.name}
                                         </div>
@@ -169,7 +170,9 @@ const CourseCreate = ({ groupid }: Props) => {
                                             {user.name}
                                             <button
                                                 className="ml-2 mb-1 text-gray-400"
-                                                onClick={() => handleRemoveUser(user.id)}
+                                                onClick={() =>
+                                                    handleRemoveUser(user.id)
+                                                }
                                             >
                                                 &times;
                                             </button>
@@ -220,8 +223,8 @@ const CourseCreate = ({ groupid }: Props) => {
                     </DialogClose>
                 </form>
             </GlassModal>
-        );
+        )
     }
-};
+}
 
-export default CourseCreate;
+export default CourseCreate

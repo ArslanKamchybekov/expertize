@@ -17,27 +17,24 @@ const Menu = ({ orientation }: MenuProps) => {
             return (
                 <Card className="bg-themeGray border-themeGray bg-clip-padding backdrop--blur__safari backdrop-filter backdrop-blur-2xl bg-opacity-60 p-1 lg:flex hidden rounded-xl">
                     <CardContent className="p-0 flex gap-2">
-                        {GH_CONSTANTS.landingPageMenu.map(
-                            (menuItem: any) => (
-                                <Link
-                                    href={menuItem.path}
-                                    {...(menuItem.section && {
-                                        onClick: () =>
-                                            onSetSection(menuItem.path),
-                                    })}
-                                    className={cn(
-                                        "rounded-xl flex gap-2 py-2 px-4 items-center",
-                                        section == menuItem.path
-                                            ? "bg-[#09090B] border-[#27272A]"
-                                            : "",
-                                    )}
-                                    key={menuItem.id}
-                                >
-                                    {section == menuItem.path && menuItem.icon}
-                                    {menuItem.label}
-                                </Link>
-                            ),
-                        )}
+                        {GH_CONSTANTS.landingPageMenu.map((menuItem: any) => (
+                            <Link
+                                href={menuItem.path}
+                                {...(menuItem.section && {
+                                    onClick: () => onSetSection(menuItem.path),
+                                })}
+                                className={cn(
+                                    "rounded-xl flex gap-2 py-2 px-4 items-center",
+                                    section == menuItem.path
+                                        ? "bg-[#09090B] border-[#27272A]"
+                                        : "",
+                                )}
+                                key={menuItem.id}
+                            >
+                                {section == menuItem.path && menuItem.icon}
+                                {menuItem.label}
+                            </Link>
+                        ))}
                     </CardContent>
                 </Card>
             )
