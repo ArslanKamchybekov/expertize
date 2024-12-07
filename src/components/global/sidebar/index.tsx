@@ -57,8 +57,7 @@ export interface IGroups {
 }
 
 const SideBar = ({ groupid, userid, mobile }: Props) => {
-    const { groupInfo, groups, mutate, variables, isPending, channels } =
-        useSideBar(groupid)
+    const { groupInfo, groups, mutate, variables, isPending, channels } = useSideBar(groupid)
 
     useGroupChatOnline(userid)
 

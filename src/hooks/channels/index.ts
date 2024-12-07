@@ -21,6 +21,7 @@ import {
     useQuery,
     useQueryClient,
 } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 import { JSONContent } from "novel"
 import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -36,6 +37,7 @@ export const useChannelInfo = () => {
     const [edit, setEdit] = useState<boolean>(false)
     const [icon, setIcon] = useState<string | undefined>(undefined)
     const client = useQueryClient()
+    const router = useRouter()
 
     const onEditChannel = (id: string | undefined) => {
         setChannel(id)
@@ -62,19 +64,23 @@ export const useChannelInfo = () => {
             })
         },
     })
+
     const { variables: deleteVariables, mutate: deleteMutation } = useMutation({
         mutationFn: (data: { id: string }) => onDeleteChannel(data.id),
         onSuccess: (data) => {
-            return toast(data.status !== 200 ? "Error" : "Success", {
+            toast(data.status !== 200 ? "Error" : "Success", {
                 description: data.message,
-            })
+            });
+
+            if (data.status === 200) router.push("/explore")
         },
         onSettled: async () => {
             return await client.invalidateQueries({
                 queryKey: ["group-channels"],
-            })
+            });
         },
-    })
+    });
+
 
     const onEndChannelEdit = (event: Event) => {
         if (inputRef.current && channelRef.current && triggerRef.current) {
@@ -105,7 +111,7 @@ export const useChannelInfo = () => {
         }
     }, [icon])
 
-    const onChannelDetele = (id: string) => deleteMutation({ id })
+    const onChannelDelete = (id: string) => deleteMutation({ id })
 
     return {
         channel,
@@ -118,7 +124,7 @@ export const useChannelInfo = () => {
         triggerRef,
         onSetIcon,
         icon,
-        onChannelDetele,
+        onChannelDelete,
         deleteVariables,
     }
 }

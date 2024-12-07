@@ -64,11 +64,11 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
 
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
-            <h3 className="text-xl mb-4 text-gray-100">Generate Quiz</h3>
+            <h3 className="text-xl mb-4 text-gray-100 font-bold">Generate Quiz</h3>
             <Button
                 onClick={generateQuiz}
                 disabled={loading}
-                className="bg-purple-600 text-white px-4 py-2 rounded font-semibold"
+                className="px-4 py-2 rounded"
             >
                 <Loader loading={loading}>Let&apos;s go!</Loader>
             </Button>

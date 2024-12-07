@@ -237,14 +237,12 @@ export const onGetUserSubscriptions = async (userid: string) => {
 
 export const onCancelSubscription = async (
     subscriptionId: string,
-    groupid: string,
 ) => {
     try {
         const subscription = await client.subscription.delete({
             where: {
                 id: subscriptionId,
-                groupId: groupid,
-            },
+            }
         })
 
         if (subscription) {

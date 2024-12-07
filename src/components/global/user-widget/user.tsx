@@ -23,7 +23,7 @@ type UserWidgetProps = {
 }
 
 export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
-    const { signOut, user } = useClerk()
+    const { signOut } = useClerk()
     const dispatch: AppDispatch = useDispatch()
 
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)

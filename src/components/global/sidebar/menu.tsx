@@ -49,7 +49,7 @@ const SideBarMenu = ({
         triggerRef,
         onSetIcon,
         icon,
-        onChannelDetele,
+        onChannelDelete,
         deleteVariables,
     } = useChannelInfo()
 
@@ -165,9 +165,9 @@ const SideBarMenu = ({
                                         channel.name !== "announcements" &&
                                         userId === groupUserId && (
                                             <Trash
-                                                onClick={() =>
-                                                    onChannelDetele(channel.id)
-                                                }
+                                                onClick={() => {
+                                                    onChannelDelete(channel.id);
+                                                }}
                                                 className="group-hover:inline hidden content-end text-themeTextGray hover:text-gray-400"
                                                 size={16}
                                             />

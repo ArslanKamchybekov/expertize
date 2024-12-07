@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import { AIChat } from "@/components/global/ai-chat"
-import { HtmlParser } from "@/components/global/html-parser"
-import { Loader } from "@/components/global/loader"
-import { QuizGenerator } from "@/components/global/quiz-generator"
-import BlockTextEditor from "@/components/global/rich-text-editor"
-import { Button } from "@/components/ui/button"
-import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses"
-import { useEffect, useState } from "react"
-import { YoutubeTranscript } from "youtube-transcript"
+import { AIChat } from "@/components/global/ai-chat";
+import { HtmlParser } from "@/components/global/html-parser";
+import { Loader } from "@/components/global/loader";
+import { QuizGenerator } from "@/components/global/quiz-generator";
+import BlockTextEditor from "@/components/global/rich-text-editor";
+import { Button } from "@/components/ui/button";
+import { useCourseContent, useCourseSectionInfo } from "@/hooks/courses";
+import { useEffect, useState } from "react";
+import { YoutubeTranscript } from "youtube-transcript";
 
 type CourseContentFormProps = {
-    sectionid: string
-    userid: string
-    groupid: string
-}
+    sectionid: string;
+    userid: string;
+    groupid: string;
+};
 
 export const CourseContentForm = ({
     sectionid,
     userid,
     groupid,
 }: CourseContentFormProps) => {
-    const { data } = useCourseSectionInfo(sectionid)
+    const { data } = useCourseSectionInfo(sectionid);
 
     const {
         errors,
@@ -37,42 +37,56 @@ export const CourseContentForm = ({
         data?.section?.content || null,
         data?.section?.JsonContent || null,
         data?.section?.htmlContent || null,
-    )
+    );
 
-    const [isEditing, setIsEditing] = useState(false)
-    const [transcriptText, setTranscriptText] = useState<string>("")
-    const lectureContent = data?.section?.htmlContent || ""
+    const [isEditing, setIsEditing] = useState(false);
+    const [transcriptText, setTranscriptText] = useState<string>("");
+    const [isTranscriptLoading, setIsTranscriptLoading] = useState(true);
+
+    const lectureContent = data?.section?.htmlContent || "";
 
     useEffect(() => {
         const fetchTranscript = async () => {
             const videoIdMatch = lectureContent.match(
                 /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-            )
-            const videoId = videoIdMatch ? videoIdMatch[1] : null
+            );
+            const videoId = videoIdMatch ? videoIdMatch[1] : null;
 
             if (videoId) {
                 try {
                     const transcript =
-                        await YoutubeTranscript.fetchTranscript(videoId)
+                        await YoutubeTranscript.fetchTranscript(videoId);
                     const combinedText = transcript
                         .map((item) => item.text)
-                        .join(" ")
-                    setTranscriptText(combinedText)
+                        .join(" ");
+                    setTranscriptText(combinedText);
                 } catch (error) {
-                    console.error("Failed to fetch transcript:", error)
+                    console.error("Failed to fetch transcript:", error);
+                } finally {
+                    setIsTranscriptLoading(false);
                 }
+            } else {
+                setIsTranscriptLoading(false);
             }
-        }
+        };
 
-        fetchTranscript()
-    }, [lectureContent])
+        fetchTranscript();
+    }, [lectureContent]);
 
     const handleDescriptionClick = () => {
-        setIsEditing(true)
-    }
+        setIsEditing(true);
+    };
 
     const handleDescriptionBlur = () => {
-        setIsEditing(false)
+        setIsEditing(false);
+    };
+
+    if (isPending || isTranscriptLoading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <Loader loading>Loading...</Loader>
+            </div>
+        );
     }
 
     return groupid === userid ? (
@@ -127,5 +141,5 @@ export const CourseContentForm = ({
             <AIChat lectureContent={transcriptText || lectureContent} />
             <QuizGenerator lectureContent={transcriptText || lectureContent} />
         </form>
-    )
-}
+    );
+};
