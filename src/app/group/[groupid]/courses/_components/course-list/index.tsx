@@ -25,10 +25,13 @@ const CourseList = ({ groupid }: Props) => {
                         className="max-h-full max-w-full object-contain"
                     />
                 </div>
-                <div className="h-2/6 flex flex-col justify-center pl-5">
+                <div className="h-2/6 flex flex-col justify-center p-4">
                     <h2 className="text-lg text-white font-semibold">
                         {course.name}
                     </h2>
+                    <p className="text-sm text-themeTextGray font-bold my-1">
+                        {course.privacy.toUpperCase()} course
+                    </p>
                     <p className="text-sm text-themeTextGray">
                         {truncateString(course.description)}
                     </p>

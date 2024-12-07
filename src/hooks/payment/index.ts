@@ -260,23 +260,26 @@ export const useAllSubscriptions = (groupid: string) => {
 
 export const useStripeConnect = (groupid: string) => {
     const [onStripeAccountPending, setOnStripeAccountPending] =
-        useState<boolean>(false)
-
+      useState<boolean>(false)
+  
     const onStripeConnect = async () => {
-        try {
-            setOnStripeAccountPending(true)
-            const account = await axios.get(
-                `/api/stripe/connect?groupid=${groupid}`,
-            )
-            if (account) {
-                setOnStripeAccountPending(false)
-                if (account) {
-                    window.location.href = account.data.url
-                }
-            }
-        } catch (error) {
-            console.error("Error connecting to stripe:", error)
+      try {
+        setOnStripeAccountPending(true)
+        const account = await axios.get(`/api/stripe/connect?groupid=${groupid}`)
+        if (account) {
+          setOnStripeAccountPending(false)
+          console.log(account)
+          if (account) {
+            //window.location.href = account.data.url
+            console.log(account)
+
+          }
         }
+        console.log(account)
+
+      } catch (error) {
+        console.log(error)
+      }
     }
     return { onStripeConnect, onStripeAccountPending }
-}
+  }

@@ -45,7 +45,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
             trigger={
                 <Button
                     variant="ghost"
-                    className="rounded-2xl hover:bg-themeGray font-medium flex gap-2"
+                    className="rounded-2xl hover:bg-themeGray font-bold flex gap-2"
                 >
                     GrowthHungry.
                     <CarotSort />
@@ -54,7 +54,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
         >
             {ownedGroups && ownedGroups.length > 0 && (
                 <>
-                    <h4 className="px-4 py-2 text-sm font-bold text-themeTextGray">
+                    <h4 className="px-4 text-sm font-semibold text-themeTextGray">
                         Owned Groups
                     </h4>
                     {ownedGroups.map((item) => (
@@ -66,7 +66,6 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                                 variant="ghost"
                                 className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                             >
-                                <Group />
                                 {item.name}
                             </Button>
                         </Link>
@@ -78,7 +77,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
 
             {members && members.length > 0 && (
                 <>
-                    <h4 className="px-4 py-2 text-sm font-bold text-themeTextGray">
+                    <h4 className="px-4 py-2 text-sm font-semibold text-themeTextGray">
                         Member Groups
                     </h4>
                     {members.map((member) => (

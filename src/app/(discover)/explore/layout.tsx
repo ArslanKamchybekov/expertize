@@ -1,10 +1,8 @@
 import { onAuthenticatedUser } from "@/actions/auth"
 import BackdropGradient from "@/components/global/backdrop-gradient"
 import GradientText from "@/components/global/gradient-text"
-
 import { GroupListSlider } from "@/components/global/group-list-slider"
 import Search from "@/components/global/search"
-
 import Link from "next/link"
 import React from "react"
 

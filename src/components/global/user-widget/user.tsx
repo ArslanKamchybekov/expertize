@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Modal } from "@/components/ui/modal"
 import { useSideBar } from "@/hooks/navigation"
-import { Logout, PersonalDevelopment, Settings } from "@/icons"
+import { Logout } from "@/icons"
 import { supabaseClient } from "@/lib/utils"
 import { onOffline } from "@/redux/slices/online-member-slice"
 import { AppDispatch } from "@/redux/store"
@@ -62,7 +62,6 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                         variant="ghost"
                         className="flex gap-x-2 px-2 w-full justify-start"
                     >
-                        <PersonalDevelopment />
                         Profile
                     </Button>
                 </Link>
@@ -72,7 +71,6 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                             variant="ghost"
                             className="flex gap-x-2 px-2 w-full justify-start"
                         >
-                            <Settings />
                             Settings
                         </Button>
                     </Link>

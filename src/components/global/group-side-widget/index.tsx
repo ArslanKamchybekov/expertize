@@ -28,6 +28,9 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
             />
             <div className="flex flex-col p-5 gap-y-2">
                 <h2 className="font-bold text-lg">{group.name}</h2>
+                <p className="text-sm text-themeTextGray font-bold">
+                    {group.privacy} group
+                </p>
                 <p className="text-sm text-themeTextGray">
                     {group.description && truncateString(group.description)}
                 </p>

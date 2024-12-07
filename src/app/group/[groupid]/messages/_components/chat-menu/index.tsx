@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useGroupChat } from "@/hooks/groups"
+import { Empty } from "@/icons"
 import { useAppSelector } from "@/redux/store"
 import { User } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -18,17 +19,24 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
     const onOpenChat = (memberId: string) => {
         const currentPath = window.location.pathname
 
-        // Remove '/messages' from the path if it exists, but avoid removing it from the group path
         const basePath = currentPath.includes("/messages")
-            ? currentPath.split("/messages")[0] // Remove the trailing '/messages' part
+            ? currentPath.split("/messages")[0]
             : currentPath
 
         const newPath = `${basePath}/messages/${memberId}`
 
-        // Redirect only if the current path doesn't already match the intended path
         if (currentPath !== newPath) {
             router.push(newPath)
         }
+    }
+
+    if (!data?.members) {
+        return (
+            <div className="flex flex-col items-center justify-center h-full">
+                <Empty/>
+                <h3 className="mt-4">No members found</h3>
+            </div>
+        )
     }
 
     return (

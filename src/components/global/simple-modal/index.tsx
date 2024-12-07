@@ -6,8 +6,6 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { ArrowLeft, ArrowRight } from "lucide-react"
-import Image from "next/image"
 
 type SimpleModalProps = {
     trigger: JSX.Element
@@ -32,26 +30,26 @@ export const SimpleModal = ({
                 <Dialog>
                     <DialogTrigger asChild>{trigger}</DialogTrigger>
                     <DialogContent className="bg-themeBlack border-themeDarkGray">
-                        <div className="flex justify-center gap-3 ">
+                        {/* <div className="flex justify-center gap-3 ">
                             <div className="w-12 h-12 relative">
                                 <Image
-                                    src={`https://ucarecdn.com/2c9bd4ab-1f00-41df-bad2-df668f65a232/`}
+                                    src="/gh.png"
                                     fill
-                                    alt="Corinna"
+                                    alt="GHAI"
                                 />
                             </div>
                             <div className="text-gray-400">
                                 <ArrowLeft size={20} />
                                 <ArrowRight size={20} />
                             </div>
-                            <div className="w-12 h-12 relative">
+                            <div className="w-12 h-6 relative">
                                 <Image
-                                    src={`https://ucarecdn.com/${logo}/`}
+                                    src="/stripe.png"
                                     fill
                                     alt="Stripe"
                                 />
                             </div>
-                        </div>
+                        </div> */}
                         <DialogHeader className="flex items-center">
                             <DialogTitle className="text-xl">
                                 {title}

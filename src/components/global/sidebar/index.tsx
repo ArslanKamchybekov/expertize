@@ -4,7 +4,7 @@ import { useGroupChatOnline } from "@/hooks/groups"
 import { useSideBar } from "@/hooks/navigation"
 import { CarotSort } from "@/icons"
 import { cn } from "@/lib/utils"
-import { Group, Plus } from "lucide-react"
+import { Plus } from "lucide-react"
 import Link from "next/link"
 import { v4 } from "uuid"
 import { DropDown } from "../drop-down"
@@ -103,7 +103,6 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                                     variant="ghost"
                                     className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                                 >
-                                    <Group />
                                     {item.name}
                                 </Button>
                             </Link>

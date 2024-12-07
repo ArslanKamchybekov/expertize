@@ -5,6 +5,7 @@ import {
     Grid,
     Heart,
     MegaPhone,
+    Tech,
     WhiteLabel,
 } from "@/icons"
 
@@ -50,4 +51,9 @@ export const CREATE_GROUP_PLACEHOLDER: CreateGroupPlaceholderProps[] = [
         label: "White-labeling options",
         icon: <WhiteLabel />,
     },
+    {
+        id: "7",
+        label: "AI powered learning tools",
+        icon: <Tech />,
+    }
 ]

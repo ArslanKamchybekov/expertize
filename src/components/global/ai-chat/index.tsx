@@ -51,7 +51,7 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
             <Button
                 onClick={handleAskQuestion}
                 disabled={loading}
-                className="mt-4 font-bold"
+                className="mt-4"
             >
                 <Loader loading={loading}>Let&apos;s learn!</Loader>
             </Button>

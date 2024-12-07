@@ -28,7 +28,7 @@ export const Empty = () => {
                         rx="5.79412"
                         fill="#262626"
                         stroke="#343434"
-                        stroke-width="0.772549"
+                        strokeWidth="0.772549"
                     />
                 </g>
                 <rect
@@ -38,7 +38,7 @@ export const Empty = () => {
                     height="230.992"
                     rx="10.4294"
                     stroke="url(#paint2_linear_8182_21406)"
-                    stroke-width="0.772549"
+                    strokeWidth="0.772549"
                 />
             </g>
             <g filter="url(#filter0_b_8182_21406)">
@@ -68,7 +68,7 @@ export const Empty = () => {
                         rx="5.79412"
                         fill="#262626"
                         stroke="#343434"
-                        stroke-width="0.772549"
+                        strokeWidth="0.772549"
                     />
                 </g>
                 <rect
@@ -78,7 +78,7 @@ export const Empty = () => {
                     height="230.992"
                     rx="10.4294"
                     stroke="url(#paint5_linear_8182_21406)"
-                    stroke-width="0.772549"
+                    strokeWidth="0.772549"
                 />
             </g>
             <g filter="url(#filter1_b_8182_21406)">
@@ -117,7 +117,7 @@ export const Empty = () => {
                         rx="5.79412"
                         stroke="#343434"
                         stroke-opacity="0.09"
-                        stroke-width="0.772549"
+                        strokeWidth="0.772549"
                     />
                 </g>
                 <rect
@@ -127,7 +127,7 @@ export const Empty = () => {
                     height="230.992"
                     rx="10.4294"
                     stroke="url(#paint8_linear_8182_21406)"
-                    stroke-width="0.772549"
+                    strokeWidth="0.772549"
                 />
             </g>
             <defs>

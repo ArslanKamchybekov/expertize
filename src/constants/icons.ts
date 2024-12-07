@@ -12,4 +12,16 @@ export const ICON_LIST: IconListProps[] = [
         id: "1",
         icon: "announcement",
     },
+    {
+        id: "2",
+        icon: "rules",
+    },
+    {
+        id: "3",
+        icon: "business",
+    },
+    {
+        id: "4",
+        icon: "resources",
+    },
 ]

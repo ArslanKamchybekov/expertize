@@ -234,3 +234,20 @@ export const onGetUserSubscriptions = async (userid: string) => {
         console.error("Error getting user subscriptions:", error)
     }
 }
+
+export const onCancelSubscription = async (subscriptionId: string, groupid: string) => {
+    try {
+        const subscription = await client.subscription.delete({
+            where: {
+                id: subscriptionId,
+                groupId: groupid,
+            },
+        })
+
+        if (subscription) {
+            return { status: 200, message: "Subscription cancelled" }
+        }
+    } catch (error) {
+        return { status: 400, message: "Failed to cancel subscription" }
+    }
+}

@@ -1,5 +1,4 @@
 import { SimpleModal } from "@/components/global/simple-modal"
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { CheckCircle2Icon, WorkflowIcon } from "lucide-react"
@@ -51,13 +50,7 @@ const IntegrationTrigger = ({
                         <p>{item}</p>
                     </div>
                 ))}
-                <div className="flex justify-between mt-10">
-                    <Button
-                        variant="outline"
-                        className="bg-themeBlack border-themeDarkGray"
-                    >
-                        Learn more
-                    </Button>
+                <div className="flex mt-4 justify-end">
                     <StripeConnect
                         connected={connections["stripe"]}
                         groupid={groupid}

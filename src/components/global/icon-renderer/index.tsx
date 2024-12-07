@@ -1,10 +1,13 @@
 import {
+    BriefCaseDuoToneBlack,
+    BriefCaseDuoToneWhite,
     FileDuoToneBlack,
     FileDuoToneWhite,
+    GlobeDuoToneBlack,
     Home,
     HomeDuoToneWhite,
     MegaPhoneDuoToneBlack,
-    MegaPhoneDuoToneWhite,
+    MegaPhoneDuoToneWhite
 } from "@/icons"
 
 type IconRendererProps = {
@@ -24,6 +27,12 @@ export const IconRenderer = ({ mode, icon }: IconRendererProps) => {
             )
         case "doc":
             return mode === "DARK" ? <FileDuoToneBlack /> : <FileDuoToneWhite />
+        case "rules":
+            return mode === "DARK" ? <FileDuoToneBlack /> : <FileDuoToneWhite />
+        case "business":
+            return mode === "DARK" ? <BriefCaseDuoToneBlack /> : <BriefCaseDuoToneWhite />
+        case "resources":
+            return mode === "DARK" ? <GlobeDuoToneBlack /> : <GlobeDuoToneBlack />
         default:
             return <></>
     }

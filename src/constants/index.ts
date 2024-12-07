@@ -27,7 +27,7 @@ type GroupleConstantsProps = {
     groupPageMenu: GroupMenuProps[]
 }
 
-export const GROUPLE_CONSTANTS: GroupleConstantsProps = {
+export const GH_CONSTANTS: GroupleConstantsProps = {
     landingPageMenu: LANDING_PAGE_MENU,
     signUpForm: SIGN_UP_FORM,
     signInForm: SIGN_IN_FORM,

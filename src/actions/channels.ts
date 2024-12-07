@@ -236,7 +236,7 @@ export const onLikeChannelPost = async (postid: string, likeid: string) => {
                 },
             })
 
-            return { status: 200, message: "You unliked this post" }
+            return { status: 200, message: "You unliked the post" }
         }
 
         const like = await client.like.create({
@@ -247,7 +247,7 @@ export const onLikeChannelPost = async (postid: string, likeid: string) => {
             },
         })
 
-        if (like) return { status: 200, message: "You liked this post" }
+        if (like) return { status: 200, message: "You liked the post" }
 
         return { status: 404, message: "Post not found!" }
     } catch (error) {

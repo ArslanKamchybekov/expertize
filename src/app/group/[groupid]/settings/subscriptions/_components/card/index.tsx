@@ -23,10 +23,10 @@ export const SubscriptionCard = ({
             className={cn(
                 "bg-themeBlack cursor-pointer text-themeTextGray flex flex-col gap-y-3 justify-center aspect-video items-center",
                 optimisitc ? "opacity-60" : "",
-                active ? "border-purple-800 border-2" : "border-none",
+                active ? "border-4 border-themePrimary" : ""
             )}
         >
-            <h3 className="text-2xl">${price}/month</h3>
+            <h3 className="text-2xl font-bold text-green-500">${price}/month</h3>
             <div className="flex items-center gap-x-2 text-sm">
                 <User size={20} />
                 <p>{members} Members</p>

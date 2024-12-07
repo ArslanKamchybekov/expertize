@@ -1,21 +1,21 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { DialogClose } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
-import { useCreateCourse } from "@/hooks/courses"
-import { cn } from "@/lib/utils"
-import { ErrorMessage } from "@hookform/error-message"
-import { BadgePlus } from "lucide-react"
-import { useState } from "react"
-import { FormGenerator } from "../form-generator"
-import { GlassModal } from "../glass-modal"
+"use client";
+import { onGetAllGroupMembers } from "@/actions/groups";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { DialogClose } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { useCreateCourse } from "@/hooks/courses";
+import { cn } from "@/lib/utils";
+import { BadgePlus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { FormGenerator } from "../form-generator";
+import { GlassModal } from "../glass-modal";
 
 type Props = {
-    groupid: string
-}
+    groupid: string;
+};
 
 const CourseCreate = ({ groupid }: Props) => {
     const {
@@ -23,25 +23,55 @@ const CourseCreate = ({ groupid }: Props) => {
         register,
         errors,
         buttonRef,
-        variables,
-        isPending,
         setValue,
         data,
-    } = useCreateCourse(groupid)
+    } = useCreateCourse(groupid);
 
-    // State to handle selected permission
-    const [selectedPrivacy, setSelectedPrivacy] = useState<string>("")
+    const [selectedPrivacy, setSelectedPrivacy] = useState<string>("");
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [selectedUsers, setSelectedUsers] = useState<{ id: number; name: string }[]>([]);
+    const [members, setMembers] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchMembers = async () => {
+            const result = await onGetAllGroupMembers(groupid);
+            if (result?.members) {
+                console.log(result.members);
+                setMembers(
+                    result.members.map((member: any) => ({
+                        id: member.User.id,
+                        name: `${member.User.firstname} ${member.User.lastname}`,
+                    }))
+                );
+            }
+        };
+        fetchMembers();
+    }, [groupid]);
 
     const handlePrivacySelect = (value: string) => {
-        setSelectedPrivacy(value)
-        setValue("privacy", value)
-    }
+        setSelectedPrivacy(value);
+        setValue("privacy", value);
+    };
+
+    const handleUserSelect = (user: { id: number; name: string }) => {
+        if (!selectedUsers.some((selected) => selected.id === user.id)) {
+            setSelectedUsers((prev) => [...prev, user]);
+        }
+    };
+
+    const handleRemoveUser = (userId: number) => {
+        setSelectedUsers((prev) => prev.filter((user) => user.id !== userId));
+    };
+
+    const filteredUsers = members.filter((user: any) =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     if (data?.groupOwner) {
         return (
             <GlassModal
                 title="Create a new course"
-                description="Add a new form for your community"
+                description="Add a new course to your group"
                 trigger={
                     <span>
                         <Card className="bg-[#101011] border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
@@ -55,7 +85,7 @@ const CourseCreate = ({ groupid }: Props) => {
             >
                 <form
                     onSubmit={onCreateCourse}
-                    className="flex flex-col gap-y-5 mt-5"
+                    className="flex flex-col gap-y-5 mt-5 max-h-[80vh] overflow-y-auto p-2"
                 >
                     <FormGenerator
                         register={register}
@@ -75,9 +105,9 @@ const CourseCreate = ({ groupid }: Props) => {
                         type="text"
                         label="Course Description"
                     />
-                    <div className="grid gap-2 grid-cols-3">
+                    <div className="grid gap-2 grid-cols-2">
                         <Label className="col-span-3">Course Permissions</Label>
-                        {["open", "level-unlock", "private"].map((privacy) => (
+                        {["open", "private"].map((privacy) => (
                             <Label htmlFor={`r-${privacy}`} key={privacy}>
                                 <span>
                                     <Input
@@ -86,9 +116,7 @@ const CourseCreate = ({ groupid }: Props) => {
                                         {...register("privacy")}
                                         id={`r-${privacy}`}
                                         value={privacy}
-                                        onChange={() =>
-                                            handlePrivacySelect(privacy)
-                                        }
+                                        onChange={() => handlePrivacySelect(privacy)}
                                     />
                                     <Card
                                         className={cn(
@@ -98,46 +126,72 @@ const CourseCreate = ({ groupid }: Props) => {
                                             "py-5 flex justify-center border-themeGray font-bold text-themeTextGray cursor-pointer",
                                         )}
                                     >
-                                        {privacy.charAt(0).toUpperCase() +
-                                            privacy.slice(1)}
+                                        {privacy.charAt(0).toUpperCase() + privacy.slice(1)}
                                     </Card>
                                 </span>
                             </Label>
                         ))}
-                        <div className="col-span-3">
-                            <ErrorMessage
-                                errors={errors}
-                                name={"privacy"}
-                                render={({ message }) => (
-                                    <p className="text-red-400 mt-2">
-                                        {message === "Required" ? "" : message}
-                                    </p>
-                                )}
-                            />
-                        </div>
                     </div>
-                    <Label htmlFor="course-image">
-                        <span>
+
+                    {selectedPrivacy === "private" && (
+                        <div className="flex flex-col gap-2">
+                            <Label htmlFor="user-search">Add Users</Label>
                             <Input
-                                type="file"
-                                id="course-image"
-                                className="hidden"
-                                {...register("image")}
+                                type="text"
+                                id="user-search"
+                                placeholder="Search for users..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
-                            <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
-                                Upload Image
-                            </Card>
-                        </span>
-                        <ErrorMessage
-                            errors={errors}
-                            name={"image"}
-                            render={({ message }) => (
-                                <p className="text-red-400 mt-2">
-                                    {message === "Required" ? "" : message}
-                                </p>
+
+                            {filteredUsers.length > 0 && (
+                                <div className="bg-black border border-themeGray rounded-md max-h-40 overflow-y-auto">
+                                    {filteredUsers.map((user) => (
+                                        <div
+                                            key={user.id}
+                                            className="p-2 cursor-pointer hover:bg-themeDarkGray"
+                                            onClick={() => handleUserSelect(user)}
+                                        >
+                                            {user.name}
+                                        </div>
+                                    ))}
+                                </div>
                             )}
+
+                            <div className="mt-4">
+                                <Label>Selected Users</Label>
+                                <div className="flex flex-wrap gap-2">
+                                    {selectedUsers.map((user) => (
+                                        <div
+                                            key={user.id}
+                                            className="bg-themeGray text-white px-3 py-1 mt-2 rounded-full flex items-center"
+                                        >
+                                            {user.name}
+                                            <button
+                                                className="ml-2 mb-1 text-gray-400"
+                                                onClick={() => handleRemoveUser(user.id)}
+                                            >
+                                                &times;
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <Label htmlFor="course-image">
+                        <Input
+                            type="file"
+                            id="course-image"
+                            className="hidden"
+                            {...register("image")}
                         />
+                        <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
+                            Upload Image
+                        </Card>
                     </Label>
+
                     <div className="flex items-center space-x-2">
                         <Switch
                             id="publish-mode"
@@ -146,6 +200,7 @@ const CourseCreate = ({ groupid }: Props) => {
                         />
                         <Label htmlFor="publish-mode">Publish Course</Label>
                     </div>
+
                     <Button
                         type="submit"
                         className="w-full bg-transparent border-themeGray"
@@ -153,6 +208,7 @@ const CourseCreate = ({ groupid }: Props) => {
                     >
                         Create
                     </Button>
+
                     <DialogClose asChild>
                         <Button
                             type="button"
@@ -164,8 +220,8 @@ const CourseCreate = ({ groupid }: Props) => {
                     </DialogClose>
                 </form>
             </GlassModal>
-        )
+        );
     }
-}
+};
 
-export default CourseCreate
+export default CourseCreate;

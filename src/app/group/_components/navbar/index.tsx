@@ -15,7 +15,7 @@ type NavbarProps = {
 export const Navbar = async ({ groupid, userid }: NavbarProps) => {
     const user = await currentUser()
     return (
-        <div className="bg-[#1A1A1D] py-2 px-3 md:px-7 md:py-3 flex gap-5 justify-between md:justify-end items-center">
+        <div className="bg-[#1A1A1D] py-4 px-3 md:px-7 md:py-4 flex gap-5 justify-between md:justify-end items-center">
             <GlassSheet trigger={<Menu className="md:hidden cursor-pointer" />}>
                 <SideBar groupid={groupid} userid={userid} mobile />
             </GlassSheet>

@@ -1,6 +1,5 @@
 import { onAuthenticatedUser } from "@/actions/auth"
 import { onGetUserGroups } from "@/actions/groups"
-
 import GlassSheet from "@/components/global/glass-sheet"
 import { UserWidget } from "@/components/global/user-widget"
 import { Button } from "@/components/ui/button"
@@ -20,7 +19,7 @@ export const Navbar = async () => {
                     // @ts-ignore
                     <GroupDropDown members={groups.members} groups={groups} />
                 ) : (
-                    <p className="text-themeTextGray font-semibold">
+                    <p className="text-themeTextGray">
                         GrowthHungry.
                     </p>
                 )}
