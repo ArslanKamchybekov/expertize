@@ -19,7 +19,7 @@ export const Navbar = async () => {
                     // @ts-ignore
                     <GroupDropDown members={groups.members} groups={groups} />
                 ) : (
-                    <p className="text-themeTextGray">GrowthHungry.</p>
+                    <p className="font-bold">GrowthHungry.</p>
                 )}
             </div>
             <GlassSheet
