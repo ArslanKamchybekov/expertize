@@ -15,8 +15,6 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
     const { data } = useGroupMembers(groupid)
     const router = useRouter()
 
-    console.log(data?.members)
-
     const onOpenChat = (memberId: string) => {
         const currentPath = window.location.pathname
         const newPath = `/group/${groupid}/messages/${memberId}`

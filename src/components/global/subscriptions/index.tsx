@@ -26,7 +26,6 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
 
     const handleCancelSubscription = async (subscriptionId: string) => {
         try {
-            console.log(`Cancelling subscription ${subscriptionId}`)
             await onCancelSubscription(subscriptionId)
             setCurrentSubscriptions((prev) =>
                 prev.filter((sub) => sub.id !== subscriptionId),

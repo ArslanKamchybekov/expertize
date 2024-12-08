@@ -270,15 +270,13 @@ export const useStripeConnect = (groupid: string) => {
             )
             if (account) {
                 setOnStripeAccountPending(false)
-                console.log(account)
                 if (account) {
                     //window.location.href = account.data.url
                     console.log(account)
                 }
             }
-            console.log(account)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
     return { onStripeConnect, onStripeAccountPending }

@@ -32,7 +32,6 @@ const CourseCreate = ({ groupid }: Props) => {
         const fetchMembers = async () => {
             const result = await onGetAllGroupMembers(groupid)
             if (result?.members) {
-                console.log(result.members)
                 setMembers(
                     result.members.map((member: any) => ({
                         id: member.User.id,
