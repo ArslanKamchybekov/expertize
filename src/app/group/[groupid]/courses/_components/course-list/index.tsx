@@ -17,22 +17,25 @@ const CourseList = ({ groupid }: Props) => {
 
     return data.courses?.map((course) => (
         <Link href={`/group/${groupid}/courses/${course.id}`} key={course.id}>
-            <Card className="bg-transparent border-themeGray h-full rounded-xl overflow-hidden flex flex-col">
-                <div className="flex items-center justify-center h-4/6">
+            <Card className="bg-themeBackground border border-themeGray rounded-xl overflow-hidden flex flex-col h-full transition-transform duration-300 hover:scale-105">
+                {/* Thumbnail Section */}
+                <div className="flex items-center justify-center h-2/3 bg-gray-950">
                     <img
                         src={`https://ucarecdn.com/${course.thumbnail}/`}
-                        alt="cover"
+                        alt={`${course.name} cover`}
                         className="max-h-full max-w-full object-contain"
                     />
                 </div>
-                <div className="h-2/6 flex flex-col justify-center p-4">
-                    <h2 className="text-lg text-white font-semibold">
+
+                {/* Content Section */}
+                <div className="p-4">
+                    <h2 className="text-lg text-white font-semibold truncate">
                         {course.name}
                     </h2>
-                    <p className="text-sm text-themeTextGray font-bold my-1">
-                        {course.privacy.toUpperCase()} course
+                    <p className="text-sm text-themeTextGray font-bold my-2">
+                        {course.privacy.toUpperCase()} Course
                     </p>
-                    <p className="text-sm text-themeTextGray">
+                    <p className="text-sm text-themeTextGray truncate">
                         {truncateString(course.description)}
                     </p>
                 </div>

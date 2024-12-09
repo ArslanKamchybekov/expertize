@@ -17,7 +17,6 @@ import { FieldErrors } from "react-hook-form"
 import { HtmlParser } from "../html-parser"
 import { ColorSelector } from "./color-selector"
 import { defaultExtensions } from "./extensions"
-
 import { Image } from "./image"
 import { LinkSelector } from "./link-selector"
 import NodeSelector from "./node-selector"
