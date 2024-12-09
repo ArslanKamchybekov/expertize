@@ -43,7 +43,7 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
                 GrowthHungry AI
             </h3>
             <textarea
-                className="w-full p-3 bg-gray-800 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-700"
+                className="w-full p-3 bg-gray-800 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-200"
                 placeholder="Ask a question..."
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}

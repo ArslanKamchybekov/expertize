@@ -167,17 +167,17 @@ const BlockTextEditor = ({
                     {inline ? (
                         onEdit && (
                             <div className="flex justify-between py-2">
-                                <p
+                               <p
                                     className={cn(
                                         "text-xs",
-                                        characters &&
-                                            (characters < min ||
-                                                characters > max) &&
-                                            "text-red-500",
+                                        characters && (characters < min || characters > max)
+                                            ? "text-red-500"
+                                            : "text-white"
                                     )}
                                 >
                                     {characters || 0} / {max}
                                 </p>
+
                                 <ErrorMessage
                                     errors={errors}
                                     name={name}
@@ -193,13 +193,12 @@ const BlockTextEditor = ({
                         )
                     ) : (
                         <div className="flex justify-between py-2">
-                            <p
+                           <p
                                 className={cn(
                                     "text-xs",
-                                    characters &&
-                                        (characters == max ||
-                                            characters > max) &&
-                                        "text-red-500",
+                                    characters && (characters < min || characters > max)
+                                        ? "text-red-500"
+                                        : "text-white"
                                 )}
                             >
                                 {characters || 0} / {max}

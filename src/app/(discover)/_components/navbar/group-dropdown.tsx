@@ -2,7 +2,6 @@
 
 import { DropDown } from "@/components/global/drop-down"
 import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
 import { CarotSort } from "@/icons"
 import { Group } from "lucide-react"
 import Link from "next/link"
@@ -54,9 +53,9 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
         >
             {ownedGroups && ownedGroups.length > 0 && (
                 <>
-                    <h4 className="px-4 text-sm font-semibold text-themeTextGray">
+                    {/* <h4 className="px-4 text-sm font-semibold text-themeTextGray">
                         Owned Groups
-                    </h4>
+                    </h4> */}
                     {ownedGroups.map((item) => (
                         <Link
                             key={item.id}
@@ -73,13 +72,13 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                 </>
             )}
 
-            <Separator orientation="horizontal" />
+            {/* <Separator orientation="horizontal" /> */}
 
             {members && members.length > 0 && (
                 <>
-                    <h4 className="px-4 py-2 text-sm font-semibold text-themeTextGray">
+                    {/* <h4 className="px-4 py-2 text-sm font-semibold text-themeTextGray">
                         Member Groups
-                    </h4>
+                    </h4> */}
                     {members.map((member) => (
                         <Link
                             key={member.Group?.id}
