@@ -57,11 +57,15 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
 
                             {/* Group Role */}
                             <p className="text-sm text-gray-400">
-                                {group.userId === currentUserId ? "Owner" : "Member"}
+                                {group.userId === currentUserId
+                                    ? "Owner"
+                                    : "Member"}
                             </p>
 
                             {/* Group Name */}
-                            <h3 className="text-lg font-semibold text-white">{group.name}</h3>
+                            <h3 className="text-lg font-semibold text-white">
+                                {group.name}
+                            </h3>
 
                             {/* Leave Group Button */}
                             {group.userId !== currentUserId && (
@@ -70,7 +74,9 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                     disabled={leavingGroupId === group.id}
                                     className="w-full mt-3 bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-lg"
                                 >
-                                    {leavingGroupId === group.id ? "Leaving..." : "Leave Group"}
+                                    {leavingGroupId === group.id
+                                        ? "Leaving..."
+                                        : "Leave Group"}
                                 </Button>
                             )}
                         </div>

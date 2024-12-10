@@ -67,7 +67,9 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
 
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
-            <h3 className="text-xl mb-4 text-gray-100 font-bold">Interactive Quiz</h3>
+            <h3 className="text-xl mb-4 text-gray-100 font-bold">
+                Interactive Quiz
+            </h3>
             <Button
                 onClick={generateQuiz}
                 disabled={loading}
@@ -78,7 +80,9 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
             {error && <p className="text-red-500 mt-4">{error}</p>}
             {quiz.length > 0 && (
                 <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg my-4 transition-all">
-                    <h3 className="text-lg font-bold text-gray-100">Test Your Knowledge</h3>
+                    <h3 className="text-lg font-bold text-gray-100">
+                        Test Your Knowledge
+                    </h3>
                     <ul className="mt-4 space-y-6">
                         {quiz.map((q, index) => (
                             <li
@@ -88,8 +92,8 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                                     userAnswers[index] === q.correctAnswer
                                         ? "border-green-500"
                                         : score !== null
-                                        ? "border-red-500"
-                                        : "border-gray-700"
+                                          ? "border-red-500"
+                                          : "border-gray-700"
                                 }`}
                             >
                                 <p className="text-gray-100 font-semibold">
@@ -161,7 +165,8 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                             )}
                             <Button
                                 onClick={resetQuiz}
-                                className="px-4 py-2 rounded mt-4">
+                                className="px-4 py-2 rounded mt-4"
+                            >
                                 Retry Quiz
                             </Button>
                         </div>
