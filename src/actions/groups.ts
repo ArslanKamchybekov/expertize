@@ -180,16 +180,22 @@ export const onGetUserGroups = async (id: string) => {
             },
         })
 
-        // Combine both groups (owned and member groups)
         const allGroups = [
-            ...(groups?.group || []), // Owned groups
-            ...(groups?.membership.map((m) => m.Group) || []), // Member groups
+            ...(groups?.group || []),
+            ...(groups?.membership.map((m) => m.Group) || []),
         ]
 
-        if (allGroups.length > 0) {
+        const uniqueGroups = allGroups.reduce((acc, group) => {
+            if (!acc.some((g) => g!.id === group!.id)) {
+                acc.push(group)
+            }
+            return acc
+        }, [] as typeof allGroups)
+
+        if (uniqueGroups.length > 0) {
             return {
                 status: 200,
-                groups: allGroups,
+                groups: uniqueGroups,
             }
         }
 
@@ -525,6 +531,32 @@ export const onJoinGroup = async (groupid: string) => {
         }
     } catch (error) {
         return { status: 404 }
+    }
+}
+
+export const onLeaveGroup = async (groupid: string) => {
+    try {
+        const user = await onAuthenticatedUser()
+
+        const result = await client.group.update({
+            where: {
+                id: groupid,
+            },
+            data: {
+                member: {
+                    deleteMany: {
+                        userId: user.id,
+                    },
+                },
+            },
+        })
+
+        if (result) {
+            return { status: 200 }
+        }
+    } catch (error) {
+        console.error("Error leaving group:", error)
+        return { status: 400, message: "Failed to leave group" }
     }
 }
 

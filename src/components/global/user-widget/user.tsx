@@ -71,7 +71,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                             variant="ghost"
                             className="flex gap-x-2 px-2 w-full justify-start"
                         >
-                            Settings
+                            Group Settings
                         </Button>
                     </Link>
                 )}

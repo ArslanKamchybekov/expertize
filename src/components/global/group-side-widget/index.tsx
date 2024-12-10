@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { useGroupInfo } from "@/hooks/groups"
 import { cn, truncateString } from "@/lib/utils"
+import { Lock } from "lucide-react"
 
 type Props = {
     light?: boolean
@@ -26,11 +27,12 @@ const GroupSideWidget = ({ groupid, light, userid }: Props) => {
                 alt="thumbnail"
                 className="w-full aspect-video"
             />
-            <div className="flex flex-col p-5 gap-y-2">
+            <div className="flex flex-col p-5 gap-y-3">
                 <h2 className="font-bold text-lg">{group.name}</h2>
-                <p className="text-sm text-themeTextGray font-bold">
-                    {group.privacy} group
-                </p>
+                <div className="text-sm text-themeTextGray font-bold flex gap-x-1">
+                    <Lock className="h-5 w-5 inline-block" />
+                    <p className="">{group.privacy}</p>
+                </div>
                 <p className="text-sm text-themeTextGray">
                     {group.description && truncateString(group.description)}
                 </p>
