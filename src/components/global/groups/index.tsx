@@ -23,7 +23,9 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
         try {
             const response = await onLeaveGroup(groupId)
             if (response && response.status === 200) {
-                setUserGroups((prev) => prev.filter((group) => group.id !== groupId))
+                setUserGroups((prev) =>
+                    prev.filter((group) => group.id !== groupId),
+                )
             } else {
                 console.error("Failed to leave group")
             }
@@ -50,7 +52,9 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                 className="w-10 h-10 rounded-lg"
                             />
                             <p className="text-gray-400">
-                                {group.userId === currentUserId ? "Owner" : "Member"}
+                                {group.userId === currentUserId
+                                    ? "Owner"
+                                    : "Member"}
                             </p>
                             <h3 className="text-xl font-semibold text-white">
                                 {group.name}
@@ -61,14 +65,18 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                     disabled={leavingGroupId === group.id}
                                     className="w-full mt-2"
                                 >
-                                    {leavingGroupId === group.id ? "Leaving..." : "Leave Group"}
+                                    {leavingGroupId === group.id
+                                        ? "Leaving..."
+                                        : "Leave Group"}
                                 </Button>
                             )}
                         </div>
                     ))
                 ) : (
                     <div className="col-span-full text-center">
-                        <p className="text-gray-400">You are not a member of any groups yet.</p>
+                        <p className="text-gray-400">
+                            You are not a member of any groups yet.
+                        </p>
                     </div>
                 )}
             </div>

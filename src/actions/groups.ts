@@ -185,12 +185,15 @@ export const onGetUserGroups = async (id: string) => {
             ...(groups?.membership.map((m) => m.Group) || []),
         ]
 
-        const uniqueGroups = allGroups.reduce((acc, group) => {
-            if (!acc.some((g) => g!.id === group!.id)) {
-                acc.push(group)
-            }
-            return acc
-        }, [] as typeof allGroups)
+        const uniqueGroups = allGroups.reduce(
+            (acc, group) => {
+                if (!acc.some((g) => g!.id === group!.id)) {
+                    acc.push(group)
+                }
+                return acc
+            },
+            [] as typeof allGroups,
+        )
 
         if (uniqueGroups.length > 0) {
             return {
