@@ -44,30 +44,33 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                     userGroups.map((group) => (
                         <div
                             key={group.id}
-                            className="py-6 bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 flex flex-col items-center gap-2"
+                            className="relative bg-gray-900 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-200 p-4 flex flex-col items-center text-center gap-2"
                         >
-                            <img
-                                src={`https://ucarecdn.com/${group.icon}/`}
-                                alt="icon"
-                                className="w-10 h-10 rounded-lg"
-                            />
-                            <p className="text-gray-400">
-                                {group.userId === currentUserId
-                                    ? "Owner"
-                                    : "Member"}
+                            {/* Group Icon */}
+                            <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center shadow-inner">
+                                <img
+                                    src={`https://ucarecdn.com/${group.icon}/`}
+                                    alt="Group Icon"
+                                    className="w-12 h-12 rounded-full"
+                                />
+                            </div>
+
+                            {/* Group Role */}
+                            <p className="text-sm text-gray-400">
+                                {group.userId === currentUserId ? "Owner" : "Member"}
                             </p>
-                            <h3 className="text-xl font-semibold text-white">
-                                {group.name}
-                            </h3>
+
+                            {/* Group Name */}
+                            <h3 className="text-lg font-semibold text-white">{group.name}</h3>
+
+                            {/* Leave Group Button */}
                             {group.userId !== currentUserId && (
                                 <Button
                                     onClick={() => handleLeaveGroup(group.id)}
                                     disabled={leavingGroupId === group.id}
-                                    className="w-full mt-2"
+                                    className="w-full mt-3 bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-lg"
                                 >
-                                    {leavingGroupId === group.id
-                                        ? "Leaving..."
-                                        : "Leave Group"}
+                                    {leavingGroupId === group.id ? "Leaving..." : "Leave Group"}
                                 </Button>
                             )}
                         </div>

@@ -95,7 +95,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
 
             <Modal
                 isOpen={isDeleteModalOpen}
-                title="Confirm Account Deletion"
+                title="Delete Account"
                 description="Are you sure you want to delete your account?"
                 onConfirm={() => {
                     deleteAccount()

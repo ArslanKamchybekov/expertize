@@ -40,11 +40,11 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-4 text-gray-100">
-                GrowthHungry AI
+                AI Chatbot
             </h3>
             <textarea
                 className="w-full p-3 bg-gray-800 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-200"
-                placeholder="Ask a question..."
+                placeholder="Ask a question about the lecture..."
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
             />

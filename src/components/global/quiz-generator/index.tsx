@@ -1,5 +1,3 @@
-"use client"
-
 import { Loader } from "@/components/global/loader"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -62,32 +60,40 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
         setScore(correctCount)
     }
 
+    const resetQuiz = () => {
+        setUserAnswers({})
+        setScore(null)
+    }
+
     return (
-        <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
-            <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                Generate Quiz
-            </h3>
+        <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
+            <h3 className="text-xl mb-4 text-gray-100 font-bold">Interactive Quiz</h3>
             <Button
                 onClick={generateQuiz}
                 disabled={loading}
                 className="px-4 py-2 rounded"
             >
-                <Loader loading={loading}>Let&apos;s go!</Loader>
+                <Loader loading={loading}>Generate Quiz</Loader>
             </Button>
             {error && <p className="text-red-500 mt-4">{error}</p>}
             {quiz.length > 0 && (
-                <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg my-4">
-                    <h3 className="text-lg font-bold text-purple-400">
-                        Time to take the quiz!
-                    </h3>
+                <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg my-4 transition-all">
+                    <h3 className="text-lg font-bold text-gray-100">Test Your Knowledge</h3>
                     <ul className="mt-4 space-y-6">
                         {quiz.map((q, index) => (
                             <li
                                 key={index}
-                                className="bg-gray-900 p-4 rounded-md"
+                                className={`p-4 rounded-md border-2 transition-all ${
+                                    score !== null &&
+                                    userAnswers[index] === q.correctAnswer
+                                        ? "border-green-500"
+                                        : score !== null
+                                        ? "border-red-500"
+                                        : "border-gray-700"
+                                }`}
                             >
                                 <p className="text-gray-100 font-semibold">
-                                    {q.question}
+                                    Q{index + 1}: {q.question}
                                 </p>
                                 <RadioGroup
                                     value={userAnswers[index] || ""}
@@ -99,12 +105,17 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                                     {q.choices.map((choice, i) => (
                                         <div
                                             key={i}
-                                            className="flex items-center space-x-2"
+                                            className={`flex items-center space-x-2 ${
+                                                score !== null &&
+                                                choice === q.correctAnswer
+                                                    ? "text-green-400"
+                                                    : ""
+                                            }`}
                                         >
                                             <RadioGroupItem
                                                 value={choice}
                                                 id={`q-${index}-choice-${i}`}
-                                                className="bg-gray-700 text-gray-100 checked:bg-white checked:text-black"
+                                                className="bg-gray-700 text-gray-100 checked:bg-blue-600"
                                             />
                                             <Label
                                                 htmlFor={`q-${index}-choice-${i}`}
@@ -114,34 +125,46 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                                         </div>
                                     ))}
                                 </RadioGroup>
-                                {score !== null && (
-                                    <p
-                                        className={`mt-2 text-sm ${
-                                            userAnswers[index] ===
-                                            q.correctAnswer
-                                                ? "text-green-400"
-                                                : "text-red-400"
-                                        }`}
-                                    >
-                                        {userAnswers[index] === q.correctAnswer
-                                            ? "Correct"
-                                            : `Incorrect. Correct answer: ${q.correctAnswer}`}
-                                    </p>
-                                )}
                             </li>
                         ))}
                     </ul>
                     {score === null ? (
-                        <Button
-                            onClick={checkAnswers}
-                            className="mt-4 font-bold bg-purple-600 text-white px-4 py-2 rounded"
-                        >
-                            Check Answers
-                        </Button>
+                        <div className="flex justify-between items-center mt-4">
+                            <Button
+                                onClick={checkAnswers}
+                                className="px-4 py-2 rounded bg-green-600 hover:bg-green-700 text-white"
+                            >
+                                Submit Answers
+                            </Button>
+                            <div className="text-gray-400">
+                                Progress: {Object.keys(userAnswers).length}/
+                                {quiz.length}
+                            </div>
+                        </div>
                     ) : (
-                        <p className="mt-4 text-gray-100">
-                            Your Score: {score}/{quiz.length}
-                        </p>
+                        <div className="mt-4 text-center">
+                            <p className="text-2xl text-gray-100 font-bold my-2">
+                                Your Score: {score}/{quiz.length}
+                            </p>
+                            {score === quiz.length ? (
+                                <p className="text-green-500">
+                                    🎉 Perfect Score! Great Job! 🎉
+                                </p>
+                            ) : score > quiz.length / 2 ? (
+                                <p className="text-yellow-400">
+                                    👍 Good Effort! Keep Going!
+                                </p>
+                            ) : (
+                                <p className="text-red-500">
+                                    😔 Ask AI for help and try again!
+                                </p>
+                            )}
+                            <Button
+                                onClick={resetQuiz}
+                                className="px-4 py-2 rounded mt-4">
+                                Retry Quiz
+                            </Button>
+                        </div>
                     )}
                 </div>
             )}

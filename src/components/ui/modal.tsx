@@ -19,8 +19,8 @@ export const Modal = ({
     if (!isOpen) return null
 
     return (
-        <div className="flex items-center justify-center fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50">
-            <div className="bg-black rounded-lg shadow-lg max-w-md w-full p-6 border border-gray-800">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-black rounded-lg shadow-lg max-w-md w-full p-6 border border-gray-800 transform transition-all">
                 <h2 className="text-lg font-bold text-white">{title}</h2>
                 <p className="mt-2 text-white">{description}</p>
                 <div className="mt-4 flex justify-end gap-3">
