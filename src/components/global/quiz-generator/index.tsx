@@ -67,9 +67,7 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
 
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
-            <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                Quick Quiz
-            </h3>
+            <h3 className="text-xl mb-4 text-gray-100 font-bold">Quick Quiz</h3>
             <Button
                 onClick={generateQuiz}
                 disabled={loading}

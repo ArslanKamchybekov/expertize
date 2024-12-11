@@ -7,7 +7,10 @@ export async function POST(req: Request) {
     const { topic } = await req.json()
 
     if (!topic) {
-        return NextResponse.json({ error: "Topic is required" }, { status: 400 })
+        return NextResponse.json(
+            { error: "Topic is required" },
+            { status: 400 },
+        )
     }
 
     try {
@@ -33,13 +36,18 @@ export async function POST(req: Request) {
             ],
         })
 
-        const newQuestions = JSON.parse(response.choices[0].message?.content || "[]")
+        const newQuestions = JSON.parse(
+            response.choices[0].message?.content || "[]",
+        )
 
         console.log("New questions:", newQuestions)
 
         return NextResponse.json({ newQuestions })
     } catch (error: any) {
         console.error(error)
-        return NextResponse.json({ error: "Failed to generate new questions" }, { status: 500 })
+        return NextResponse.json(
+            { error: "Failed to generate new questions" },
+            { status: 500 },
+        )
     }
 }

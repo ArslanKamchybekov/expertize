@@ -28,7 +28,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
     const [error, setError] = useState<string | null>(null)
     const [feedback, setFeedback] = useState<string | null>(null)
 
-
     const fetchQuizData = async () => {
         setLoading(true)
         setError(null)
@@ -67,7 +66,9 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                 setCurrentQuestionIndex(0)
             }
         } else {
-            setFeedback(`Incorrect. The correct answer is: ${currentQuestion.correctAnswer}`)
+            setFeedback(
+                `Incorrect. The correct answer is: ${currentQuestion.correctAnswer}`,
+            )
         }
 
         setUserAnswers((prev) => [...prev, answer])
@@ -106,23 +107,29 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
 
     const skipCurrentTopic = () => {
         if (currentTopicIndex < topics.length - 1) {
-            setCurrentTopicIndex(currentTopicIndex + 1);
-            setCurrentQuestionIndex(0);
-            setFeedback(null);
+            setCurrentTopicIndex(currentTopicIndex + 1)
+            setCurrentQuestionIndex(0)
+            setFeedback(null)
         }
-    };
+    }
 
     return (
         <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
             {/* For premium users only */}
             <div className="flex items-center justify-between">
-                <h3 className="text-xl mb-4 text-gray-100 font-bold">Interactive Quiz</h3>
+                <h3 className="text-xl mb-4 text-gray-100 font-bold">
+                    Interactive Quiz
+                </h3>
                 <p className="text-green-400 font-bold text-xl flex items-center gap-2">
                     GH Premium
                 </p>
             </div>
             <Button onClick={fetchQuizData} disabled={loading}>
-                {loading ? <Loader loading={loading}>Generating Quiz...</Loader> : "Start Quiz"}
+                {loading ? (
+                    <Loader loading={loading}>Generating Quiz...</Loader>
+                ) : (
+                    "Start Quiz"
+                )}
             </Button>
             {error && <p className="text-red-500 mt-4">{error}</p>}
 
@@ -132,8 +139,11 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                     <div
                         style={{
                             width: `${
-                                ((currentTopicIndex * topics[0].questions.length + currentQuestionIndex) /
-                                    (topics.length * topics[0].questions.length)) *
+                                ((currentTopicIndex *
+                                    topics[0].questions.length +
+                                    currentQuestionIndex) /
+                                    (topics.length *
+                                        topics[0].questions.length)) *
                                 100
                             }%`,
                         }}
@@ -147,14 +157,21 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                     {/* Friendly Topic Introduction */}
                     {feedback === null && currentQuestionIndex === 0 && (
                         <p className="mt-4 text-gray-300 italic mb-4">
-                            Let's dive into the topic: <span className="text-white font-bold">{topics[currentTopicIndex].topic}</span>
+                            Let&apos;s dive into the topic:{" "}
+                            <span className="text-white font-bold">
+                                {topics[currentTopicIndex].topic}
+                            </span>
                         </p>
                     )}
                     <h3 className="text-xl font-semibold text-gray-100">
                         Topic: {topics[currentTopicIndex].topic}
                     </h3>
                     <p className="mt-4 text-gray-200">
-                        {topics[currentTopicIndex].questions[currentQuestionIndex].question}
+                        {
+                            topics[currentTopicIndex].questions[
+                                currentQuestionIndex
+                            ].question
+                        }
                     </p>
                     <RadioGroup
                         className="mt-4"
@@ -163,9 +180,17 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                         {topics[currentTopicIndex].questions[
                             currentQuestionIndex
                         ].choices.map((choice, index) => (
-                            <div key={index} className="flex items-center space-x-3">
-                                <RadioGroupItem value={choice} id={`choice-${index}`} />
-                                <Label htmlFor={`choice-${index}`}>{choice}</Label>
+                            <div
+                                key={index}
+                                className="flex items-center space-x-3"
+                            >
+                                <RadioGroupItem
+                                    value={choice}
+                                    id={`choice-${index}`}
+                                />
+                                <Label htmlFor={`choice-${index}`}>
+                                    {choice}
+                                </Label>
                             </div>
                         ))}
                     </RadioGroup>
@@ -187,11 +212,18 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                     {/* Retry Button for Incorrect Answers */}
                     {feedback && !feedback.startsWith("Correct") && (
                         <Button onClick={retryCurrentTopic} className="mt-4">
-                            {loading ? <Loader loading={loading}>Retrying...</Loader> : "Retry Topic"}
+                            {loading ? (
+                                <Loader loading={loading}>Retrying...</Loader>
+                            ) : (
+                                "Retry Topic"
+                            )}
                         </Button>
                     )}
 
-                    <Button onClick={skipCurrentTopic} className="mt-4 bg-black text-white">
+                    <Button
+                        onClick={skipCurrentTopic}
+                        className="mt-4 bg-black text-white"
+                    >
                         Skip Topic
                     </Button>
                 </div>
@@ -200,7 +232,9 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
             {/* End Quiz Call-to-Action */}
             {topics.length > 0 && currentTopicIndex >= topics.length && (
                 <div className="mt-6 text-center">
-                    <p className="text-lg text-green-400">Congratulations! You've completed the quiz.</p>
+                    <p className="text-lg text-green-400">
+                        Congratulations! You&apos;ve completed the quiz.
+                    </p>
                     {/* <Button onClick={exploreMoreTopics} className="mt-4">
                         Explore More Topics
                     </Button> */}

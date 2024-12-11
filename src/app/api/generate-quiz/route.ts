@@ -4,11 +4,13 @@ import { OpenAI } from "openai"
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export async function POST(req: Request) {
-
     const { transcript } = await req.json()
 
     if (!transcript) {
-        return NextResponse.json({ error: "Transcript is required" }, { status: 400 })
+        return NextResponse.json(
+            { error: "Transcript is required" },
+            { status: 400 },
+        )
     }
 
     try {
@@ -54,12 +56,14 @@ export async function POST(req: Request) {
                                 "correctAnswer": "Paris"
                             },
                             ...
-                        ]`
-                    }
+                        ]`,
+                    },
                 ],
             })
 
-            const questions = JSON.parse(questionResponse.choices[0].message?.content || "[]")
+            const questions = JSON.parse(
+                questionResponse.choices[0].message?.content || "[]",
+            )
 
             quiz.push({
                 topic: topic.trim(),
@@ -72,6 +76,9 @@ export async function POST(req: Request) {
         return NextResponse.json({ topics: quiz })
     } catch (error: any) {
         console.error(error)
-        return NextResponse.json({ error: error.message || "Something went wrong" }, { status: 500 })
+        return NextResponse.json(
+            { error: error.message || "Something went wrong" },
+            { status: 500 },
+        )
     }
 }

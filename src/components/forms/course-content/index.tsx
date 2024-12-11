@@ -136,7 +136,9 @@ export const CourseContentForm = ({
                 />
             )}
             {!isEditing && (
-                <InteractiveQuiz transcript={transcriptText || lectureContent} />
+                <InteractiveQuiz
+                    transcript={transcriptText || lectureContent}
+                />
             )}
         </form>
     ) : (
