@@ -2,6 +2,7 @@
 
 import { AIChat } from "@/components/global/ai-chat"
 import { HtmlParser } from "@/components/global/html-parser"
+import IDE from "@/components/global/ide"
 import { InteractiveQuiz } from "@/components/global/interactive-quiz"
 import { Loader } from "@/components/global/loader"
 import { QuizGenerator } from "@/components/global/quiz-generator"
@@ -140,6 +141,9 @@ export const CourseContentForm = ({
                     transcript={transcriptText || lectureContent}
                 />
             )}
+            {isEditing && (
+                <IDE />
+            )}
         </form>
     ) : (
         <form className="p-4 flex flex-col gap-4">
@@ -147,6 +151,7 @@ export const CourseContentForm = ({
             <AIChat lectureContent={transcriptText || lectureContent} />
             <QuizGenerator lectureContent={transcriptText || lectureContent} />
             <InteractiveQuiz transcript={transcriptText || lectureContent} />
+            <IDE />
         </form>
     )
 }

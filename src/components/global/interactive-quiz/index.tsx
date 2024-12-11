@@ -115,7 +115,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
 
     return (
         <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
-            {/* For premium users only */}
             <div className="flex items-center justify-between">
                 <h3 className="text-xl mb-4 text-gray-100 font-bold">
                     Interactive Quiz
@@ -133,7 +132,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
             </Button>
             {error && <p className="text-red-500 mt-4">{error}</p>}
 
-            {/* Dynamic Progress Indicator */}
             {topics.length > 0 && (
                 <div className="mt-4 w-full bg-gray-700 rounded-full h-2">
                     <div
@@ -154,7 +152,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
 
             {topics.length > 0 && currentTopicIndex < topics.length && (
                 <div className="mt-6">
-                    {/* Friendly Topic Introduction */}
                     {feedback === null && currentQuestionIndex === 0 && (
                         <p className="mt-4 text-gray-300 italic mb-4">
                             Let&apos;s dive into the topic:{" "}
@@ -195,7 +192,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                         ))}
                     </RadioGroup>
 
-                    {/* Interactive Feedback Animation */}
                     {feedback && (
                         <div
                             className={`mt-4 p-4 border rounded-lg animate__animated ${
@@ -209,7 +205,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                         </div>
                     )}
 
-                    {/* Retry Button for Incorrect Answers */}
                     {feedback && !feedback.startsWith("Correct") && (
                         <Button onClick={retryCurrentTopic} className="mt-4">
                             {loading ? (
@@ -226,18 +221,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                     >
                         Skip Topic
                     </Button>
-                </div>
-            )}
-
-            {/* End Quiz Call-to-Action */}
-            {topics.length > 0 && currentTopicIndex >= topics.length && (
-                <div className="mt-6 text-center">
-                    <p className="text-lg text-green-400">
-                        Congratulations! You&apos;ve completed the quiz.
-                    </p>
-                    {/* <Button onClick={exploreMoreTopics} className="mt-4">
-                        Explore More Topics
-                    </Button> */}
                 </div>
             )}
         </div>
