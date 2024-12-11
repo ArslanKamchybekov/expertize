@@ -4,73 +4,74 @@ import { OpenAI } from "openai"
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export async function POST(req: Request) {
+
+    const { transcript } = await req.json()
+
+    if (!transcript) {
+        return NextResponse.json({ error: "Transcript is required" }, { status: 400 })
+    }
+
     try {
-        const { lectureContent } = await req.json()
-        if (!lectureContent) {
-            return NextResponse.json(
-                { error: "Lecture content is required." },
-                { status: 400 },
-            )
-        }
-
-        const prompt = `
-            Based on the following lecture content, create a multiple-choice quiz with 5 questions. 
-            Each question should have:
-            - A "question" string.
-            - Four "choices" (array of strings).
-            - An "answer" string (correct choice from "choices").
-            ---
-            Lecture Content:
-            ${lectureContent}
-            ---
-            Output *only* valid JSON in this format:
-            [
-                {
-                    "question": "What is the main idea?",
-                    "choices": ["A", "B", "C", "D"],
-                    "answer": "A"
-                },
-                ...
-            ]
-        `
-
-        const response = await openai.chat.completions.create({
+        // Step 1: Extract main topics
+        const topicResponse = await openai.chat.completions.create({
             model: "gpt-4",
-            messages: [{ role: "user", content: prompt }],
-            max_tokens: 1000,
+            messages: [
+                {
+                    role: "system",
+                    content: "You are an educational assistant.",
+                },
+                {
+                    role: "user",
+                    content: `Extract the main topics from this lecture transcript: ${transcript}. Provide the topics as a plain comma-separated list.`,
+                },
+            ],
         })
 
-        const rawContent = response.choices[0].message?.content || "[]"
+        const topics = topicResponse.choices[0].message?.content?.split(",")
 
-        let quiz = []
-        try {
-            const jsonMatch = rawContent.match(/\[.*\]/s)
-            quiz = jsonMatch ? JSON.parse(jsonMatch[0]) : []
-        } catch (parseError) {
-            console.error(
-                "Parsing Error:",
-                parseError,
-                "Raw Content:",
-                rawContent,
-            )
-            return NextResponse.json(
-                { error: "Failed to parse quiz from OpenAI response." },
-                { status: 500 },
-            )
+        if (!topics || topics.length === 0) {
+            throw new Error("Failed to extract topics")
         }
 
-        quiz = quiz.map((q: any) => ({
-            question: q.question || "No question provided.",
-            choices: Array.isArray(q.choices) ? q.choices : [],
-            correctAnswer: q.answer || "No answer provided.",
-        }))
+        // Step 2: Generate questions for each topic
+        const quiz = []
 
-        return NextResponse.json({ quiz }, { status: 200 })
-    } catch (error) {
-        console.error("Error generating quiz:", error)
-        return NextResponse.json(
-            { error: "Failed to generate quiz." },
-            { status: 500 },
-        )
+        for (const topic of topics) {
+            const questionResponse = await openai.chat.completions.create({
+                model: "gpt-4",
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are an educational assistant.",
+                    },
+                    {
+                        role: "user",
+                        content: `Generate 3 multiple-choice questions for the topic "${topic}". Provide the output as a valid JSON array with this structure:
+                        [
+                            {
+                                "question": "What is the capital of France?",
+                                "choices": ["Paris", "London", "Berlin", "Madrid"],
+                                "correctAnswer": "Paris"
+                            },
+                            ...
+                        ]`
+                    }
+                ],
+            })
+
+            const questions = JSON.parse(questionResponse.choices[0].message?.content || "[]")
+
+            quiz.push({
+                topic: topic.trim(),
+                questions,
+            })
+        }
+
+        console.log("Generated quiz:", quiz)
+
+        return NextResponse.json({ topics: quiz })
+    } catch (error: any) {
+        console.error(error)
+        return NextResponse.json({ error: error.message || "Something went wrong" }, { status: 500 })
     }
 }

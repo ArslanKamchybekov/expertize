@@ -27,7 +27,7 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
         setScore(null)
 
         try {
-            const response = await fetch("/api/generate-quiz", {
+            const response = await fetch("/api/generate-quick-quiz", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ lectureContent }),
@@ -68,7 +68,7 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
             <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                Interactive Quiz
+                Quick Quiz
             </h3>
             <Button
                 onClick={generateQuiz}

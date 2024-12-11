@@ -190,7 +190,9 @@ export const useJoinGroup = (groupid: string) => {
                 const member = await onJoinGroup(groupid)
                 if (member?.status === 200) {
                     const channels = await onGetGroupChannels(groupid)
-                    router.push("/explore")
+                    router.push(
+                        `/group/${groupid}/channel/${channels?.channels?.[0].id}`,
+                    )
                 }
             }
         },
