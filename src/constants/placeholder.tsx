@@ -18,42 +18,44 @@ export type CreateGroupPlaceholderProps = {
 export const CREATE_GROUP_PLACEHOLDER: CreateGroupPlaceholderProps[] = [
     {
         id: "0",
-        label: "Highly engaging",
+        label: "Engage with ease",
         icon: <MegaPhone />,
     },
     {
         id: "1",
-        label: "Easy to setup",
+        label: "Effortless setup",
         icon: <Heart />,
     },
     {
         id: "2",
-        label: "Group chat and posts",
+        label: "Integrated chat, posts, and channels",
         icon: <Chat />,
     },
     {
         id: "3",
-        label: "Students can create teams within Groups",
+        label: "Enable team creation within groups",
         icon: <Grid />,
     },
     {
         id: "4",
-        label: "Gamification",
+        label: "Offer unlimited courses ",
         icon: <Document />,
     },
     {
         id: "5",
-        label: "Host unlimited courses",
+        label: "Access to Online Coding Editor",
         icon: <Courses />,
     },
     {
         id: "6",
-        label: "White-labeling options",
+        label: "Custom branding with white-label options",
         icon: <WhiteLabel />,
     },
     {
         id: "7",
-        label: "AI powered learning tools",
+        label: "AI-driven educational tools",
         icon: <Tech />,
     },
-]
+];
+
+

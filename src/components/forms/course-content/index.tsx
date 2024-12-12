@@ -141,7 +141,7 @@ export const CourseContentForm = ({
                     transcript={transcriptText || lectureContent}
                 />
             )}
-            {isEditing && <IDE />}
+            {!isEditing && <IDE />}
         </form>
     ) : (
         <form className="p-4 flex flex-col gap-4">

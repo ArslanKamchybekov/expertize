@@ -160,9 +160,17 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                             </span>
                         </p>
                     )}
-                    <h3 className="text-xl font-semibold text-gray-100">
-                        Topic: {topics[currentTopicIndex].topic}
-                    </h3>
+                    <div className="flex items-center justify-between">
+                        <h3 className="text-xl font-semibold text-gray-100">
+                            Topic: {topics[currentTopicIndex].topic}
+                        </h3>
+                        <Button
+                            onClick={skipCurrentTopic}
+                            className=" bg-black text-white"
+                        >
+                            Skip Topic
+                        </Button>
+                    </div>
                     <p className="mt-4 text-gray-200">
                         {
                             topics[currentTopicIndex].questions[
@@ -214,13 +222,6 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                             )}
                         </Button>
                     )}
-
-                    <Button
-                        onClick={skipCurrentTopic}
-                        className="mt-4 bg-black text-white"
-                    >
-                        Skip Topic
-                    </Button>
                 </div>
             )}
         </div>

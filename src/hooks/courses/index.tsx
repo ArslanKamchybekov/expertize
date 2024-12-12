@@ -2,6 +2,8 @@ import {
     onCreateCourseModule,
     onCreateGroupCourse,
     onCreateModuleSection,
+    onDeleteCourseModule,
+    onDeleteCourseSection,
     onGetCourseModules,
     onGetGroupCourses,
     onGetSectionInfo,
@@ -16,7 +18,7 @@ import { upload } from "@/lib/uploadcare"
 import { useUser } from "@clerk/nextjs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { JSONContent } from "novel"
 import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -187,6 +189,8 @@ export const useCourseModule = (courseId: string, groupid: string) => {
 
     const user = useUser()
 
+    const router = useRouter()
+
     const { variables, mutate, isPending } = useMutation({
         mutationFn: (data: { type: "NAME" | "DATA"; content: string }) =>
             onUpdateModule(moduleId!, data.type, data.content),
@@ -235,6 +239,34 @@ export const useCourseModule = (courseId: string, groupid: string) => {
     } = useMutation({
         mutationFn: (data: { moduleid: string; sectionid: string }) =>
             onCreateModuleSection(data.moduleid, data.sectionid),
+        onSuccess: (data) => {
+            toast(data.status === 200 ? "Success" : "Error", {
+                description: data.message,
+            })
+        },
+        onSettled: async () => {
+            return await client.invalidateQueries({
+                queryKey: ["course-modules"],
+            })
+        },
+    })
+
+    const {variables: deleteModuleVariables, mutate: deleteModuleMutation } = useMutation({
+        mutationFn: (data: { moduleid: string }) => onDeleteCourseModule(data.moduleid),
+        onSuccess: (data) => {
+            toast(data.status === 200 ? "Success" : "Error", {
+                description: data.message,
+            })
+        },
+        onSettled: async () => {
+            return await client.invalidateQueries({
+                queryKey: ["course-modules"],
+            })
+        },
+    })
+
+    const {variables: deleteSectionVariables, mutate: deleteSectionMutation } = useMutation({
+        mutationFn: (data: { sectionid: string }) => onDeleteCourseSection(data.sectionid),
         onSuccess: (data) => {
             toast(data.status === 200 ? "Success" : "Error", {
                 description: data.message,
@@ -306,6 +338,14 @@ export const useCourseModule = (courseId: string, groupid: string) => {
 
     const onEditSection = () => setEditSection(true)
 
+    const onModuleDelete = (moduleid: string) => {
+        deleteModuleMutation({ moduleid })
+    }
+
+    const onSectionDelete = (sectionid: string) => {
+        deleteSectionMutation({ sectionid })
+    }
+
     return {
         data,
         onEditModule,
@@ -327,6 +367,10 @@ export const useCourseModule = (courseId: string, groupid: string) => {
         editSection,
         sectionUpdatePending,
         updateVariables,
+        deleteModuleVariables,
+        deleteSectionVariables,
+        onSectionDelete,
+        onModuleDelete,
     }
 }
 

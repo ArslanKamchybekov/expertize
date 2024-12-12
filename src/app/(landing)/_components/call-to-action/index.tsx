@@ -22,14 +22,16 @@ const CallToAction = (props: Props) => {
                 relationships to drive personal and professional growth
             </p>
             <div className="flex md:flex-row flex-col md:justify-center gap-5 md:mt-5 w-full">
-                {/* <Button
-                    variant="outline"
-                    className="rounded-xl bg-transparent text-base"
-                >
-                    Watch Demo
-                </Button> */}
+                <Link href="https://www.growthhungry.life/">
+                    <Button
+                        variant="outline"
+                        className="rounded-xl bg-transparent text-base"
+                    >
+                        Watch Demo
+                    </Button>
+                </Link>
                 <Link href="/sign-in">
-                    <Button className="rounded-xl text-base flex gap-2 w-full font-bold justify-center px-6">
+                    <Button className="rounded-xl text-base">
                         Get Started
                     </Button>
                 </Link>

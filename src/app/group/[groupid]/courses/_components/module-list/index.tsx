@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useCourseModule } from "@/hooks/courses"
 import { EmptyCircle, PurpleCheck } from "@/icons"
-import { Plus } from "lucide-react"
+import { Plus, Trash } from "lucide-react"
 import Link from "next/link"
 import { v4 } from "uuid"
 
@@ -19,6 +19,8 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
     const {
         data,
         onEditModule,
+        onModuleDelete,
+        onSectionDelete,
         edit,
         triggerRef,
         inputRef,
@@ -64,46 +66,61 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                         <AccordionContent className="flex flex-col gap-y-2 px-3">
                             {module.section.length ? (
                                 module.section.map((section) => (
-                                    <Link
-                                        ref={contentRef}
-                                        onDoubleClick={() => {
-                                            onEditSection()
-                                        }}
-                                        onClick={() =>
-                                            setActiveSection(section.id)
-                                        }
-                                        className="flex gap-x-3 items-center capitalize overflow-scroll"
+                                    <div
+                                        className="flex items-center justify-between"
                                         key={section.id}
-                                        href={`/group/${groupid}/courses/${courseId}/${section.id}`}
                                     >
-                                        {section.complete ? (
-                                            <PurpleCheck />
-                                        ) : (
-                                            <EmptyCircle />
-                                        )}
-                                        <IconRenderer
-                                            icon={section.icon}
-                                            mode={
-                                                pathname.split("/").pop() ===
-                                                section.id
-                                                    ? "LIGHT"
-                                                    : "DARK"
+                                        <Link
+                                            ref={contentRef}
+                                            onDoubleClick={() => {
+                                                onEditSection()
+                                            }}
+                                            onClick={() =>
+                                                setActiveSection(section.id)
                                             }
-                                        />
-                                        {editSection &&
-                                        activeSection === section.id &&
-                                        groupOwner?.groupOwner ? (
-                                            <Input
-                                                ref={sectionInputRef}
-                                                className="flex-1 bg-transparent border-none p-0"
+                                            className="flex gap-x-3 items-center capitalize overflow-scroll flex-1"
+                                            href={`/group/${groupid}/courses/${courseId}/${section.id}`}
+                                        >
+                                            {section.complete ? (
+                                                <PurpleCheck />
+                                            ) : (
+                                                <EmptyCircle />
+                                            )}
+                                            <IconRenderer
+                                                icon={section.icon}
+                                                mode={
+                                                    pathname.split("/").pop() ===
+                                                    section.id
+                                                        ? "LIGHT"
+                                                        : "DARK"
+                                                }
                                             />
-                                        ) : sectionUpdatePending &&
-                                          activeSection === section.id ? (
-                                            updateVariables?.content
-                                        ) : (
-                                            section.name
+                                            {editSection &&
+                                            activeSection === section.id &&
+                                            groupOwner?.groupOwner ? (
+                                                <Input
+                                                    ref={sectionInputRef}
+                                                    className="flex-1 bg-transparent border-none p-0"
+                                                />
+                                            ) : sectionUpdatePending &&
+                                              activeSection === section.id ? (
+                                                updateVariables?.content
+                                            ) : (
+                                                section.name
+                                            )}
+                                        </Link>
+                                        {groupOwner?.groupOwner && (
+                                            <Button
+                                                onClick={() =>
+                                                    onSectionDelete(section.id)
+                                                }
+                                                variant="ghost"
+                                                className="text-red-500 flex items-center"
+                                            >
+                                                <Trash size={16} />
+                                            </Button>
                                         )}
-                                    </Link>
+                                    </div>
                                 ))
                             ) : (
                                 <div className="text-themeTextGray">
@@ -150,6 +167,14 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     </Button>
                                 </>
                             )}
+                            <Button
+                                onClick={() => onModuleDelete(module.id)}
+                                variant="ghost"
+                                className="text-red-500 flex items-center gap-1 mt-4"
+                            >
+                                <Trash size={16} />
+                                Delete Module
+                            </Button>
                         </AccordionContent>
                     </GlobalAccordion>
                 ))}
