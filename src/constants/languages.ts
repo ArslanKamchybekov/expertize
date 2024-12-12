@@ -7,13 +7,13 @@ export const LANGUAGE_CONFIGS = {
         System.out.println("Hello, World!");
     }
 }`,
-        name: "Java"
+        name: "Java",
     },
     python: {
         id: 71,
         defaultCode: `# Python code
 print("Hello, World!")`,
-        name: "Python"
+        name: "Python",
     },
     cpp: {
         id: 54,
@@ -25,7 +25,7 @@ int main() {
     cout << "Hello, World!" << endl;
     return 0;
 }`,
-        name: "C++"
+        name: "C++",
     },
     csharp: {
         id: 51,
@@ -38,6 +38,6 @@ class Program
         Console.WriteLine("Hello, World!");
     }
 }`,
-        name: "C#"
+        name: "C#",
     },
 }

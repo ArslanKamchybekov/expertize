@@ -124,8 +124,10 @@ const IDE = () => {
                         }
                     >
                         <div className="py-2">
-                            {(Object.keys(LANGUAGE_CONFIGS) as LanguageKey[]).map((lang) => (
-                                <button 
+                            {(
+                                Object.keys(LANGUAGE_CONFIGS) as LanguageKey[]
+                            ).map((lang) => (
+                                <button
                                     key={lang}
                                     onClick={() => handleLanguageChange(lang)}
                                     className="block w-full text-left py-2 px-4 hover:bg-gray-700 hover:text-white"
@@ -139,7 +141,7 @@ const IDE = () => {
             </div>
 
             <CodeEditor
-                language={language === 'cpp' ? 'cpp' : language}
+                language={language === "cpp" ? "cpp" : language}
                 onCodeChange={setCode}
                 defaultCode={code}
             />
