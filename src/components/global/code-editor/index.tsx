@@ -1,13 +1,13 @@
-import * as monaco from "monaco-editor";
-import { useEffect, useRef, useState } from "react";
+import * as monaco from "monaco-editor"
+import { useEffect, useRef, useState } from "react"
 
 interface CodeEditorProps {
-    language?: string;
-    theme?: string;
-    defaultCode?: string;
-    readOnly?: boolean;
-    height?: string;
-    onCodeChange?: (value: string) => void;
+    language?: string
+    theme?: string
+    defaultCode?: string
+    readOnly?: boolean
+    height?: string
+    onCodeChange?: (value: string) => void
 }
 
 const CodeEditor = ({
@@ -21,14 +21,14 @@ const CodeEditor = ({
 }`,
     onCodeChange,
     readOnly = false,
-    height = "300px"
+    height = "300px",
 }: CodeEditorProps) => {
-    const editorRef = useRef<HTMLDivElement>(null);
-    const [editorInstance, setEditorInstance] = 
-        useState<monaco.editor.IStandaloneCodeEditor | null>(null);
+    const editorRef = useRef<HTMLDivElement>(null)
+    const [editorInstance, setEditorInstance] =
+        useState<monaco.editor.IStandaloneCodeEditor | null>(null)
 
     useEffect(() => {
-        if (!editorRef.current) return;
+        if (!editorRef.current) return
 
         const editor = monaco.editor.create(editorRef.current, {
             value: defaultCode,
@@ -37,36 +37,36 @@ const CodeEditor = ({
             automaticLayout: true,
             fontSize: 16,
             lineNumbers: "on",
-            readOnly
-        });
+            readOnly,
+        })
 
-        setEditorInstance(editor);
+        setEditorInstance(editor)
 
         return () => {
-            editor.dispose();
-        };
-    }, [language, defaultCode, theme, readOnly]);
+            editor.dispose()
+        }
+    }, [language, defaultCode, theme, readOnly])
 
     useEffect(() => {
         if (editorInstance) {
-            editorInstance.setValue(defaultCode);
+            editorInstance.setValue(defaultCode)
         }
-    }, [defaultCode, editorInstance]);
+    }, [defaultCode, editorInstance])
 
     useEffect(() => {
         if (editorInstance && onCodeChange) {
-            const model = editorInstance.getModel();
+            const model = editorInstance.getModel()
             if (model) {
                 const subscription = model.onDidChangeContent(() => {
-                    onCodeChange(model.getValue());
-                });
+                    onCodeChange(model.getValue())
+                })
 
-                return () => subscription.dispose();
+                return () => subscription.dispose()
             }
         }
-    }, [editorInstance, onCodeChange]);
+    }, [editorInstance, onCodeChange])
 
-    return <div ref={editorRef} style={{ height, width: "100%" }} />;
-};
+    return <div ref={editorRef} style={{ height, width: "100%" }} />
+}
 
-export default CodeEditor;
+export default CodeEditor

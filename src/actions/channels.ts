@@ -186,8 +186,6 @@ export const onDeleteChannel = async (channelId: string) => {
     }
 }
 
-
-
 export const onCreateChannelPost = async (
     channelid: string,
     title: string,

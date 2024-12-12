@@ -89,8 +89,9 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                             <IconRenderer
                                                 icon={section.icon}
                                                 mode={
-                                                    pathname.split("/").pop() ===
-                                                    section.id
+                                                    pathname
+                                                        .split("/")
+                                                        .pop() === section.id
                                                         ? "LIGHT"
                                                         : "DARK"
                                                 }

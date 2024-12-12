@@ -1,16 +1,16 @@
-import { NextResponse } from "next/server";
-import { OpenAI } from "openai";
+import { NextResponse } from "next/server"
+import { OpenAI } from "openai"
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 
 export async function POST(req: Request) {
-    const { transcript } = await req.json();
+    const { transcript } = await req.json()
 
     if (!transcript) {
         return NextResponse.json(
             { error: "Transcript is required" },
-            { status: 400 }
-        );
+            { status: 400 },
+        )
     }
 
     try {
@@ -26,26 +26,26 @@ export async function POST(req: Request) {
                     content: `Extract the main topics from this lecture transcript: ${transcript}. Provide the topics as a plain comma-separated list. Do not include any comments or extra text besides the list.`,
                 },
             ],
-        });
+        })
 
-        const responseContent = topicResponse.choices[0].message?.content;
+        const responseContent = topicResponse.choices[0].message?.content
 
         if (!responseContent) {
-            throw new Error("No content returned from OpenAI for topics.");
+            throw new Error("No content returned from OpenAI for topics.")
         }
 
         const topics = responseContent
             .split(",")
             .map((topic) => topic.trim())
-            .filter((topic) => topic); // Remove empty strings
+            .filter((topic) => topic) // Remove empty strings
 
         if (topics.length === 0) {
-            throw new Error("Failed to extract valid topics from the response.");
+            throw new Error("Failed to extract valid topics from the response.")
         }
 
-        console.log("Extracted topics:", topics);
+        console.log("Extracted topics:", topics)
 
-        const quiz = [];
+        const quiz = []
 
         for (const topic of topics) {
             const questionResponse = await openai.chat.completions.create({
@@ -69,35 +69,35 @@ export async function POST(req: Request) {
                         Do not include anything else or any comments, besides the JSON itself.`,
                     },
                 ],
-            });
+            })
 
-            const questionContent = questionResponse.choices[0].message?.content;
+            const questionContent = questionResponse.choices[0].message?.content
 
-            let questions = [];
+            let questions = []
             try {
-                questions = JSON.parse(questionContent || "[]");
+                questions = JSON.parse(questionContent || "[]")
             } catch (parseError) {
                 console.error(
                     `Failed to parse questions for topic "${topic}":`,
-                    questionContent
-                );
-                continue;
+                    questionContent,
+                )
+                continue
             }
 
             quiz.push({
                 topic: topic.trim(),
                 questions,
-            });
+            })
         }
 
-        console.log("Generated quiz:", quiz);
+        console.log("Generated quiz:", quiz)
 
-        return NextResponse.json({ topics: quiz });
+        return NextResponse.json({ topics: quiz })
     } catch (error: any) {
-        console.error(error);
+        console.error(error)
         return NextResponse.json(
             { error: error.message || "Something went wrong" },
-            { status: 500 }
-        );
+            { status: 500 },
+        )
     }
 }

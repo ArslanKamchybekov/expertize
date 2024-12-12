@@ -251,33 +251,37 @@ export const useCourseModule = (courseId: string, groupid: string) => {
         },
     })
 
-    const {variables: deleteModuleVariables, mutate: deleteModuleMutation } = useMutation({
-        mutationFn: (data: { moduleid: string }) => onDeleteCourseModule(data.moduleid),
-        onSuccess: (data) => {
-            toast(data.status === 200 ? "Success" : "Error", {
-                description: data.message,
-            })
-        },
-        onSettled: async () => {
-            return await client.invalidateQueries({
-                queryKey: ["course-modules"],
-            })
-        },
-    })
+    const { variables: deleteModuleVariables, mutate: deleteModuleMutation } =
+        useMutation({
+            mutationFn: (data: { moduleid: string }) =>
+                onDeleteCourseModule(data.moduleid),
+            onSuccess: (data) => {
+                toast(data.status === 200 ? "Success" : "Error", {
+                    description: data.message,
+                })
+            },
+            onSettled: async () => {
+                return await client.invalidateQueries({
+                    queryKey: ["course-modules"],
+                })
+            },
+        })
 
-    const {variables: deleteSectionVariables, mutate: deleteSectionMutation } = useMutation({
-        mutationFn: (data: { sectionid: string }) => onDeleteCourseSection(data.sectionid),
-        onSuccess: (data) => {
-            toast(data.status === 200 ? "Success" : "Error", {
-                description: data.message,
-            })
-        },
-        onSettled: async () => {
-            return await client.invalidateQueries({
-                queryKey: ["course-modules"],
-            })
-        },
-    })
+    const { variables: deleteSectionVariables, mutate: deleteSectionMutation } =
+        useMutation({
+            mutationFn: (data: { sectionid: string }) =>
+                onDeleteCourseSection(data.sectionid),
+            onSuccess: (data) => {
+                toast(data.status === 200 ? "Success" : "Error", {
+                    description: data.message,
+                })
+            },
+            onSettled: async () => {
+                return await client.invalidateQueries({
+                    queryKey: ["course-modules"],
+                })
+            },
+        })
 
     const onEditModuleName = (event: Event) => {
         if (inputRef.current && triggerRef.current) {
