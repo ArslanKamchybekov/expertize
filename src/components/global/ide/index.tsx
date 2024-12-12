@@ -1,15 +1,22 @@
 import { useState } from "react"
+import { LANGUAGE_CONFIGS } from "../../../constants/languages"
 import CodeEditor from "../code-editor"
+import { DropDown } from "../drop-down"
 import { Loader } from "../loader"
 
+type LanguageKey = keyof typeof LANGUAGE_CONFIGS
+
 const IDE = () => {
-    const [code, setCode] = useState(`public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}`)
+    const [language, setLanguage] = useState<LanguageKey>("java")
+    const [code, setCode] = useState(LANGUAGE_CONFIGS.java.defaultCode)
     const [output, setOutput] = useState("")
     const [loading, setLoading] = useState(false)
+
+    const handleLanguageChange = (newLanguage: LanguageKey) => {
+        setLanguage(newLanguage)
+        setCode(LANGUAGE_CONFIGS[newLanguage].defaultCode)
+        setOutput("")
+    }
 
     const executeCode = async () => {
         setLoading(true)
@@ -24,7 +31,7 @@ const IDE = () => {
                         "x-rapidapi-key": `${process.env.NEXT_PUBLIC_RAPID_API_KEY}`,
                     },
                     body: JSON.stringify({
-                        language_id: 62,
+                        language_id: LANGUAGE_CONFIGS[language].id,
                         source_code: code,
                         stdin: "U25Wa1oyVXc=",
                     }),
@@ -63,13 +70,12 @@ const IDE = () => {
 
             console.log("Final Result:", result)
 
-            // Handle the result
             if (result.stdout) {
-                setOutput(atob(result.stdout)) // Decode Base64 stdout
+                setOutput(atob(result.stdout))
             } else if (result.stderr) {
-                setOutput(atob(result.stderr)) // Decode Base64 stderr
+                setOutput(atob(result.stderr))
             } else if (result.compile_output) {
-                setOutput(atob(result.compile_output)) // Decode Base64 compile output
+                setOutput(atob(result.compile_output))
             } else {
                 setOutput("Error occurred while executing code.")
             }
@@ -84,7 +90,7 @@ const IDE = () => {
     return (
         <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
             <div className="flex items-center justify-between">
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center justify-between gap-4 pb-6">
                     <h3 className="text-xl text-gray-100 font-bold">
                         Online IDE
                     </h3>
@@ -92,24 +98,48 @@ const IDE = () => {
                         GH Premium
                     </p>
                 </div>
-                <button
-                    onClick={(event) => {
-                        event.preventDefault()
-                        executeCode()
-                    }}
-                    disabled={loading}
-                    className={`mb-4 ${loading ? "bg-gray-500" : "bg-green-500"} hover:bg-green-600 text-white font-bold py-2 px-4 rounded`}
-                >
-                    {loading ? (
-                        <Loader loading={true}>Loading...</Loader>
-                    ) : (
-                        "Execute"
-                    )}
-                </button>
+
+                <div className="flex items-center gap-4 mb-6">
+                    <button
+                        onClick={(event) => {
+                            event.preventDefault()
+                            executeCode()
+                        }}
+                        disabled={loading}
+                        className={`${loading ? "bg-gray-500" : "bg-gray-700"} hover:bg-gray-600 text-white font-bold py-2 px-4 rounded`}
+                    >
+                        {loading ? (
+                            <Loader loading={true}>Loading...</Loader>
+                        ) : (
+                            "Execute"
+                        )}
+                    </button>
+
+                    <DropDown
+                        title="Select Language"
+                        trigger={
+                            <button className="bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded">
+                                {LANGUAGE_CONFIGS[language].name}
+                            </button>
+                        }
+                    >
+                        <div className="py-2">
+                            {(Object.keys(LANGUAGE_CONFIGS) as LanguageKey[]).map((lang) => (
+                                <button 
+                                    key={lang}
+                                    onClick={() => handleLanguageChange(lang)}
+                                    className="block w-full text-left py-2 px-4 hover:bg-gray-700 hover:text-white"
+                                >
+                                    {LANGUAGE_CONFIGS[lang].name}
+                                </button>
+                            ))}
+                        </div>
+                    </DropDown>
+                </div>
             </div>
 
             <CodeEditor
-                language="java"
+                language={language === 'cpp' ? 'cpp' : language}
                 onCodeChange={setCode}
                 defaultCode={code}
             />
