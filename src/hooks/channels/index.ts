@@ -10,7 +10,7 @@ import {
 import {
     onGetCommentReplies,
     onGetPostComments,
-    onGetPostInfo
+    onGetPostInfo,
 } from "@/actions/groups"
 import { CreateCommentSchema } from "@/components/global/post-comments/schema"
 import { CreateChannelPost } from "@/components/global/post-content/schema"
