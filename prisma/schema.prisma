@@ -28,6 +28,7 @@ model User {
   comments   Comment[]
   message    Message[]
   sectionCompletion SectionCompletion[]
+  courses        Course[]    @relation("CourseMembers")
 }
 
 model Subscription {
@@ -131,6 +132,7 @@ model Course {
   Group       Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   groupId     String?  @db.Uuid
   modules     Module[]
+  allowedMembers User[] @relation("CourseMembers")
 }
 
 model Module {

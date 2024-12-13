@@ -10,6 +10,7 @@ import { useCreateCourse } from "@/hooks/courses"
 import { cn } from "@/lib/utils"
 import { BadgePlus } from "lucide-react"
 import { useEffect, useState } from "react"
+import { useForm } from "react-hook-form"
 import { FormGenerator } from "../form-generator"
 import { GlassModal } from "../glass-modal"
 
@@ -21,12 +22,24 @@ const CourseCreate = ({ groupid }: Props) => {
     const { onCreateCourse, register, errors, buttonRef, setValue, data } =
         useCreateCourse(groupid)
 
+    const { handleSubmit } = useForm()
     const [selectedPrivacy, setSelectedPrivacy] = useState<string>("")
     const [searchTerm, setSearchTerm] = useState<string>("")
     const [selectedUsers, setSelectedUsers] = useState<
         { id: number; name: string }[]
     >([])
     const [members, setMembers] = useState<any[]>([])
+    const [selectedImage, setSelectedImage] = useState<File | null>(null)
+
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file && file.type.startsWith('image/')) {
+            setSelectedImage(file)
+        } else {
+            alert('Please select a valid image file.')
+        }
+    }
 
     useEffect(() => {
         const fetchMembers = async () => {
@@ -79,7 +92,14 @@ const CourseCreate = ({ groupid }: Props) => {
                 }
             >
                 <form
-                    onSubmit={onCreateCourse}
+                    onSubmit={handleSubmit((values) => {
+                        const formData = {
+                            ...values,
+                            members: selectedPrivacy === "private" ? selectedUsers : [],
+                        }
+
+                        onCreateCourse(formData as any)
+                    })}
                     className="flex flex-col gap-y-5 mt-5 max-h-[80vh] overflow-y-auto p-2"
                 >
                     <FormGenerator
@@ -188,10 +208,19 @@ const CourseCreate = ({ groupid }: Props) => {
                             id="course-image"
                             className="hidden"
                             {...register("image")}
+                            onChange={handleImageChange}
                         />
-                        <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
-                            Upload Image
-                        </Card>
+                        {selectedImage && (
+                            <img
+                                src={URL.createObjectURL(selectedImage)}
+                                alt="course thumbnail"
+                                className="w-full h-50 object-cover rounded-xl"
+                            />
+                        ) || (
+                            <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
+                                Upload Image
+                            </Card>
+                        )}
                     </Label>
 
                     <div className="flex items-center space-x-2">
@@ -225,5 +254,6 @@ const CourseCreate = ({ groupid }: Props) => {
         )
     }
 }
+
 
 export default CourseCreate

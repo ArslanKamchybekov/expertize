@@ -2,6 +2,7 @@ import {
     onCreateCourseModule,
     onCreateGroupCourse,
     onCreateModuleSection,
+    onDeleteCourse,
     onDeleteCourseModule,
     onDeleteCourseSection,
     onGetCourseModules,
@@ -66,6 +67,7 @@ export const useCreateCourse = (groupid: string) => {
             createdAt: Date
             privacy: string
             published: boolean
+            members?: { id: number; name: string }[] 
         }) => {
             const uploaded = await upload.uploadFile(data.image[0])
             const course = await onCreateGroupCourse(
@@ -76,6 +78,7 @@ export const useCreateCourse = (groupid: string) => {
                 data.id,
                 data.privacy,
                 data.published,
+                data.members,
             )
             return course
         },
@@ -100,6 +103,7 @@ export const useCreateCourse = (groupid: string) => {
             createdAt: new Date(),
             image: values.image,
             ...values,
+            members: onPrivacy === "private" ? values.members : undefined,
         }),
     )
 
@@ -124,6 +128,30 @@ export const useCourses = (groupid: string) => {
 
     return { data }
 }
+
+export const useCourse = (groupid: string) => {
+    const client = useQueryClient()
+
+    const { mutate, variables, isPending } = useMutation({
+        mutationKey: ["delete-course"],
+        mutationFn: (courseid: string) => onDeleteCourse(courseid),
+        onSuccess: (data) => {
+            toast(data.status === 200 ? "Success" : "Error", {
+                description: data.message,
+            })
+        },
+        onSettled: async () => {
+            return await client.invalidateQueries({
+                queryKey: ["group-courses"],
+            })
+        },
+    })
+
+    const onCourseDelete = (courseid: string) => mutate(courseid)
+
+    return { onCourseDelete, variables, isPending }
+}
+
 
 export const useCreateModule = (courseId: string, groupid: string) => {
     const client = useQueryClient()

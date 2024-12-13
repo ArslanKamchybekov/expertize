@@ -30,6 +30,44 @@ export const onGetGroupCourses = async (groupid: string) => {
     }
 }
 
+// export const onCreateGroupCourse = async (
+//     groupid: string,
+//     name: string,
+//     image: string,
+//     description: string,
+//     courseid: string,
+//     privacy: string,
+//     published: boolean,
+// ) => {
+//     try {
+//         const course = await client.group.update({
+//             where: {
+//                 id: groupid,
+//             },
+//             data: {
+//                 courses: {
+//                     create: {
+//                         id: courseid,
+//                         name,
+//                         thumbnail: image,
+//                         description,
+//                         privacy,
+//                         published,
+//                     },
+//                 },
+//             },
+//         })
+
+//         if (course) {
+//             return { status: 200, message: "Course successfully created" }
+//         }
+
+//         return { status: 404, message: "Group not found" }
+//     } catch (error) {
+//         return { status: 400, message: "Oops! something went wrong" }
+//     }
+// }
+
 export const onCreateGroupCourse = async (
     groupid: string,
     name: string,
@@ -38,22 +76,31 @@ export const onCreateGroupCourse = async (
     courseid: string,
     privacy: string,
     published: boolean,
+    members?: { id: number; name: string }[],
 ) => {
     try {
+        const courseData: any = {
+            id: courseid,
+            name,
+            thumbnail: image,
+            description,
+            privacy,
+            published,
+        }
+
+        if (privacy === "private" && members && members.length > 0) {
+            courseData.allowedMembers = {
+                connect: members.map((member) => ({ id: member.id })),
+            }
+        }
+
         const course = await client.group.update({
             where: {
                 id: groupid,
             },
             data: {
                 courses: {
-                    create: {
-                        id: courseid,
-                        name,
-                        thumbnail: image,
-                        description,
-                        privacy,
-                        published,
-                    },
+                    create: courseData,
                 },
             },
         })
@@ -64,9 +111,12 @@ export const onCreateGroupCourse = async (
 
         return { status: 404, message: "Group not found" }
     } catch (error) {
-        return { status: 400, message: "Oops! something went wrong" }
+        console.error("Error creating course:", error)
+        return { status: 400, message: "Oops! Something went wrong" }
     }
 }
+
+
 export const onGetCourseModules = async (courseId: string) => {
     try {
         const modules = await client.module.findMany({
@@ -300,6 +350,24 @@ export const onUpdateCourseSectionContent = async (
         return { status: 404, message: "Section not found!" }
     } catch (error) {
         return { status: 400, message: "Oop! something went wrong" }
+    }
+}
+
+export const onDeleteCourse = async (courseId: string) => {
+    try {
+        const course = await client.course.delete({
+            where: {
+                id: courseId,
+            },
+        })
+
+        if (course) {
+            return { status: 200, message: "Course deleted" }
+        }
+
+        return { status: 404, message: "Course not found!" }
+    } catch (error) {
+        return { status: 400, message: "Oops! something went wrong" }
     }
 }
 

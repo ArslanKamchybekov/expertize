@@ -20,4 +20,12 @@ export const CreateCourseSchema = z.object({
         .string()
         .min(1, { message: "You need to pick a privacy setting" }),
     published: z.boolean(),
+    members: z
+        .array(
+            z.object({
+                id: z.number(),
+                name: z.string(),
+            })
+        )
+        .optional(),
 })
