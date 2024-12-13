@@ -67,7 +67,7 @@ export const useCreateCourse = (groupid: string) => {
             createdAt: Date
             privacy: string
             published: boolean
-            members?: { id: number; name: string }[] 
+            members?: { id: number; name: string }[]
         }) => {
             const uploaded = await upload.uploadFile(data.image[0])
             const course = await onCreateGroupCourse(
@@ -151,7 +151,6 @@ export const useCourse = (groupid: string) => {
 
     return { onCourseDelete, variables, isPending }
 }
-
 
 export const useCreateModule = (courseId: string, groupid: string) => {
     const client = useQueryClient()

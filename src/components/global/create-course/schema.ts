@@ -25,7 +25,7 @@ export const CreateCourseSchema = z.object({
             z.object({
                 id: z.number(),
                 name: z.string(),
-            })
+            }),
         )
         .optional(),
 })

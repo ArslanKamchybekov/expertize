@@ -31,13 +31,12 @@ const CourseCreate = ({ groupid }: Props) => {
     const [members, setMembers] = useState<any[]>([])
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
-
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
-        if (file && file.type.startsWith('image/')) {
+        if (file && file.type.startsWith("image/")) {
             setSelectedImage(file)
         } else {
-            alert('Please select a valid image file.')
+            alert("Please select a valid image file.")
         }
     }
 
@@ -95,7 +94,10 @@ const CourseCreate = ({ groupid }: Props) => {
                     onSubmit={handleSubmit((values) => {
                         const formData = {
                             ...values,
-                            members: selectedPrivacy === "private" ? selectedUsers : [],
+                            members:
+                                selectedPrivacy === "private"
+                                    ? selectedUsers
+                                    : [],
                         }
 
                         onCreateCourse(formData as any)
@@ -210,13 +212,13 @@ const CourseCreate = ({ groupid }: Props) => {
                             {...register("image")}
                             onChange={handleImageChange}
                         />
-                        {selectedImage && (
+                        {(selectedImage && (
                             <img
                                 src={URL.createObjectURL(selectedImage)}
                                 alt="course thumbnail"
                                 className="w-full h-50 object-cover rounded-xl"
                             />
-                        ) || (
+                        )) || (
                             <Card className="bg-transparent text-themeTextGray flex justify-center items-center border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-video rounded-xl">
                                 Upload Image
                             </Card>
@@ -254,6 +256,5 @@ const CourseCreate = ({ groupid }: Props) => {
         )
     }
 }
-
 
 export default CourseCreate

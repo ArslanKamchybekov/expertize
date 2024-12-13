@@ -116,7 +116,6 @@ export const onCreateGroupCourse = async (
     }
 }
 
-
 export const onGetCourseModules = async (courseId: string) => {
     try {
         const modules = await client.module.findMany({
