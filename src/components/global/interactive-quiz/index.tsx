@@ -116,20 +116,22 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
     return (
         <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
             <div className="flex items-center justify-between">
-                <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                    Interactive Quiz
-                </h3>
-                <p className="text-green-400 font-bold text-xl flex items-center gap-2">
-                    GH Premium
-                </p>
+                <div className="flex items-center gap-4">
+                    <h3 className="text-xl text-gray-100 font-bold">
+                        Interactive Quiz
+                    </h3>
+                    <p className="text-green-400 font-bold text-xl flex items-center gap-2">
+                        GH Premium
+                    </p>
+                </div>
+                <Button onClick={fetchQuizData} disabled={loading}>
+                    {loading ? (
+                        <Loader loading={loading}>Generating Quiz...</Loader>
+                    ) : (
+                        "Start Quiz"
+                    )}
+                </Button>
             </div>
-            <Button onClick={fetchQuizData} disabled={loading}>
-                {loading ? (
-                    <Loader loading={loading}>Generating Quiz...</Loader>
-                ) : (
-                    "Start Quiz"
-                )}
-            </Button>
             {error && <p className="text-red-500 mt-4">{error}</p>}
 
             {topics.length > 0 && (

@@ -122,7 +122,7 @@ const IDE = () => {
                     <DropDown
                         title="Select Language"
                         trigger={
-                            <button className="bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded">
+                            <button className="bg-white text-gray-900 font-bold py-2 px-4 rounded">
                                 <div className="flex items-center gap-2">
                                     <Code />
                                     <span>
@@ -156,7 +156,7 @@ const IDE = () => {
             />
 
             {output && (
-                <div className="mt-4">
+                <div className="mt-4 border border-gray-700">
                     <CodeEditor
                         language="text"
                         theme="vs-dark"

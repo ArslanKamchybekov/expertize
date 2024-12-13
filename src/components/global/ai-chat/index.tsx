@@ -39,20 +39,21 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
 
     return (
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4 text-gray-100">AI Chatbot</h3>
+            <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-gray-100">AI Chatbot</h3>
+                <Button
+                    onClick={handleAskQuestion}
+                    disabled={loading}
+                >
+                    <Loader loading={loading}>Let&apos;s learn!</Loader>
+                </Button>
+            </div>
             <textarea
-                className="w-full p-3 bg-gray-800 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-200"
+                className="w-full p-4 mt-4 bg-gray-800 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-fuchsia-200"
                 placeholder="Ask a question about the lecture..."
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
             />
-            <Button
-                onClick={handleAskQuestion}
-                disabled={loading}
-                className="mt-4"
-            >
-                <Loader loading={loading}>Let&apos;s learn!</Loader>
-            </Button>
             {answer && (
                 <div className="mt-5 p-4 bg-gray-800 border border-gray-600 rounded-lg">
                     <h4 className="text-lg font-semibold text-purple-400">

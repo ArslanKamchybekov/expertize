@@ -68,20 +68,22 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
     return (
         <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
             <div className="flex items-center justify-between">
-                <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                    Quick Quiz
-                </h3>
-                <p className="text-green-400 font-bold text-xl flex items-center gap-2">
-                    GH Premium
-                </p>
+                <div className="flex items-center gap-4">
+                    <h3 className="text-xl text-gray-100 font-bold">
+                        Quick Quiz
+                    </h3>
+                    <p className="text-green-400 font-bold text-xl flex items-center gap-2">
+                        GH Premium
+                    </p>
+                </div>
+                <Button
+                    onClick={generateQuiz}
+                    disabled={loading}
+                    className="px-4 py-2 rounded"
+                >
+                    <Loader loading={loading}>Generate Quiz</Loader>
+                </Button>
             </div>
-            <Button
-                onClick={generateQuiz}
-                disabled={loading}
-                className="px-4 py-2 rounded"
-            >
-                <Loader loading={loading}>Generate Quiz</Loader>
-            </Button>
             {error && <p className="text-red-500 mt-4">{error}</p>}
             {quiz.length > 0 && (
                 <div className="p-4 bg-gray-800 border border-gray-700 rounded-lg shadow-lg my-4 transition-all">
