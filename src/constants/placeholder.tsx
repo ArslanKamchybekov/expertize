@@ -33,7 +33,7 @@ export const CREATE_GROUP_PLACEHOLDER: CreateGroupPlaceholderProps[] = [
     },
     {
         id: "3",
-        label: "Enable team creation within groups",
+        label: "Organize content with ease",
         icon: <Grid />,
     },
     {

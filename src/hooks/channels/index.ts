@@ -10,7 +10,7 @@ import {
 import {
     onGetCommentReplies,
     onGetPostComments,
-    onGetPostInfo,
+    onGetPostInfo
 } from "@/actions/groups"
 import { CreateCommentSchema } from "@/components/global/post-comments/schema"
 import { CreateChannelPost } from "@/components/global/post-content/schema"
@@ -67,12 +67,14 @@ export const useChannelInfo = () => {
 
     const { variables: deleteVariables, mutate: deleteMutation } = useMutation({
         mutationFn: (data: { id: string }) => onDeleteChannel(data.id),
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             toast(data.status !== 200 ? "Error" : "Success", {
                 description: data.message,
             })
 
-            if (data.status === 200) router.push("/explore")
+            if (data.status === 200) {
+                router.push(`/explore`)
+            }
         },
         onSettled: async () => {
             return await client.invalidateQueries({

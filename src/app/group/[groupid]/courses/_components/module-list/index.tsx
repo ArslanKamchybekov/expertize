@@ -168,14 +168,16 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     </Button>
                                 </>
                             )}
-                            <Button
-                                onClick={() => onModuleDelete(module.id)}
-                                variant="ghost"
-                                className="text-red-500 flex items-center gap-1 mt-4"
-                            >
-                                <Trash size={16} />
-                                Delete Module
-                            </Button>
+                            {groupOwner?.groupOwner && (
+                                <Button
+                                    onClick={() => onModuleDelete(module.id)}
+                                    variant="ghost"
+                                    className="text-red-500 flex items-center gap-1"
+                                >
+                                    <Trash size={16} />
+                                    Delete Module
+                                </Button>
+                            )}
                         </AccordionContent>
                     </GlobalAccordion>
                 ))}
