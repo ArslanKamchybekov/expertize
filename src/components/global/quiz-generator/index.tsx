@@ -66,10 +66,10 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
     }
 
     return (
-        <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
+        <div className="p-6 bg-gray-900 border border-gray-700 rounded-lg shadow-lg transition-all">
             <div className="flex items-center justify-between">
                 <h3 className="text-xl mb-4 text-gray-100 font-bold">
-                    Interactive Quiz
+                    Quick Quiz
                 </h3>
                 <p className="text-green-400 font-bold text-xl flex items-center gap-2">
                     GH Premium

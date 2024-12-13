@@ -2,6 +2,7 @@
 import { Card } from "@/components/ui/card"
 import { useCourses } from "@/hooks/courses"
 import { truncateString } from "@/lib/utils"
+import { LockIcon, LockOpenIcon } from "lucide-react"
 import Link from "next/link"
 
 type Props = {
@@ -32,9 +33,23 @@ const CourseList = ({ groupid }: Props) => {
                     <h2 className="text-lg text-white font-semibold truncate">
                         {course.name}
                     </h2>
-                    <p className="text-sm text-themeTextGray font-bold my-2">
-                        {course.privacy.toUpperCase()} Course
-                    </p>
+
+                    {course.privacy === "public" ? (
+                        <div className="flex items-center gap-2 my-2">
+                            <LockOpenIcon size={16} />
+                            <p className="text-sm text-themeTextGray font-semibold">
+                                Public Course
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2 my-2">
+                            <LockIcon size={16} />
+                            <p className="text-sm text-themeTextGray font-semibold">
+                                Private Course
+                            </p>
+                        </div>
+                    )}
+
                     <p className="text-sm text-themeTextGray truncate">
                         {truncateString(course.description)}
                     </p>

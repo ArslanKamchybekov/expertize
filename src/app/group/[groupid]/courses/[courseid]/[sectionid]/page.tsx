@@ -10,6 +10,10 @@ const CourseModuleSection = async ({ params }: Props) => {
     const user = await onAuthenticatedUser()
     const group = await onGetGroupInfo(params.groupid)
 
+    if (!user || !group) {
+        return <></>
+    }
+
     return (
         <div>
             <CourseContentForm

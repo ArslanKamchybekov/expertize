@@ -63,7 +63,6 @@ export default async function UserProfilePage() {
             </div>
 
             <Groups groups={groups} currentUserId={user.id} />
-
             <Subscriptions subscriptions={subscriptions} groups={groups} />
         </>
     )

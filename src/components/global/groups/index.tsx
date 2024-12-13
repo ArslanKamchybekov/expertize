@@ -72,7 +72,8 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                 <Button
                                     onClick={() => handleLeaveGroup(group.id)}
                                     disabled={leavingGroupId === group.id}
-                                    className="w-full mt-3 bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-lg"
+                                    variant="outline"
+                                    className="w-full"
                                 >
                                     {leavingGroupId === group.id
                                         ? "Leaving..."

@@ -1,3 +1,4 @@
+import { Code, Play } from "lucide-react"
 import { useState } from "react"
 import { LANGUAGE_CONFIGS } from "../../../constants/languages"
 import CodeEditor from "../code-editor"
@@ -111,7 +112,10 @@ const IDE = () => {
                         {loading ? (
                             <Loader loading={true}>Loading...</Loader>
                         ) : (
-                            "Execute"
+                            <div className="flex items-center gap-2">
+                                <Play />
+                                <span>Run Code</span>
+                            </div>
                         )}
                     </button>
 
@@ -119,7 +123,12 @@ const IDE = () => {
                         title="Select Language"
                         trigger={
                             <button className="bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded">
-                                {LANGUAGE_CONFIGS[language].name}
+                                <div className="flex items-center gap-2">
+                                    <Code />
+                                    <span>
+                                        {LANGUAGE_CONFIGS[language].name}
+                                    </span>
+                                </div>
                             </button>
                         }
                     >

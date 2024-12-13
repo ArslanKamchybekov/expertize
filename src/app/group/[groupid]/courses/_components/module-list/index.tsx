@@ -116,7 +116,7 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                                     onSectionDelete(section.id)
                                                 }
                                                 variant="ghost"
-                                                className="text-red-500 flex items-center"
+                                                className="text-gray-600"
                                             >
                                                 <Trash size={16} />
                                             </Button>
@@ -174,7 +174,6 @@ const CourseModuleList = ({ courseId, groupid }: Props) => {
                                     variant="ghost"
                                     className="text-red-500 flex items-center gap-1"
                                 >
-                                    <Trash size={16} />
                                     Delete Module
                                 </Button>
                             )}
