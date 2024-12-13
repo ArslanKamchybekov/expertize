@@ -41,10 +41,7 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
         <div className="p-5 bg-gray-900 border border-gray-700 rounded-lg shadow-lg">
             <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-gray-100">AI Chatbot</h3>
-                <Button
-                    onClick={handleAskQuestion}
-                    disabled={loading}
-                >
+                <Button onClick={handleAskQuestion} disabled={loading}>
                     <Loader loading={loading}>Let&apos;s learn!</Loader>
                 </Button>
             </div>
