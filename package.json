@@ -59,6 +59,7 @@
         "cmdk": "1.0.0",
         "date-fns": "^3.6.0",
         "embla-carousel-react": "^8.2.0",
+        "heroicons-react": "^1.4.1",
         "html-react-parser": "^5.1.18",
         "input-otp": "^1.2.4",
         "install": "^0.13.0",
