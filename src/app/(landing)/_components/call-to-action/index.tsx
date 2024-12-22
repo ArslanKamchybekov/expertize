@@ -14,8 +14,8 @@ const CallToAction = (props: Props) => {
                 Invest in your future
             </GradientText>
             <p className="text-sm md:text-center text-left text-muted-foreground my-4">
-                Expertize is a vibrant online education platform that
-                empowers <br className="md:hidden" />
+                Expertize is a vibrant online education platform that empowers{" "}
+                <br className="md:hidden" />
                 people to connect, <br className="hidden md:block" />{" "}
                 collaborate, and cultivate meaningful{" "}
                 <br className="md:hidden" />
