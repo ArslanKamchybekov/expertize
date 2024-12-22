@@ -6,7 +6,7 @@ import Subscriptions from "@/components/global/subscriptions"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { currentUser } from '@clerk/nextjs/server'
+import { currentUser } from "@clerk/nextjs/server"
 import { CreditCardIcon, MailIcon, User } from "lucide-react"
 import { redirect } from "next/navigation"
 
@@ -57,15 +57,24 @@ export default async function UserProfilePage() {
                                     />
                                     <span
                                         className={`absolute bottom-2 right-1 w-3 h-3 rounded-full border-2 border-background ${
-                                            user.banned === true ? "bg-red-500" : "bg-green-500"
+                                            user.banned === true
+                                                ? "bg-red-500"
+                                                : "bg-green-500"
                                         }`}
                                     />
                                 </div>
                                 <div className="ml-4">
-                                    <h1 className="text-2xl font-bold">{user.fullName}</h1>
+                                    <h1 className="text-2xl font-bold">
+                                        {user.fullName}
+                                    </h1>
                                     <div className="flex items-center gap-2 text-muted-foreground">
                                         <MailIcon className="w-4 h-4" />
-                                        <span>{user.emailAddresses[0].emailAddress}</span>
+                                        <span>
+                                            {
+                                                user.emailAddresses[0]
+                                                    .emailAddress
+                                            }
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +85,11 @@ export default async function UserProfilePage() {
                                 </Badge>
                                 <Badge variant="secondary" className="gap-1">
                                     <CreditCardIcon className="w-4 h-4" />
-                                    {subscriptions.filter(s => s.active).length} Active Subs
+                                    {
+                                        subscriptions.filter((s) => s.active)
+                                            .length
+                                    }{" "}
+                                    Active Subs
                                 </Badge>
                             </div>
                         </div>
@@ -87,7 +100,9 @@ export default async function UserProfilePage() {
             <Tabs defaultValue="groups" className="w-full">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="groups">Groups</TabsTrigger>
-                    <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
+                    <TabsTrigger value="subscriptions">
+                        Subscriptions
+                    </TabsTrigger>
                 </TabsList>
                 <TabsContent value="groups">
                     <Card>
@@ -105,11 +120,14 @@ export default async function UserProfilePage() {
                             <CardTitle>My Subscriptions</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <Subscriptions subscriptions={subscriptions} groups={groups} />
+                            <Subscriptions
+                                subscriptions={subscriptions}
+                                groups={groups}
+                            />
                         </CardContent>
                     </Card>
                 </TabsContent>
             </Tabs>
         </div>
-    );
+    )
 }

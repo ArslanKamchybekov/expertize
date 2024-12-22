@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 export default function UserProfileLayout({
     children,
@@ -11,7 +11,9 @@ export default function UserProfileLayout({
                 <div className="max-w-8xl mx-auto">
                     <div className="py-4 border-b border-gray-900/10 dark:border-gray-300/10 px-8">
                         <div className="relative flex items-center">
-                            <h2 className="text-lg font-semibold">Profile Dashboard</h2>
+                            <h2 className="text-lg font-semibold">
+                                Profile Dashboard
+                            </h2>
                         </div>
                     </div>
                 </div>
@@ -22,11 +24,9 @@ export default function UserProfileLayout({
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 via-gray-50/60 to-gray-50/20 dark:from-gray-900/80 dark:via-gray-900/60 dark:to-gray-900/20" />
 
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="py-16">
-                        {children}
-                    </div>
+                    <div className="py-16">{children}</div>
                 </div>
             </main>
         </div>
-    );
+    )
 }
