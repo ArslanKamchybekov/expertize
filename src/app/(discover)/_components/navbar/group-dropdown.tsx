@@ -46,7 +46,7 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                     variant="ghost"
                     className="rounded-2xl hover:bg-themeGray font-bold flex gap-2"
                 >
-                    GrowthHungry.
+                    Expertize.
                     <CarotSort />
                 </Button>
             }

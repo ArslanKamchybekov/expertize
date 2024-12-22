@@ -274,7 +274,6 @@ export const useStripeConnect = (groupid: string) => {
                 setOnStripeAccountPending(false)
                 if (account) {
                     //window.location.href = account.data.url
-                    console.log(account)
                 }
             }
         } catch (error) {

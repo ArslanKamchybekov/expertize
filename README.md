@@ -1,6 +1,6 @@
-# GrowthHungry AI - LMS-Community Platform
+# Expertize AI - LMS-Community Platform
 
-Welcome to **GrowthHungry AI**, a powerful learning management system (LMS) and community platform that leverages **AI** capabilities to enhance learning experiences. Designed to help users manage, grow, and share knowledge, GrowthHungry AI offers a comprehensive suite of tools to build thriving learning communities and improve educational engagement.
+Welcome to **Expertize AI**, a powerful learning management system (LMS) and community platform that leverages **AI** capabilities to enhance learning experiences. Designed to help users manage, grow, and share knowledge, Expertize AI offers a comprehensive suite of tools to build thriving learning communities and improve educational engagement.
 
 ---
 
@@ -155,4 +155,4 @@ For any questions, issues, or feedback, feel free to open an issue or contact us
 
 ---
 
-**GrowthHungry AI** aims to revolutionize how communities and learning groups manage their content, learn, and grow together. With AI-driven tools, customizations, and integrations, we are creating a dynamic and scalable learning experience.
+**Expertize AI** aims to revolutionize how communities and learning groups manage their content, learn, and grow together. With AI-driven tools, customizations, and integrations, we are creating a dynamic and scalable learning experience.

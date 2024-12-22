@@ -43,8 +43,6 @@ export async function POST(req: Request) {
             throw new Error("Failed to extract valid topics from the response.")
         }
 
-        console.log("Extracted topics:", topics)
-
         const quiz = []
 
         for (const topic of topics) {
@@ -89,9 +87,6 @@ export async function POST(req: Request) {
                 questions,
             })
         }
-
-        console.log("Generated quiz:", quiz)
-
         return NextResponse.json({ topics: quiz })
     } catch (error: any) {
         console.error(error)

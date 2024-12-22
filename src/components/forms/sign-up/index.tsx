@@ -2,7 +2,7 @@
 import { FormGenerator } from "@/components/global/form-generator"
 import { Loader } from "@/components/global/loader"
 import { Button } from "@/components/ui/button"
-import { GH_CONSTANTS } from "@/constants"
+import { APP_CONSTANTS } from "@/constants"
 import { useAuthSignUp } from "@/hooks/authentication"
 import dynamic from "next/dynamic"
 
@@ -39,7 +39,7 @@ const SignUpForm = (props: Props) => {
                     <OtpInput otp={code} setOtp={setCode} />
                 </div>
             ) : (
-                GH_CONSTANTS.signUpForm.map((field) => (
+                APP_CONSTANTS.signUpForm.map((field) => (
                     <FormGenerator
                         {...field}
                         key={field.id}

@@ -112,7 +112,7 @@ export const PricingSection = (props: Props) => {
 
                         <span className="flex gap-2 items-center">
                             <Check />
-                            GrowthHungry AI capabilities
+                            Expertize AI capabilities
                         </span>
                     </div>
                 </Card>

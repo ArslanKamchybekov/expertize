@@ -13,7 +13,6 @@ type JoinButtonProps = {
 export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     const { data } = useActiveGroupSubscription(groupid)
     const { onJoinFreeGroup } = useJoinFree(groupid)
-    console.log(data)
 
     // Handle error state
     if (!data) {

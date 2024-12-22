@@ -121,7 +121,7 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                         Interactive Quiz
                     </h3>
                     <p className="text-green-400 font-bold text-xl flex items-center gap-2">
-                        GH Premium
+                        Premium
                     </p>
                 </div>
                 <Button onClick={fetchQuizData} disabled={loading}>
@@ -210,7 +210,7 @@ export const InteractiveQuiz = ({ transcript }: QuizProps) => {
                                     : "border-red-400 bg-red-50 text-red-800 animate__shakeX"
                             }`}
                         >
-                            <p className="font-semibold">GrowthHungry AI:</p>
+                            <p className="font-semibold">Expertize AI:</p>
                             <p className="mt-2">{feedback}</p>
                         </div>
                     )}

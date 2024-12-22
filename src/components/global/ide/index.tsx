@@ -69,8 +69,6 @@ const IDE = () => {
                 await new Promise((resolve) => setTimeout(resolve, 1000))
             }
 
-            console.log("Final Result:", result)
-
             if (result.stdout) {
                 setOutput(atob(result.stdout))
             } else if (result.stderr) {
@@ -96,7 +94,7 @@ const IDE = () => {
                         Online IDE
                     </h3>
                     <p className="text-green-400 font-bold text-xl flex items-center gap-2">
-                        GH Premium
+                        Premium
                     </p>
                 </div>
 

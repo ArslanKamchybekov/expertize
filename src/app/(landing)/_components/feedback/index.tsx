@@ -32,7 +32,7 @@ export const FeedbackSection = (props: Props) => {
                                 "feedback",
                             ) as HTMLTextAreaElement
                             const feedbackValue = feedback.value
-                            window.location.href = `mailto:arslan@growthhungry.life?subject=Feedback&body=${encodeURIComponent(
+                            window.location.href = `mailto:kamchybekov.arslan.us@gmail.com?subject=Feedback&body=${encodeURIComponent(
                                 feedbackValue,
                             )}`
                         }}

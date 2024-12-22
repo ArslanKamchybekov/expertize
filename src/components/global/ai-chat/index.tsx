@@ -54,7 +54,7 @@ export const AIChat = ({ lectureContent }: AIChatProps) => {
             {answer && (
                 <div className="mt-5 p-4 bg-gray-800 border border-gray-600 rounded-lg">
                     <h4 className="text-lg font-semibold text-purple-400">
-                        GrowthHungry AI:
+                        Expertize AI:
                     </h4>
                     <ReactMarkdown
                         className="prose prose-invert text-gray-300 mt-2"

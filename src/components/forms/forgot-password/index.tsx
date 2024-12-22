@@ -3,7 +3,7 @@
 import { FormGenerator } from "@/components/global/form-generator"
 import { Loader } from "@/components/global/loader"
 import { Button } from "@/components/ui/button"
-import { GH_CONSTANTS } from "@/constants"
+import { APP_CONSTANTS } from "@/constants"
 import { useAuthForgotPassword } from "@/hooks/authentication"
 
 type Props = {}
@@ -14,7 +14,7 @@ const ForgotPasswordForm = (props: Props) => {
 
     return (
         <form className="flex flex-col gap-3 mt-4" onSubmit={onSendResetLink}>
-            {GH_CONSTANTS.forgotPasswordForm.map((field) => (
+            {APP_CONSTANTS.forgotPasswordForm.map((field) => (
                 <FormGenerator
                     {...field}
                     key={field.id}

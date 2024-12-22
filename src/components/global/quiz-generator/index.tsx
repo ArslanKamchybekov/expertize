@@ -73,7 +73,7 @@ export const QuizGenerator = ({ lectureContent }: QuizProps) => {
                         Quick Quiz
                     </h3>
                     <p className="text-green-400 font-bold text-xl flex items-center gap-2">
-                        GH Premium
+                        Premium
                     </p>
                 </div>
                 <Button

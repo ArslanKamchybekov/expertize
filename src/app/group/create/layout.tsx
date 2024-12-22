@@ -1,7 +1,7 @@
 import BackdropGradient from "@/components/global/backdrop-gradient"
 import GlassCard from "@/components/global/glass-card"
 import GradientText from "@/components/global/gradient-text"
-import { GH_CONSTANTS } from "@/constants"
+import { APP_CONSTANTS } from "@/constants"
 import Link from "next/link"
 
 type Props = {
@@ -17,7 +17,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                         className="text-2xl font-bold text-themeTextWhite"
                         href={"/"}
                     >
-                        <h5>GrowthHungry.</h5>
+                        <h5>Expertize.</h5>
                     </Link>
                     <GradientText
                         element="H2"
@@ -31,7 +31,7 @@ const CreateGroupLayout = ({ children }: Props) => {
                         All features. Unlimited everything. No hidden fees.
                     </p>
                     <div className="flex flex-col gap-3 mt-16 pl-5">
-                        {GH_CONSTANTS.createGroupPlaceholder.map(
+                        {APP_CONSTANTS.createGroupPlaceholder.map(
                             (placeholder) => (
                                 <div
                                     className="flex gap-3"

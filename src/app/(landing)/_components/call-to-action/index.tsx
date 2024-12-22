@@ -14,7 +14,7 @@ const CallToAction = (props: Props) => {
                 Invest in your future
             </GradientText>
             <p className="text-sm md:text-center text-left text-muted-foreground my-4">
-                GrowthHungry is a vibrant online education platform that
+                Expertize is a vibrant online education platform that
                 empowers <br className="md:hidden" />
                 people to connect, <br className="hidden md:block" />{" "}
                 collaborate, and cultivate meaningful{" "}
@@ -22,7 +22,7 @@ const CallToAction = (props: Props) => {
                 relationships to drive personal and professional growth
             </p>
             <div className="flex md:flex-row flex-col md:justify-center gap-5 md:mt-5 w-full">
-                <Link href="https://www.growthhungry.life/">
+                <Link href="">
                     <Button
                         variant="outline"
                         className="rounded-xl bg-transparent text-base"

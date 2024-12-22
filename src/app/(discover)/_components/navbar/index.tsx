@@ -19,14 +19,14 @@ export const Navbar = async () => {
                     // @ts-ignore
                     <GroupDropDown members={groups.members} groups={groups} />
                 ) : (
-                    <p className="font-bold">GrowthHungry.</p>
+                    <p className="font-bold">Expertize.</p>
                 )}
             </div>
             <GlassSheet
                 trigger={
                     <span className="lg:hidden flex items-center gap-2 py-2">
                         <MenuIcon className="cursor-pointer" />
-                        <p>GrowthHungry.</p>
+                        <p>Expertize.</p>
                     </span>
                 }
             >

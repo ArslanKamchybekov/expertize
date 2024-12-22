@@ -31,7 +31,7 @@ export default function Home() {
             {/* Footer */}
             <footer className="text-white text-center">
                 <p>
-                    &copy; 2025 <span className="font-bold">GrowthHungry.</span>{" "}
+                    &copy; 2025 <span className="font-bold">Expertize.</span>{" "}
                     All rights reserved.
                 </p>
                 <p className="text-sm mt-2">
@@ -40,18 +40,9 @@ export default function Home() {
                         href="https://arslankamchybekov.com"
                         target="_blank"
                         rel="noreferrer"
-                        className="text-themeBlue underline"
+                        className="text-themeBlue"
                     >
-                        Arslan Kamchybekov |{" "}
-                    </a>
-                    <a
-                        href="https://www.growthhungry.life/en"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <span className="text-themeBlue underline">
-                            GrowthHungry
-                        </span>
+                        Arslan Kamchybekov
                     </a>
                 </p>
             </footer>

@@ -42,9 +42,6 @@ export async function POST(req: Request) {
         const newQuestions = JSON.parse(
             response.choices[0].message?.content || "[]",
         )
-
-        console.log("New questions:", newQuestions)
-
         return NextResponse.json({ newQuestions })
     } catch (error: any) {
         console.error(error)
