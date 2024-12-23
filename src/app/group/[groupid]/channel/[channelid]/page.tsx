@@ -20,7 +20,6 @@ type Props = {
     params: { channelid: string; groupid: string }
 }
 
-// Loading skeleton for the main content
 const LoadingSkeleton = () => (
     <div className="grid lg:grid-cols-4 grid-cols-1 w-full flex-1 h-0 gap-x-5 px-5">
         <div className="col-span-1 lg:inline relative hidden py-5">
@@ -41,7 +40,6 @@ const LoadingSkeleton = () => (
     </div>
 )
 
-// Mobile navigation component
 const MobileNavigation = ({ groupid }: { groupid: string }) => (
     <div className="lg:hidden sticky top-0 z-10 bg-themeBackground border-b border-themeGray">
         <Menu orientation="mobile" groupid={groupid} />
@@ -52,8 +50,9 @@ const GroupChannelPage = async ({ params }: Props) => {
     try {
         const client = new QueryClient()
 
-        // Fetch user data
         const user = await currentUser()
+        console.log(user)
+
         if (!user) {
             redirect("/sign-in")
         }
@@ -63,7 +62,6 @@ const GroupChannelPage = async ({ params }: Props) => {
             throw new Error("Failed to authenticate user")
         }
 
-        // Prefetch queries
         await Promise.all([
             client.prefetchQuery({
                 queryKey: ["channel-info"],
@@ -99,7 +97,7 @@ const GroupChannelPage = async ({ params }: Props) => {
                                 <CreateNewPost
                                     userImage={user.imageUrl}
                                     channelid={params.channelid}
-                                    username={user.firstName || "User"}
+                                    username={user.fullName || ""}
                                 />
 
                                 <PostFeed
@@ -108,7 +106,6 @@ const GroupChannelPage = async ({ params }: Props) => {
                                 />
                             </main>
 
-                            {/* Right Sidebar */}
                             <aside className="col-span-1 hidden lg:inline py-5 sticky top-5">
                                 <GroupSideWidget
                                     light

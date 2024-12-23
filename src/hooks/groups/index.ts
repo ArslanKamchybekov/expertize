@@ -340,7 +340,7 @@ export const useExploreSlider = (query: string, paginate: number) => {
 }
 
 export const useGroupInfo = () => {
-    const { data } = useQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ["about-group-info"],
     })
 
@@ -354,6 +354,8 @@ export const useGroupInfo = () => {
 
     return {
         group,
+        error,
+        isLoading,
     }
 }
 

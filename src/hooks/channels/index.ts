@@ -131,7 +131,7 @@ export const useChannelInfo = () => {
 }
 
 export const useChannelPage = (channelid: string) => {
-    const { data } = useQuery({
+    const { data, error, isLoading } = useQuery({
         queryKey: ["channel-info"],
         queryFn: () => onGetChannelInfo(channelid),
     })
@@ -146,7 +146,7 @@ export const useChannelPage = (channelid: string) => {
         },
     })
 
-    return { data, mutation }
+    return { data, mutation, error, isLoading }
 }
 
 export const useCreateChannelPost = (channelid: string) => {
