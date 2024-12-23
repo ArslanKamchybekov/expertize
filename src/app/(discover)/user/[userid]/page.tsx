@@ -65,7 +65,7 @@ export default async function UserProfilePage() {
                                 </div>
                                 <div className="ml-4">
                                     <h1 className="text-2xl font-bold">
-                                        {user.fullName}
+                                        {user.fullName || userInfo.username}
                                     </h1>
                                     <div className="flex items-center gap-2 text-muted-foreground">
                                         <MailIcon className="w-4 h-4" />

@@ -12,20 +12,7 @@ type JoinButtonProps = {
 
 export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     const { data } = useActiveGroupSubscription(groupid)
-    const { onJoinFreeGroup } = useJoinFree(groupid)
-
-    // Handle error state
-    if (!data) {
-        return (
-            <Button
-                onClick={onJoinFreeGroup}
-                className="w-full p-8 font-bold"
-                variant="ghost"
-            >
-                Join now
-            </Button>
-        )
-    }
+    const { onJoinFreeGroup } = useJoinFree(groupid) 
 
     // Check if the user is already a member
     const isMember = Object.values(data?.members || {}).some(
@@ -51,7 +38,7 @@ export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     }
 
     // If the group requires a subscription
-    if (data.subscription?.price) {
+    if (data?.subscription?.price) {
         return (
             <GlassModal
                 trigger={

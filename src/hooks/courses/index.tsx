@@ -29,6 +29,7 @@ import { z } from "zod"
 
 export const useCreateCourse = (groupid: string) => {
     const [onPrivacy, setOnPrivacy] = useState<string | undefined>("open")
+    const [privateMembers, setPrivateMembers] = useState<Array<{ id: number; name: string }>>([])
     const buttonRef = useRef<HTMLButtonElement | null>(null)
 
     const {
@@ -78,9 +79,8 @@ export const useCreateCourse = (groupid: string) => {
                 data.id,
                 data.privacy,
                 data.published,
-                data.members,
+                data.privacy === "private" ? privateMembers : undefined
             )
-            console.log(course)
             return course
         },
         onMutate: () => {
@@ -100,7 +100,6 @@ export const useCreateCourse = (groupid: string) => {
 
     const onCreateCourse = handleSubmit(
         async (values) => {
-            console.log("Form values:", values)
             mutate({
                 id: v4(),
                 createdAt: new Date(),
@@ -110,7 +109,7 @@ export const useCreateCourse = (groupid: string) => {
         },
         (errors) => {
             console.log("Validation errors:", errors)
-        },
+        }
     )
 
     return {
@@ -123,16 +122,18 @@ export const useCreateCourse = (groupid: string) => {
         onPrivacy,
         setValue,
         data,
+        setPrivateMembers
     }
 }
 
+
 export const useCourses = (groupid: string) => {
-    const { data } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ["group-courses"],
         queryFn: () => onGetGroupCourses(groupid),
     })
 
-    return { data }
+    return { data, isLoading, isError }
 }
 
 export const useCourse = (groupid: string) => {

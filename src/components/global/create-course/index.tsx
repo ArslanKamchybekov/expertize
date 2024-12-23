@@ -29,19 +29,14 @@ const CourseCreate = ({ groupid }: Props) => {
         setValue,
         onPrivacy,
         data,
+        setPrivateMembers
     } = useCreateCourse(groupid)
 
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState("")
-    const [members, setMembers] = useState<Array<{ id: number; name: string }>>(
-        [],
-    )
-    const [selectedMembers, setSelectedMembers] = useState<
-        Array<{ id: number; name: string }>
-    >([])
-    const [filteredMembers, setFilteredMembers] = useState<
-        Array<{ id: number; name: string }>
-    >([])
+    const [members, setMembers] = useState<Array<{ id: number; name: string }>>([])
+    const [selectedMembers, setSelectedMembers] = useState<Array<{ id: number; name: string }>>([])
+    const [filteredMembers, setFilteredMembers] = useState<Array<{ id: number; name: string }>>([])
 
     useEffect(() => {
         const fetchMembers = async () => {
@@ -61,10 +56,17 @@ const CourseCreate = ({ groupid }: Props) => {
         const filtered = members.filter(
             (member) =>
                 member.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                !selectedMembers.some((selected) => selected.id === member.id),
+                !selectedMembers.some((selected) => selected.id === member.id)
         )
         setFilteredMembers(filtered)
     }, [searchTerm, members, selectedMembers])
+
+    // Add effect to update form when selected members change
+    useEffect(() => {
+        if (onPrivacy === "private") {
+            setPrivateMembers(selectedMembers)
+        }
+    }, [selectedMembers, onPrivacy, setPrivateMembers])
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -81,7 +83,7 @@ const CourseCreate = ({ groupid }: Props) => {
 
     const handleRemoveMember = (memberId: number) => {
         setSelectedMembers((prev) =>
-            prev.filter((member) => member.id !== memberId),
+            prev.filter((member) => member.id !== memberId)
         )
     }
 
@@ -89,7 +91,7 @@ const CourseCreate = ({ groupid }: Props) => {
         return (
             <GlassModal
                 title="Create a new course"
-                description="Add a new form for your community"
+                description="Add a new course for your group"
                 trigger={
                     <span>
                         <Card className="bg-[#101011] border-themeGray hover:bg-themeBlack transition duration-100 cursor-pointer border-dashed aspect-square rounded-xl">
