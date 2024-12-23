@@ -98,15 +98,20 @@ export const useCreateCourse = (groupid: string) => {
         },
     })
 
-    const onCreateCourse = handleSubmit(async (values) =>
-        mutate({
-            id: v4(),
-            createdAt: new Date(),
-            image: values.image,
-            ...values,
-            // members: onPrivacy === "private" ? values.members : undefined,
-        }),
-    )
+    const onCreateCourse = handleSubmit(
+        async (values) => {
+            console.log('Form values:', values);
+            mutate({
+                id: v4(),
+                createdAt: new Date(),
+                image: values.image,
+                ...values,
+            });
+        },
+        (errors) => {
+            console.log('Validation errors:', errors);
+        }
+    );
 
     return {
         onCreateCourse,
