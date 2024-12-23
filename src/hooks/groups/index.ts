@@ -585,7 +585,7 @@ export const useMediaGallery = (groupid: string) => {
 }
 
 export const useGroupChat = (groupid: string) => {
-    const { data, isLoading} = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["member-chats"],
         queryFn: () => onGetAllGroupMembers(groupid),
     })

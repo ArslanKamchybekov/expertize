@@ -1,66 +1,63 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useGroupChat } from "@/hooks/groups";
-import { Empty } from "@/icons";
-import { useAppSelector } from "@/redux/store";
-import { MessageCircle, Users } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useMemo, useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useGroupChat } from "@/hooks/groups"
+import { Empty } from "@/icons"
+import { useAppSelector } from "@/redux/store"
+import { MessageCircle, Users } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useMemo, useState } from "react"
 
 type GroupChatMenuProps = {
     groupid: string
 }
 
 export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
-    const { members } = useAppSelector((state) => state.onlineTrackingReducer);
-    const { data, pathname, isLoading } = useGroupChat(groupid);
-    const router = useRouter();
-    const [searchQuery, setSearchQuery] = useState("");
+    const { members } = useAppSelector((state) => state.onlineTrackingReducer)
+    const { data, pathname, isLoading } = useGroupChat(groupid)
+    const router = useRouter()
+    const [searchQuery, setSearchQuery] = useState("")
 
     const onOpenChat = (memberId: string) => {
-        const currentPath = window.location.pathname;
+        const currentPath = window.location.pathname
         const basePath = currentPath.includes("/messages")
             ? currentPath.split("/messages")[0]
-            : currentPath;
-        const newPath = `${basePath}/messages/${memberId}`;
+            : currentPath
+        const newPath = `${basePath}/messages/${memberId}`
 
         if (currentPath !== newPath) {
-            router.push(newPath);
+            router.push(newPath)
         }
-    };
+    }
 
     const filteredMembers = useMemo(() => {
-        return data?.members?.filter(member => 
+        return data?.members?.filter((member) =>
             `${member.User?.firstname} ${member.User?.lastname}`
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-        );
-    }, [data?.members, searchQuery]);
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()),
+        )
+    }, [data?.members, searchQuery])
 
-    const onlineMembers = useMemo(() => 
-        filteredMembers?.filter(member => 
-            members.some(m => m.id === member.userId)
-        ),
-        [filteredMembers, members]
-    );
+    const onlineMembers = useMemo(
+        () =>
+            filteredMembers?.filter((member) =>
+                members.some((m) => m.id === member.userId),
+            ),
+        [filteredMembers, members],
+    )
 
-    const offlineMembers = useMemo(() => 
-        filteredMembers?.filter(member => 
-            !members.some(m => m.id === member.userId)
-        ),
-        [filteredMembers, members]
-    );
+    const offlineMembers = useMemo(
+        () =>
+            filteredMembers?.filter(
+                (member) => !members.some((m) => m.id === member.userId),
+            ),
+        [filteredMembers, members],
+    )
 
     if (isLoading) {
         return (
@@ -70,8 +67,11 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                     <Skeleton className="h-10 w-full" />
                 </CardHeader>
                 <CardContent>
-                    {[1, 2, 3].map(i => (
-                        <div key={i} className="flex items-center space-x-4 py-4">
+                    {[1, 2, 3].map((i) => (
+                        <div
+                            key={i}
+                            className="flex items-center space-x-4 py-4"
+                        >
                             <Skeleton className="h-10 w-10 rounded-full" />
                             <div className="space-y-2">
                                 <Skeleton className="h-4 w-[150px]" />
@@ -81,7 +81,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                     ))}
                 </CardContent>
             </Card>
-        );
+        )
     }
 
     if (!data?.members) {
@@ -97,7 +97,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                     </div>
                 </CardContent>
             </Card>
-        );
+        )
     }
 
     return (
@@ -140,7 +140,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                             ))}
                         </div>
                     )}
-                    
+
                     {offlineMembers && offlineMembers.length > 0 && (
                         <div>
                             <div className="px-4">
@@ -161,13 +161,13 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                 </ScrollArea>
             </CardContent>
         </Card>
-    );
-};
+    )
+}
 
 interface MemberItemProps {
-    member: any;
-    isOnline: boolean;
-    onClick: () => void;
+    member: any
+    isOnline: boolean
+    onClick: () => void
 }
 
 const MemberItem = ({ member, isOnline, onClick }: MemberItemProps) => (
@@ -195,10 +195,10 @@ const MemberItem = ({ member, isOnline, onClick }: MemberItemProps) => (
                     {`${member.User?.firstname} ${member.User?.lastname}`}
                 </span>
                 <span className="text-sm text-muted-foreground">
-                    {isOnline ? 'Online' : 'Offline'}
+                    {isOnline ? "Online" : "Offline"}
                 </span>
             </div>
         </div>
         <MessageCircle className="w-4 h-4 text-muted-foreground" />
     </div>
-);
+)

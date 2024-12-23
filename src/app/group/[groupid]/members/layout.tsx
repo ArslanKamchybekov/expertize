@@ -6,9 +6,7 @@ type MembersLayoutProps = {
 }
 
 const MembersLayout = async ({ children, params }: MembersLayoutProps) => {
-    return (
-        <GroupMembersList groupid={params.groupid} />
-    )
+    return <GroupMembersList groupid={params.groupid} />
 }
 
 export default MembersLayout

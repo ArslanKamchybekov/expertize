@@ -1,53 +1,48 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useGroupMembers } from "@/hooks/groups";
-import { useAppSelector } from "@/redux/store";
-import {
-    MessageCircle,
-    MoreHorizontal,
-    Users
-} from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { useGroupMembers } from "@/hooks/groups"
+import { useAppSelector } from "@/redux/store"
+import { MessageCircle, MoreHorizontal, Users } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 type GroupMembersListProps = {
     groupid: string
 }
 
 export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
-    const { members } = useAppSelector((state) => state.onlineTrackingReducer);
-    const { data } = useGroupMembers(groupid);
-    const router = useRouter();
-    const [searchQuery, setSearchQuery] = useState("");
+    const { members } = useAppSelector((state) => state.onlineTrackingReducer)
+    const { data } = useGroupMembers(groupid)
+    const router = useRouter()
+    const [searchQuery, setSearchQuery] = useState("")
 
     const onOpenChat = (memberId: string) => {
-        const currentPath = window.location.pathname;
-        const newPath = `/group/${groupid}/messages/${memberId}`;
+        const currentPath = window.location.pathname
+        const newPath = `/group/${groupid}/messages/${memberId}`
 
         if (currentPath !== newPath) {
-            router.push(newPath);
+            router.push(newPath)
         }
-    };
+    }
 
-    const filteredMembers = data?.members?.filter(member => 
+    const filteredMembers = data?.members?.filter((member) =>
         `${member.User?.firstname} ${member.User?.lastname}`
-        .toLowerCase()
-        .includes(searchQuery.toLowerCase())
-    );
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()),
+    )
 
-    const isOnline = (userId: string) => 
-        members.some(m => m.id === userId);
+    const isOnline = (userId: string) => members.some((m) => m.id === userId)
 
     return (
         <Card className="h-full">
@@ -78,7 +73,7 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
                                 key={member.id}
                                 className="flex items-center justify-between p-4 hover:bg-accent/50 transition-colors"
                             >
-                                <div 
+                                <div
                                     className="flex items-center gap-3 cursor-pointer flex-1"
                                     onClick={() => onOpenChat(member.id)}
                                 >
@@ -101,12 +96,14 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
                                             {`${member.User?.firstname} ${member.User?.lastname}`}
                                         </span>
                                         <span className="text-sm text-muted-foreground">
-                                            {isOnline(member.id) ? 'Online' : 'Offline'}
+                                            {isOnline(member.id)
+                                                ? "Online"
+                                                : "Offline"}
                                         </span>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                    <button 
+                                    <button
                                         onClick={() => onOpenChat(member.id)}
                                         className="p-2 hover:bg-accent rounded-full"
                                     >
@@ -117,7 +114,11 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
                                             <MoreHorizontal className="w-4 h-4" />
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent align="end">
-                                            <DropdownMenuItem onClick={() => onOpenChat(member.id)}>
+                                            <DropdownMenuItem
+                                                onClick={() =>
+                                                    onOpenChat(member.id)
+                                                }
+                                            >
                                                 Send Message
                                             </DropdownMenuItem>
                                             <DropdownMenuItem>
@@ -132,5 +133,5 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
                 </ScrollArea>
             </CardContent>
         </Card>
-    );
-};
+    )
+}
