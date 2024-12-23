@@ -127,7 +127,7 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                     {/* Additional group information could go here */}
                                 </CardContent>
                                 <CardFooter className="justify-between">
-                                    <Button variant="outline" size="sm">
+                                    <Button variant="outline" size="sm" onClick={() => router.push(`/about/${group.id}`)}>
                                         View Details
                                     </Button>
                                     {group.userId === currentUserId && (

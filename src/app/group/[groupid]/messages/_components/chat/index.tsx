@@ -15,7 +15,7 @@ export const ChatWindow = ({ recieverid, userid }: ChatWindowProps) => {
 
     return (
         <div
-            className="flex-1 flex py-5 flex-col gap-y-3 h-0 overflow-auto"
+            className="flex-1 flex p-4 flex-col gap-y-3 h-0 overflow-auto"
             ref={messageWindowRef}
         >
             {chat.map((c) => (

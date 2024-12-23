@@ -1,78 +1,204 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useGroupChat } from "@/hooks/groups"
-import { Empty } from "@/icons"
-import { useAppSelector } from "@/redux/store"
-import { User } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useGroupChat } from "@/hooks/groups";
+import { Empty } from "@/icons";
+import { useAppSelector } from "@/redux/store";
+import { MessageCircle, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useMemo, useState } from 'react';
 
 type GroupChatMenuProps = {
     groupid: string
 }
 
 export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
-    const { members } = useAppSelector((state) => state.onlineTrackingReducer)
-    const { data, pathname } = useGroupChat(groupid)
-    const router = useRouter()
+    const { members } = useAppSelector((state) => state.onlineTrackingReducer);
+    const { data, pathname, isLoading } = useGroupChat(groupid);
+    const router = useRouter();
+    const [searchQuery, setSearchQuery] = useState("");
 
     const onOpenChat = (memberId: string) => {
-        const currentPath = window.location.pathname
-
+        const currentPath = window.location.pathname;
         const basePath = currentPath.includes("/messages")
             ? currentPath.split("/messages")[0]
-            : currentPath
-
-        const newPath = `${basePath}/messages/${memberId}`
+            : currentPath;
+        const newPath = `${basePath}/messages/${memberId}`;
 
         if (currentPath !== newPath) {
-            router.push(newPath)
+            router.push(newPath);
         }
+    };
+
+    const filteredMembers = useMemo(() => {
+        return data?.members?.filter(member => 
+            `${member.User?.firstname} ${member.User?.lastname}`
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+        );
+    }, [data?.members, searchQuery]);
+
+    const onlineMembers = useMemo(() => 
+        filteredMembers?.filter(member => 
+            members.some(m => m.id === member.userId)
+        ),
+        [filteredMembers, members]
+    );
+
+    const offlineMembers = useMemo(() => 
+        filteredMembers?.filter(member => 
+            !members.some(m => m.id === member.userId)
+        ),
+        [filteredMembers, members]
+    );
+
+    if (isLoading) {
+        return (
+            <Card>
+                <CardHeader className="space-y-4">
+                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-10 w-full" />
+                </CardHeader>
+                <CardContent>
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="flex items-center space-x-4 py-4">
+                            <Skeleton className="h-10 w-10 rounded-full" />
+                            <div className="space-y-2">
+                                <Skeleton className="h-4 w-[150px]" />
+                                <Skeleton className="h-4 w-[100px]" />
+                            </div>
+                        </div>
+                    ))}
+                </CardContent>
+            </Card>
+        );
     }
 
     if (!data?.members) {
         return (
-            <div className="flex flex-col items-center justify-center h-full">
-                <Empty />
-                <h3 className="mt-4">No members found</h3>
-            </div>
-        )
+            <Card className="h-[400px]">
+                <CardContent className="h-full flex flex-col items-center justify-center space-y-4">
+                    <Empty />
+                    <div className="text-center space-y-2">
+                        <h3 className="font-semibold">No Members Found</h3>
+                        <p className="text-sm text-muted-foreground">
+                            There are no members in this group chat yet.
+                        </p>
+                    </div>
+                </CardContent>
+            </Card>
+        );
     }
 
     return (
-        <div className="flex flex-col">
-            {data?.status === 200 &&
-                data.members?.map((member) => (
-                    <div
-                        key={member.id}
-                        onClick={() => onOpenChat(member.id)}
-                        className="flex gap-x-2 items-center p-5 hover:bg-themeGray cursor-pointer"
-                    >
-                        <div className="relative">
-                            {members.map(
-                                (m) =>
-                                    m.id === member.userId && (
-                                        <span
-                                            key={m.id}
-                                            className="absolute bottom-0 right-0 z-50 w-2 h-2 rounded-full bg-green-600"
-                                        ></span>
-                                    ),
-                            )}
-                            <Avatar>
-                                <AvatarImage
-                                    src={member.User?.image!}
-                                    alt="user"
+        <Card className="h-full">
+            <CardHeader className="space-y-4">
+                <div className="flex justify-between items-center">
+                    <CardTitle className="flex items-center gap-2">
+                        <Users className="w-5 h-5" />
+                        Chat Members
+                        <Badge variant="secondary" className="ml-2">
+                            {data.members.length}
+                        </Badge>
+                    </CardTitle>
+                </div>
+                <div className="relative">
+                    <Input
+                        placeholder="Search members..."
+                        className="pl-8"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+            </CardHeader>
+            <CardContent className="p-0">
+                <ScrollArea className="h-[500px]">
+                    {onlineMembers && onlineMembers.length > 0 && (
+                        <div>
+                            <div className="px-4">
+                                <span className="text-sm font-medium text-muted-foreground">
+                                    Online — {onlineMembers.length}
+                                </span>
+                            </div>
+                            {onlineMembers.map((member) => (
+                                <MemberItem
+                                    key={member.id}
+                                    member={member}
+                                    isOnline={true}
+                                    onClick={() => onOpenChat(member.id)}
                                 />
-                                <AvatarFallback>
-                                    <User />
-                                </AvatarFallback>
-                            </Avatar>
+                            ))}
                         </div>
-                        <div className="flex flex-col">
-                            <h3>{`${member.User?.firstname} ${member.User?.lastname}`}</h3>
+                    )}
+                    
+                    {offlineMembers && offlineMembers.length > 0 && (
+                        <div>
+                            <div className="px-4">
+                                <span className="text-sm font-medium text-muted-foreground">
+                                    Offline — {offlineMembers.length}
+                                </span>
+                            </div>
+                            {offlineMembers.map((member) => (
+                                <MemberItem
+                                    key={member.id}
+                                    member={member}
+                                    isOnline={false}
+                                    onClick={() => onOpenChat(member.id)}
+                                />
+                            ))}
                         </div>
-                    </div>
-                ))}
-        </div>
-    )
+                    )}
+                </ScrollArea>
+            </CardContent>
+        </Card>
+    );
+};
+
+interface MemberItemProps {
+    member: any;
+    isOnline: boolean;
+    onClick: () => void;
 }
+
+const MemberItem = ({ member, isOnline, onClick }: MemberItemProps) => (
+    <div
+        onClick={onClick}
+        className="flex items-center justify-between px-4 py-2 hover:bg-accent/50 cursor-pointer transition-colors"
+    >
+        <div className="flex items-center gap-3">
+            <div className="relative">
+                <Avatar>
+                    <AvatarImage
+                        src={member.User?.image!}
+                        alt={`${member.User?.firstname} ${member.User?.lastname}`}
+                    />
+                    <AvatarFallback>
+                        {member.User?.firstname?.charAt(0)}
+                    </AvatarFallback>
+                </Avatar>
+                {isOnline && (
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-green-500 border-2 border-background"></span>
+                )}
+            </div>
+            <div className="flex flex-col">
+                <span className="font-medium">
+                    {`${member.User?.firstname} ${member.User?.lastname}`}
+                </span>
+                <span className="text-sm text-muted-foreground">
+                    {isOnline ? 'Online' : 'Offline'}
+                </span>
+            </div>
+        </div>
+        <MessageCircle className="w-4 h-4 text-muted-foreground" />
+    </div>
+);

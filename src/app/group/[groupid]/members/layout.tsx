@@ -7,9 +7,7 @@ type MembersLayoutProps = {
 
 const MembersLayout = async ({ children, params }: MembersLayoutProps) => {
     return (
-        <div className="flex flex-col gap-4">
-            <GroupMembersList groupid={params.groupid} />
-        </div>
+        <GroupMembersList groupid={params.groupid} />
     )
 }
 

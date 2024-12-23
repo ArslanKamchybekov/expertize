@@ -32,7 +32,7 @@ const HuddlesLayout = ({ children, params }: HuddlesLayoutProps) => {
                 </div>
                 {children}
             </div>
-            <div className="hidden lg:inline lg:col-span-2 bg-themeBlack rounded-tl-3xl overflow-auto">
+            <div className="hidden lg:inline lg:col-span-2 bg-themeBlack overflow-auto">
                 <GroupChatMenu groupid={params.groupid} />
             </div>
         </div>
