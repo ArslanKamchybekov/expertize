@@ -8,7 +8,7 @@ import { useGroupInfo } from "@/hooks/groups"
 import { cn, truncateString } from "@/lib/utils"
 import { AlertCircle, Lock } from "lucide-react"
 import Image from "next/image"
-import { memo } from 'react'
+import { memo } from "react"
 
 interface Props {
     light?: boolean
@@ -48,7 +48,7 @@ const GroupSideWidget = memo(({ groupid, light, userid }: Props) => {
         <Card
             className={cn(
                 "border-themeGray lg:sticky lg:top-0 mt-10 lg:mt-0 rounded-xl overflow-hidden",
-                light ? "border-themeGray bg-[#1A1A1D]" : "bg-themeBlack"
+                light ? "border-themeGray bg-[#1A1A1D]" : "bg-themeBlack",
             )}
         >
             <div className="relative aspect-video">
@@ -59,16 +59,16 @@ const GroupSideWidget = memo(({ groupid, light, userid }: Props) => {
                     className="object-cover"
                     priority
                     onError={(e) => {
-                        e.currentTarget.src = '/fallback-image.png'
+                        e.currentTarget.src = "/fallback-image.png"
                     }}
                 />
             </div>
             <div className="flex flex-col p-5 gap-y-3">
                 <h2 className="font-bold text-lg line-clamp-2">{group.name}</h2>
-                <div 
+                <div
                     className="text-sm text-themeTextGray font-bold flex gap-x-1 items-center"
                     role="status"
-                    aria-label={`Group privacy: ${group.privacy ? 'Private' : 'Public'}`}
+                    aria-label={`Group privacy: ${group.privacy ? "Private" : "Public"}`}
                 >
                     <Lock className="h-5 w-5" aria-hidden="true" />
                     <span>{group.privacy}</span>
@@ -91,6 +91,6 @@ const GroupSideWidget = memo(({ groupid, light, userid }: Props) => {
     )
 })
 
-GroupSideWidget.displayName = 'GroupSideWidget'
+GroupSideWidget.displayName = "GroupSideWidget"
 
 export default GroupSideWidget

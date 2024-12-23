@@ -3,7 +3,7 @@
 import InfiniteScrollObserver from "@/components/global/infinite-scroll"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useChannelPage } from "@/hooks/channels"
-import { memo } from 'react'
+import { memo } from "react"
 import { PaginatedPosts } from "../paginated-posts"
 import { PostCard } from "./post-card"
 
@@ -53,34 +53,37 @@ const LoadingSkeleton = () => (
     </div>
 )
 
-const PostList = memo(({ posts, userid }: { posts: Post[], userid: string }) => (
-    <>
-        {posts.map((post) => (
-            <PostCard
-                key={post.id}
-                channelname={post.channel.name}
-                title={post.title ?? 'Untitled Post'}
-                html={post.htmlContent ?? ''}
-                username={`${post.author.firstname} ${post.author.lastname}`.trim()}
-                userimage={post.author.image ?? '/default-avatar.png'}
-                likes={post._count.likes}
-                comments={post._count.comments}
-                postid={post.id}
-                likedUser={post.likes[0]?.userId}
-                userid={userid}
-                likeid={post.likes[0]?.id}
-            />
-        ))}
-    </>
-))
+const PostList = memo(
+    ({ posts, userid }: { posts: Post[]; userid: string }) => (
+        <>
+            {posts.map((post) => (
+                <PostCard
+                    key={post.id}
+                    channelname={post.channel.name}
+                    title={post.title ?? "Untitled Post"}
+                    html={post.htmlContent ?? ""}
+                    username={`${post.author.firstname} ${post.author.lastname}`.trim()}
+                    userimage={post.author.image ?? "/default-avatar.png"}
+                    likes={post._count.likes}
+                    comments={post._count.comments}
+                    postid={post.id}
+                    likedUser={post.likes[0]?.userId}
+                    userid={userid}
+                    likeid={post.likes[0]?.id}
+                />
+            ))}
+        </>
+    ),
+)
 
 export const PostFeed = memo(({ channelid, userid }: PostFeedProps) => {
     const { data, error, isLoading } = useChannelPage(channelid)
-    const posts = (data && 'posts' in data) ? data.posts as Post[] : undefined
+    const posts = data && "posts" in data ? (data.posts as Post[]) : undefined
 
     if (isLoading) return <LoadingSkeleton />
     if (error) return <div className="text-red-500">Failed to load posts</div>
-    if (!posts?.length) return <div className="text-center p-4">No posts yet</div>
+    if (!posts?.length)
+        return <div className="text-center p-4">No posts yet</div>
 
     return (
         <>
@@ -97,5 +100,5 @@ export const PostFeed = memo(({ channelid, userid }: PostFeedProps) => {
     )
 })
 
-PostList.displayName = 'PostList'
-PostFeed.displayName = 'PostFeed'
+PostList.displayName = "PostList"
+PostFeed.displayName = "PostFeed"

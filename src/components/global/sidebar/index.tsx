@@ -5,9 +5,9 @@ import { useSideBar } from "@/hooks/navigation"
 import { CarotSort } from "@/icons"
 import { cn } from "@/lib/utils"
 import { Plus } from "lucide-react"
-import Image from 'next/image'
+import Image from "next/image"
 import Link from "next/link"
-import { memo, useMemo } from 'react'
+import { memo, useMemo } from "react"
 import { v4 } from "uuid"
 import { DropDown } from "../drop-down"
 import SideBarMenu from "./menu"
@@ -49,35 +49,45 @@ interface Channel {
 
 interface Groups {
     status: number
-    groups: Array<{
-        icon: string | null
-        id: string
-        name: string
-    }> | undefined
+    groups:
+        | Array<{
+              icon: string | null
+              id: string
+              name: string
+          }>
+        | undefined
 }
 
 const getImageUrl = (icon: string) => `https://ucarecdn.com/${icon}/`
 
 // eslint-disable-next-line react/display-name
-const GroupsList = memo(({ groups, channels }: { groups: Groups['groups'], channels: Channel[] | undefined }) => (
-    groups?.map(item => (
-        <Link
-            key={item.id}
-            href={`/group/${item.id}/channel/${channels?.[0]?.id}`}
-        >
-            <Button
-                variant="ghost"
-                className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
-                aria-label={`Join ${item.name} group`}
+const GroupsList = memo(
+    ({
+        groups,
+        channels,
+    }: {
+        groups: Groups["groups"]
+        channels: Channel[] | undefined
+    }) =>
+        groups?.map((item) => (
+            <Link
+                key={item.id}
+                href={`/group/${item.id}/channel/${channels?.[0]?.id}`}
             >
-                {item.name}
-            </Button>
-        </Link>
-    ))
-))
+                <Button
+                    variant="ghost"
+                    className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
+                    aria-label={`Join ${item.name} group`}
+                >
+                    {item.name}
+                </Button>
+            </Link>
+        )),
+)
 
 const SideBar = ({ groupid, userid, mobile }: Props) => {
-    const { groupInfo, groups, mutate, variables, isPending, channels } = useSideBar(groupid)
+    const { groupInfo, groups, mutate, variables, isPending, channels } =
+        useSideBar(groupid)
     useGroupChatOnline(userid)
 
     const isGroupOwner = userid === groupInfo.group?.userId
@@ -94,24 +104,29 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
         })
     }
 
-    const groupImage = useMemo(() => (
-        <Image
-            src={getImageUrl(groupInfo.group?.icon || '')}
-            alt={`${groupInfo.group?.name || 'Group'} icon`}
-            width={32}
-            height={32}
-            className="rounded-lg"
-            onError={(e) => {
-                e.currentTarget.src = '/fallback-image.png'
-            }}
-        />
-    ), [groupInfo.group?.icon, groupInfo.group?.name])
+    const groupImage = useMemo(
+        () => (
+            <Image
+                src={getImageUrl(groupInfo.group?.icon || "")}
+                alt={`${groupInfo.group?.name || "Group"} icon`}
+                width={32}
+                height={32}
+                className="rounded-lg"
+                onError={(e) => {
+                    e.currentTarget.src = "/fallback-image.png"
+                }}
+            />
+        ),
+        [groupInfo.group?.icon, groupInfo.group?.name],
+    )
 
     return (
         <aside
             className={cn(
                 "h-screen flex-col gap-y-10 sm:px-5",
-                !mobile ? "hidden bg-black md:w-[300px] fixed md:flex" : "w-full flex"
+                !mobile
+                    ? "hidden bg-black md:w-[300px] fixed md:flex"
+                    : "w-full flex",
             )}
             role="complementary"
             aria-label="Sidebar navigation"
@@ -124,7 +139,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                             <div className="flex gap-x-3 items-center">
                                 {groupImage}
                                 <p className="text-sm overflow-scroll">
-                                    {groupInfo.group?.name || 'Unnamed Group'}
+                                    {groupInfo.group?.name || "Unnamed Group"}
                                 </p>
                             </div>
                             <span aria-hidden="true">
@@ -133,7 +148,10 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                         </div>
                     }
                 >
-                    <GroupsList groups={groups?.groups} channels={channels?.channels} />
+                    <GroupsList
+                        groups={groups?.groups}
+                        channels={channels?.channels}
+                    />
                 </DropDown>
             )}
 
@@ -147,7 +165,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                             aria-label="Add new channel"
                             className={cn(
                                 "text-themeTextGray cursor-pointer",
-                                isPending && "opacity-70"
+                                isPending && "opacity-70",
                             )}
                         >
                             <Plus size={16} />
@@ -159,7 +177,7 @@ const SideBar = ({ groupid, userid, mobile }: Props) => {
                     optimisticChannel={variables}
                     loading={isPending}
                     groupid={groupid}
-                    groupUserId={groupInfo.group?.userId ?? ''}
+                    groupUserId={groupInfo.group?.userId ?? ""}
                     userId={userid}
                 />
             </div>
