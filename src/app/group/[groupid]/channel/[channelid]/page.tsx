@@ -51,7 +51,6 @@ const GroupChannelPage = async ({ params }: Props) => {
         const client = new QueryClient()
 
         const user = await currentUser()
-        console.log(user)
 
         if (!user) {
             redirect("/sign-in")

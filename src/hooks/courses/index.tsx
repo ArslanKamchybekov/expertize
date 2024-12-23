@@ -110,7 +110,7 @@ export const useCreateCourse = (groupid: string) => {
             })
         },
         (errors) => {
-            console.log("Validation errors:", errors)
+            console.error("Validation errors:", errors)
         },
     )
 
