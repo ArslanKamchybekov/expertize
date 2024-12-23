@@ -63,7 +63,9 @@ const CourseCard = ({ course, groupid }: { course: any; groupid: string }) => {
                         />
                     ) : (
                         <div className="flex items-center justify-center w-full h-full bg-themeBlack">
-                            <p className="text-themeTextGray">No image available</p>
+                            <p className="text-themeTextGray">
+                                No image available
+                            </p>
                         </div>
                     )}
                 </div>
@@ -88,7 +90,10 @@ const CourseCard = ({ course, groupid }: { course: any; groupid: string }) => {
 const LoadingSkeleton = () => (
     <>
         {[1, 2, 3].map((i) => (
-            <Card key={i} className="bg-themeBackground border border-themeGray rounded-xl overflow-hidden">
+            <Card
+                key={i}
+                className="bg-themeBackground border border-themeGray rounded-xl overflow-hidden"
+            >
                 <Skeleton className="h-48 w-full bg-gray-800" />
                 <div className="p-4">
                     <Skeleton className="h-6 w-3/4 bg-gray-800 mb-4" />

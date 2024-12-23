@@ -1,7 +1,12 @@
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { APP_CONSTANTS } from "@/constants"
 import { useNavigation } from "@/hooks/navigation"
 import { cn } from "@/lib/utils"
@@ -56,7 +61,7 @@ const MenuLink = ({
                 isActive
                     ? "bg-[#09090B] border-[#27272A] text-white"
                     : "text-themeTextGray hover:text-white",
-                isMobile && "w-full"
+                isMobile && "w-full",
             )}
         >
             <motion.span
@@ -140,13 +145,16 @@ const MobileMenu = ({ groupid, className }: Omit<MenuProps, "orientation">) => {
     )
 }
 
-const DesktopMenu = ({ groupid, className }: Omit<MenuProps, "orientation">) => {
+const DesktopMenu = ({
+    groupid,
+    className,
+}: Omit<MenuProps, "orientation">) => {
     const { section, onSetSection } = useNavigation()
     const pathname = usePathname()
 
     useEffect(() => {
         const currentPath = APP_CONSTANTS.groupPageMenu.find(
-            (item) => getMenuItemHref(item, groupid) === pathname
+            (item) => getMenuItemHref(item, groupid) === pathname,
         )
         if (currentPath) {
             onSetSection(currentPath.path)
@@ -157,7 +165,7 @@ const DesktopMenu = ({ groupid, className }: Omit<MenuProps, "orientation">) => 
         <Card
             className={cn(
                 "bg-themeGray border-themeGray bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-60 p-1 lg:flex md:rounded-xl items-center justify-center w-fit",
-                className
+                className,
             )}
         >
             <CardContent className="p-0 flex gap-2">

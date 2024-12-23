@@ -29,14 +29,20 @@ const CourseCreate = ({ groupid }: Props) => {
         setValue,
         onPrivacy,
         data,
-        setPrivateMembers
+        setPrivateMembers,
     } = useCreateCourse(groupid)
 
     const [selectedImage, setSelectedImage] = useState<string | null>(null)
     const [searchTerm, setSearchTerm] = useState("")
-    const [members, setMembers] = useState<Array<{ id: number; name: string }>>([])
-    const [selectedMembers, setSelectedMembers] = useState<Array<{ id: number; name: string }>>([])
-    const [filteredMembers, setFilteredMembers] = useState<Array<{ id: number; name: string }>>([])
+    const [members, setMembers] = useState<Array<{ id: number; name: string }>>(
+        [],
+    )
+    const [selectedMembers, setSelectedMembers] = useState<
+        Array<{ id: number; name: string }>
+    >([])
+    const [filteredMembers, setFilteredMembers] = useState<
+        Array<{ id: number; name: string }>
+    >([])
 
     useEffect(() => {
         const fetchMembers = async () => {
@@ -56,7 +62,7 @@ const CourseCreate = ({ groupid }: Props) => {
         const filtered = members.filter(
             (member) =>
                 member.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-                !selectedMembers.some((selected) => selected.id === member.id)
+                !selectedMembers.some((selected) => selected.id === member.id),
         )
         setFilteredMembers(filtered)
     }, [searchTerm, members, selectedMembers])
@@ -83,7 +89,7 @@ const CourseCreate = ({ groupid }: Props) => {
 
     const handleRemoveMember = (memberId: number) => {
         setSelectedMembers((prev) =>
-            prev.filter((member) => member.id !== memberId)
+            prev.filter((member) => member.id !== memberId),
         )
     }
 

@@ -12,7 +12,7 @@ type JoinButtonProps = {
 
 export const JoinButton = ({ owner, groupid, userid }: JoinButtonProps) => {
     const { data } = useActiveGroupSubscription(groupid)
-    const { onJoinFreeGroup } = useJoinFree(groupid) 
+    const { onJoinFreeGroup } = useJoinFree(groupid)
 
     // Check if the user is already a member
     const isMember = Object.values(data?.members || {}).some(

@@ -29,7 +29,9 @@ import { z } from "zod"
 
 export const useCreateCourse = (groupid: string) => {
     const [onPrivacy, setOnPrivacy] = useState<string | undefined>("open")
-    const [privateMembers, setPrivateMembers] = useState<Array<{ id: number; name: string }>>([])
+    const [privateMembers, setPrivateMembers] = useState<
+        Array<{ id: number; name: string }>
+    >([])
     const buttonRef = useRef<HTMLButtonElement | null>(null)
 
     const {
@@ -79,7 +81,7 @@ export const useCreateCourse = (groupid: string) => {
                 data.id,
                 data.privacy,
                 data.published,
-                data.privacy === "private" ? privateMembers : undefined
+                data.privacy === "private" ? privateMembers : undefined,
             )
             return course
         },
@@ -109,7 +111,7 @@ export const useCreateCourse = (groupid: string) => {
         },
         (errors) => {
             console.log("Validation errors:", errors)
-        }
+        },
     )
 
     return {
@@ -122,10 +124,9 @@ export const useCreateCourse = (groupid: string) => {
         onPrivacy,
         setValue,
         data,
-        setPrivateMembers
+        setPrivateMembers,
     }
 }
-
 
 export const useCourses = (groupid: string) => {
     const { data, isLoading, isError } = useQuery({

@@ -51,13 +51,13 @@ const MobileNavigation = ({ groupid }: { groupid: string }) => (
 const GroupChannelPage = async ({ params }: Props) => {
     try {
         const client = new QueryClient()
-        
+
         // Fetch user data
         const user = await currentUser()
         if (!user) {
-            redirect('/sign-in')
+            redirect("/sign-in")
         }
-        
+
         const authUser = await onAuthenticatedUser()
         if (!authUser?.id) {
             throw new Error("Failed to authenticate user")
@@ -72,7 +72,7 @@ const GroupChannelPage = async ({ params }: Props) => {
             client.prefetchQuery({
                 queryKey: ["about-group-info"],
                 queryFn: () => onGetGroupInfo(params.groupid),
-            })
+            }),
         ])
 
         return (
@@ -80,7 +80,7 @@ const GroupChannelPage = async ({ params }: Props) => {
                 <HydrationBoundary state={dehydrate(client)}>
                     <div className="min-h-screen flex flex-col">
                         <MobileNavigation groupid={params.groupid} />
-                        
+
                         <div className="grid lg:grid-cols-4 grid-cols-1 w-full flex-1 gap-x-5 px-5 relative">
                             {/* Left Sidebar */}
                             <aside className="col-span-1 lg:inline hidden py-5 sticky top-5">
@@ -90,9 +90,12 @@ const GroupChannelPage = async ({ params }: Props) => {
                             {/* Main Content */}
                             <main className="lg:col-span-2 flex flex-col gap-y-5 py-5">
                                 <div className="hidden lg:block">
-                                    <Menu orientation="desktop" groupid={params.groupid} />
+                                    <Menu
+                                        orientation="desktop"
+                                        groupid={params.groupid}
+                                    />
                                 </div>
-                                
+
                                 <CreateNewPost
                                     userImage={user.imageUrl}
                                     channelid={params.channelid}
@@ -123,7 +126,9 @@ const GroupChannelPage = async ({ params }: Props) => {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <div className="text-center">
-                    <h2 className="text-xl font-semibold mb-2">Failed to load channel</h2>
+                    <h2 className="text-xl font-semibold mb-2">
+                        Failed to load channel
+                    </h2>
                     <p className="text-themeTextGray">Please try again later</p>
                 </div>
             </div>
