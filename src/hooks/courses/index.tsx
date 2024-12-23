@@ -80,6 +80,7 @@ export const useCreateCourse = (groupid: string) => {
                 data.published,
                 data.members,
             )
+            console.log(course)
             return course
         },
         onMutate: () => {
@@ -103,7 +104,7 @@ export const useCreateCourse = (groupid: string) => {
             createdAt: new Date(),
             image: values.image,
             ...values,
-            members: onPrivacy === "private" ? values.members : undefined,
+            // members: onPrivacy === "private" ? values.members : undefined,
         }),
     )
 

@@ -7,7 +7,7 @@ export const CreateCourseSchema = z.object({
     name: z
         .string()
         .min(3, { message: "Course title must be alteast 3 characters" }),
-    description: z.string().min(100, "description must be atleast 100 words"),
+    description: z.string().min(100, "Description must be at least 100 words"),
     image: z
         .any({ required_error: "You must add an image" })
         .refine((files) => files?.[0]?.size <= MAX_UPLOAD_SIZE, {

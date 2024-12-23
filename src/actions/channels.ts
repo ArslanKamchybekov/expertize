@@ -279,7 +279,7 @@ export const onCreateNewComment = async (
             },
         })
         if (comment) {
-            return { status: 200, message: "Comment successfull" }
+            return { status: 200, message: "Comment successful" }
         }
     } catch (error) {
         return { status: 400, message: "Something went wrong" }

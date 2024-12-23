@@ -19,15 +19,11 @@ type Props = {
 }
 
 const CourseCreate = ({ groupid }: Props) => {
-    const { onCreateCourse, register, errors, buttonRef, setValue, data } =
-        useCreateCourse(groupid)
-
+    const { onCreateCourse, register, errors, buttonRef, setValue, data } = useCreateCourse(groupid)
     const { handleSubmit } = useForm()
     const [selectedPrivacy, setSelectedPrivacy] = useState<string>("")
     const [searchTerm, setSearchTerm] = useState<string>("")
-    const [selectedUsers, setSelectedUsers] = useState<
-        { id: number; name: string }[]
-    >([])
+    const [selectedUsers, setSelectedUsers] = useState<{ id: number; name: string }[]>([])
     const [members, setMembers] = useState<any[]>([])
     const [selectedImage, setSelectedImage] = useState<File | null>(null)
 
@@ -94,12 +90,11 @@ const CourseCreate = ({ groupid }: Props) => {
                     onSubmit={handleSubmit((values) => {
                         const formData = {
                             ...values,
-                            members:
-                                selectedPrivacy === "private"
-                                    ? selectedUsers
-                                    : [],
+                            // members:
+                            //     selectedPrivacy === "private"
+                            //         ? selectedUsers
+                            //         : [],
                         }
-
                         onCreateCourse(formData as any)
                     })}
                     className="flex flex-col gap-y-5 mt-5 max-h-[80vh] overflow-y-auto p-2"
