@@ -22,21 +22,23 @@ export interface IChannels {
 
 export interface IGroupInfo {
     status: number
-    group: {
-        id: string
-        name: string
-        category: string
-        thumbnail: string | null
-        description: string | null
-        gallery: string[]
-        jsonDescription: string | null
-        htmlDescription: string | null
-        privacy: boolean
-        active: boolean
-        createdAt: Date
-        userId: string
-        icon: string
-    } | undefined
+    group:
+        | {
+              id: string
+              name: string
+              category: string
+              thumbnail: string | null
+              description: string | null
+              gallery: string[]
+              jsonDescription: string | null
+              htmlDescription: string | null
+              privacy: boolean
+              active: boolean
+              createdAt: Date
+              userId: string
+              icon: string
+          }
+        | undefined
 }
 
 export interface IGroups {
