@@ -106,7 +106,7 @@ Welcome to **Expertize AI**, a powerful learning management system (LMS) and com
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/tgrowth/ghplatform.git
+    git clone https://github.com/ArslanKamchybekov/expertize.git
     cd ghplatform
 
     ```
