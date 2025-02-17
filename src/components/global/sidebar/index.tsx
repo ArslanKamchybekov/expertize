@@ -12,6 +12,44 @@ import { v4 } from "uuid"
 import { DropDown } from "../drop-down"
 import SideBarMenu from "./menu"
 
+export interface IChannels {
+    id: string
+    name: string
+    icon: string
+    createdAt: Date
+    groupId: string | null
+}
+
+export interface IGroupInfo {
+    status: number
+    group: {
+        id: string
+        name: string
+        category: string
+        thumbnail: string | null
+        description: string | null
+        gallery: string[]
+        jsonDescription: string | null
+        htmlDescription: string | null
+        privacy: boolean
+        active: boolean
+        createdAt: Date
+        userId: string
+        icon: string
+    } | undefined
+}
+
+export interface IGroups {
+    status: number
+    groups:
+        | Array<{
+              icon: string | null
+              id: string
+              name: string
+          }>
+        | undefined
+}
+
 interface Props {
     groupid: string
     userid: string
