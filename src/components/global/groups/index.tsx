@@ -117,7 +117,7 @@ const Groups = ({ groups, currentUserId }: GroupsProps) => {
                                             {group.name}
                                         </h3>
                                         <p className="text-sm text-muted-foreground">
-                                          You&apos;re a member
+                                            You&apos;re a member
                                         </p>
                                     </div>
                                 </CardHeader>
