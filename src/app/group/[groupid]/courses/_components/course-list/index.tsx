@@ -112,7 +112,7 @@ const CourseList = ({ groupid }: Props) => {
         return <LoadingSkeleton />
     }
 
-    if (isError || data?.status !== 200) {
+    if (isError) {
         return (
             <div className="col-span-full flex flex-col items-center justify-center p-8 text-themeTextGray">
                 <p>Failed to load courses</p>
@@ -121,16 +121,7 @@ const CourseList = ({ groupid }: Props) => {
         )
     }
 
-    if (!data.courses?.length) {
-        return (
-            <div className="col-span-full flex flex-col items-center justify-center p-8 text-themeTextGray">
-                <p>No courses available</p>
-                <p className="text-sm">Create a new course to get started</p>
-            </div>
-        )
-    }
-
-    return data.courses.map((course) => (
+    return data?.courses?.map((course) => (
         <CourseCard key={course.id} course={course} groupid={groupid} />
     ))
 }

@@ -24,6 +24,8 @@ import {
     Calendar,
     CheckCircle2,
     CreditCard,
+    Earth,
+    Globe,
     Group,
 } from "lucide-react"
 import { useRouter } from "next/navigation"
@@ -209,8 +211,8 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
                                     the moment.
                                 </p>
                             </div>
-                            <Button onClick={() => router.push("/")}>
-                                Browse Available Plans
+                            <Button onClick={() => router.push("/explore")}>
+                                Browse Groups
                             </Button>
                         </div>
                     </Card>

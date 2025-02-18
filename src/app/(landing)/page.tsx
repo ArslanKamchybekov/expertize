@@ -31,7 +31,7 @@ export default function Home() {
             {/* Footer */}
             <footer className="text-white text-center">
                 <p>
-                    &copy; 2025 <span className="font-bold">Expertize.</span>{" "}
+                    &copy; {new Date().getFullYear()} <span className="font-bold">Expertize.</span>{" "}
                     All rights reserved.
                 </p>
                 <p className="text-sm mt-2">

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useCreateChannelPost } from "@/hooks/channels"
 
-import { Upload } from "lucide-react"
+import { UploadCloud } from "lucide-react"
 
 type PostContentProps = {
     channelid: string
@@ -45,8 +45,8 @@ export const PostContent = ({ channelid }: PostContentProps) => {
                 setHtmlContent={setOnHtmlDescription}
             />
             <Button className="self-end rounded-2xl bg-themeTextGray flex gap-x-2">
-                <Upload />
-                Create
+                <UploadCloud size={16} />
+                Post
             </Button>
         </form>
     )
