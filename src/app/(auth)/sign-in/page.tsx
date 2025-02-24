@@ -18,7 +18,9 @@ const SignInPage = () => {
                 <Separator orientation="horizontal" className="bg-themeGray" />
             </div>
             <div className="flex justify-center items-center gap-2">
-                <p className="text-themeTextGray">Don&apos;t have an account?</p>
+                <p className="text-themeTextGray">
+                    Don&apos;t have an account?
+                </p>
                 <a href="/sign-up" className="text-themeBlue font-bold">
                     Sign up
                 </a>

@@ -12,13 +12,16 @@ const CallToAction = () => {
                 Invest in your future
             </GradientText>
             <p className="text-sm sm:text-base text-muted-foreground my-4 max-w-2xl">
-                Expertize is a vibrant online education platform that empowers 
-                people to connect, collaborate, and cultivate meaningful 
+                Expertize is a vibrant online education platform that empowers
+                people to connect, collaborate, and cultivate meaningful
                 relationships to drive personal and professional growth.
             </p>
             <div className="flex flex-col sm:flex-row sm:justify-center gap-4 w-full sm:w-auto">
                 <Link href="">
-                    <Button variant="outline" className="rounded-xl bg-transparent text-base w-full sm:w-auto">
+                    <Button
+                        variant="outline"
+                        className="rounded-xl bg-transparent text-base w-full sm:w-auto"
+                    >
                         Watch Demo
                     </Button>
                 </Link>

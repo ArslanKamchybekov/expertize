@@ -8,7 +8,7 @@ import { onAuthenticatedUser } from "@/actions/auth"
 
 const LandingPageNavbar = async () => {
     const user = await onAuthenticatedUser()
-    
+
     return (
         <div className="w-full flex justify-between sticky top-0 items-center py-5 z-50">
             <p className="font-bold text-2xl">Expertize.</p>

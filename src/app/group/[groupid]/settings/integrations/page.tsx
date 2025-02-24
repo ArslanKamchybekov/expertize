@@ -47,7 +47,9 @@ const IntegrationsPage = async ({
                                     groupid={params.groupid}
                                 />
                             </div>
-                            <CardDescription>{item.description}</CardDescription>
+                            <CardDescription>
+                                {item.description}
+                            </CardDescription>
                         </CardContent>
                     </Card>
                 ))}
