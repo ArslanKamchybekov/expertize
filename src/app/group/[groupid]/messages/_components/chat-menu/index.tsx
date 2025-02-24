@@ -59,44 +59,15 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
         [filteredMembers, members],
     )
 
-    if (isLoading) {
-        return (
-            <Card>
-                <CardHeader className="space-y-4">
-                    <Skeleton className="h-4 w-[200px]" />
-                    <Skeleton className="h-10 w-full" />
-                </CardHeader>
-                <CardContent>
-                    {[1, 2, 3].map((i) => (
-                        <div
-                            key={i}
-                            className="flex items-center space-x-4 py-4"
-                        >
-                            <Skeleton className="h-10 w-10 rounded-full" />
-                            <div className="space-y-2">
-                                <Skeleton className="h-4 w-[150px]" />
-                                <Skeleton className="h-4 w-[100px]" />
-                            </div>
-                        </div>
-                    ))}
-                </CardContent>
-            </Card>
-        )
-    }
-
     if (!data?.members) {
         return (
-            <Card className="h-[400px]">
-                <CardContent className="h-full flex flex-col items-center justify-center space-y-4">
-                    <Empty />
-                    <div className="text-center space-y-2">
-                        <h3 className="font-semibold">No Members Found</h3>
-                        <p className="text-sm text-muted-foreground">
-                            There are no members in this group chat yet.
-                        </p>
-                    </div>
-                </CardContent>
-            </Card>
+            <div className="flex flex-col items-center justify-center h-full">
+                <h3 className="font-semibold">No Members Found</h3>
+                <p className="text-sm text-muted-foreground">
+                    There are no members in this group chat yet.
+                </p>
+            </div>
+
         )
     }
 

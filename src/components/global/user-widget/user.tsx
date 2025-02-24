@@ -10,7 +10,7 @@ import { supabaseClient } from "@/lib/utils"
 import { onOffline } from "@/redux/slices/online-member-slice"
 import { AppDispatch } from "@/redux/store"
 import { useClerk } from "@clerk/nextjs"
-import { Trash } from "lucide-react"
+import { Settings, Trash, User } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
@@ -62,6 +62,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                         variant="ghost"
                         className="flex gap-x-2 px-2 w-full justify-start"
                     >
+                        <User size={16} />
                         Profile
                     </Button>
                 </Link>
@@ -71,6 +72,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                             variant="ghost"
                             className="flex gap-x-2 px-2 w-full justify-start"
                         >
+                            <Settings size={16} />
                             Group Settings
                         </Button>
                     </Link>
@@ -88,7 +90,7 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                     className="flex gap-x-2 px-2 justify-start w-full text-red-500"
                     onClick={() => setIsDeleteModalOpen(true)}
                 >
-                    <Trash size={17} color="red" />
+                    <Trash size={16} color="red" />
                     Delete Account
                 </Button>
             </DropDown>

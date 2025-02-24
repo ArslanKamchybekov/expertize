@@ -45,7 +45,7 @@ export const GroupMembersList = ({ groupid }: GroupMembersListProps) => {
     const isOnline = (userId: string) => members.some((m) => m.id === userId)
 
     return (
-        <Card className="h-full">
+        <Card className="h-full bg-inherit">
             <CardHeader className="space-y-4">
                 <div className="flex justify-between items-center">
                     <CardTitle className="flex items-center gap-2">

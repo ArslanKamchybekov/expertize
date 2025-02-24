@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 const isProtectedRoute = createRouteMatcher(["/group(.*)"])
 
 export default clerkMiddleware(async (auth, req) => {
-    const baseHost = ["localhost:3000", process.env.NEXT_PUBLIC_API_URL]
+    const baseHost = [process.env.NEXT_PUBLIC_API_URL]
     const host = req.headers.get("host")
     const reqPath = req.nextUrl.pathname
     const origin = req.nextUrl.origin
