@@ -67,7 +67,6 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
                     There are no members in this group chat yet.
                 </p>
             </div>
-
         )
     }
 

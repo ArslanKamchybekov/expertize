@@ -83,7 +83,11 @@ export const PostFeed = memo(({ channelid, userid }: PostFeedProps) => {
     if (isLoading) return <LoadingSkeleton />
     if (error) return <div className="text-red-500">Failed to load posts</div>
     if (!posts?.length)
-        return <div className="text-center text-themeTextGray">No posts yet ...</div>
+        return (
+            <div className="text-center text-themeTextGray">
+                No posts yet ...
+            </div>
+        )
 
     return (
         <>

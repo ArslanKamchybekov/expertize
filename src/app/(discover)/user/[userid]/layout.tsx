@@ -5,9 +5,5 @@ export default function UserProfileLayout({
 }: {
     children: React.ReactNode
 }) {
-    return (
-        <div className="pt-16">
-            {children}
-        </div>
-    )
+    return <div className="pt-16">{children}</div>
 }
