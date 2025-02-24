@@ -18,9 +18,9 @@ const GroupCreatePage = async ({
 
     return (
         <>
-            <div className="px-7 flex flex-col">
+            <div className="flex flex-col items-center gap-3">
                 <h5 className="font-bold text-base text-themeTextWhite">
-                    Create your group
+                    Create Your Group
                 </h5>
                 {affiliate.status === 200 && (
                     <div className="w-full flex justify-center items-center gap-x-2 italic text-themeTextGray text-sm">

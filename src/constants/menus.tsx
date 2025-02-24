@@ -52,13 +52,13 @@ export const LANDING_PAGE_MENU: MenuProps[] = [
 ]
 export const GROUP_PAGE_MENU: MenuProps[] = [
     {
-        id: 4,
+        id: 1,
         label: "About",
         icon: <Document />,
         path: "/about",
     },
     {
-        id: 1,
+        id: 2,
         label: "Courses",
         icon: <Courses />,
         path: "/courses",
@@ -66,12 +66,6 @@ export const GROUP_PAGE_MENU: MenuProps[] = [
     },
     {
         id: 3,
-        label: "Members",
-        icon: <PersonalDevelopment />,
-        path: "/members",
-    },
-    {
-        id: 5,
         label: "Huddle",
         icon: <Chat />,
         path: "/huddle",
@@ -97,15 +91,15 @@ export const SIDEBAR_SETTINGS_MENU: MenuProps[] = [
         icon: <AffiliateDuoToneBlack />,
         path: "affiliates",
     },
+    // {
+    //     id: 3,
+    //     label: "Domain Config",
+    //     icon: <GlobeDuoToneBlack />,
+    //     path: "domains",
+    // },
     {
         id: 3,
-        label: "Domain Config",
-        icon: <GlobeDuoToneBlack />,
-        path: "domains",
-    },
-    {
-        id: 4,
-        label: "Integration",
+        label: "Integrations",
         icon: <ZapDouToneBlack />,
         path: "integrations",
         integration: true,

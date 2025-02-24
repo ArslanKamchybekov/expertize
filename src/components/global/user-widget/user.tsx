@@ -85,14 +85,14 @@ export const UserAvatar = ({ image, groupid, userid }: UserWidgetProps) => {
                     <Logout />
                     Logout
                 </Button>
-                <Button
+                {/* <Button
                     variant="ghost"
                     className="flex gap-x-2 px-2 justify-start w-full text-red-500"
                     onClick={() => setIsDeleteModalOpen(true)}
                 >
                     <Trash size={16} color="red" />
                     Delete Account
-                </Button>
+                </Button> */}
             </DropDown>
 
             <Modal

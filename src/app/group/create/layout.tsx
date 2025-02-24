@@ -10,51 +10,36 @@ type Props = {
 
 const CreateGroupLayout = ({ children }: Props) => {
     return (
-        <div className="container h-screen grid grid-cols-1 lg:grid-cols-2 content-center">
-            <div className="flex items-center">
-                <BackdropGradient className="w-8/12 h-2/6 opacity-50">
-                    <Link
-                        className="text-2xl font-bold text-themeTextWhite"
-                        href={"/"}
-                    >
+        <div className="container h-screen grid grid-cols-1 md:grid-cols-2 content-center px-4 md:px-10">
+            {/* Left Side */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                <BackdropGradient className="w-full md:w-8/12 lg:w-6/12 h-2/6 opacity-50">
+                    <Link className="text-2xl font-bold text-themeTextWhite" href={"/"}>
                         <h5>Expertize.</h5>
                     </Link>
-                    <GradientText
-                        element="H2"
-                        className="text-4xl font-semibold py-1 my-4"
-                    >
+                    <GradientText element="H2" className="text-3xl md:text-4xl font-semibold py-1 my-4">
                         Create Your Group
                     </GradientText>
-                    <p className="text-themeTextGray">
+                    <p className="text-themeTextGray text-base md:text-lg">
                         Free for 7 days, then $10/month. Cancel anytime.
                         <br />
                         All features. Unlimited everything. No hidden fees.
                     </p>
-                    <div className="flex flex-col gap-3 mt-16 pl-5">
-                        {APP_CONSTANTS.createGroupPlaceholder.map(
-                            (placeholder) => (
-                                <div
-                                    className="flex gap-3"
-                                    key={placeholder.id}
-                                >
-                                    <div className="mt-1">
-                                        {placeholder.icon}
-                                    </div>
-                                    <p className="text-themeTextGray">
-                                        {placeholder.label}
-                                    </p>
-                                </div>
-                            ),
-                        )}
+                    <div className="flex flex-col gap-3 mt-10 md:mt-16">
+                        {APP_CONSTANTS.createGroupPlaceholder.map((placeholder) => (
+                            <div className="flex items-center gap-3" key={placeholder.id}>
+                                <div className="text-xl">{placeholder.icon}</div>
+                                <p className="text-themeTextGray text-sm md:text-base">{placeholder.label}</p>
+                            </div>
+                        ))}
                     </div>
                 </BackdropGradient>
             </div>
-            <div>
-                <BackdropGradient
-                    className="w-6/12 h-3/6 opacity-40"
-                    container="lg:items-center"
-                >
-                    <GlassCard className="xs:w-full lg:w-10/12 xl:w-8/12 mt-16 py-7">
+
+            {/* Right Side */}
+            <div className="flex justify-center md:justify-end">
+                <BackdropGradient className="w-full md:w-10/12 lg:w-8/12 h-auto opacity-40 flex items-center">
+                    <GlassCard className="w-full sm:w-11/12 md:w-10/12 xl:w-8/12 mt-10 md:mt-16 py-7 px-5">
                         {children}
                     </GlassCard>
                 </BackdropGradient>

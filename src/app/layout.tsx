@@ -10,9 +10,9 @@ import "./global.css"
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-    title: "Expertize AI",
+    title: "Expertize",
     description:
-        "Expertize AI is an educational platform that helps you learn and grow your skills.",
+        "Expertize is an educational platform that helps you learn and grow your skills.",
 }
 
 export default function RootLayout({

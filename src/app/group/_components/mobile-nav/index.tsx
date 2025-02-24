@@ -16,7 +16,7 @@ const MobileNav = async ({ groupid }: Props) => {
             <Link href={`/group/${groupid}`}>
                 <Home className="h-7 w-7" />
             </Link>
-            <Notification />
+            {/* <Notification /> */}
             <Link href={`/group/${groupid}/messages`}>
                 <Message className="h-7 w-7" />
             </Link>

@@ -74,23 +74,12 @@ export default function Subscriptions({ subscriptions, groups }: Props) {
                         const subscriptionDate = new Date(
                             subscription.createdAt,
                         )
-                        const isRecentSubscription =
-                            Date.now() - subscription.createdAt <
-                            7 * 24 * 60 * 60 * 1000 // 7 days
 
                         return (
                             <Card
                                 key={subscription.id}
                                 className="relative overflow-hidden"
                             >
-                                {isRecentSubscription && (
-                                    <div className="absolute top-0 right-0">
-                                        <Badge className="rounded-none rounded-bl bg-green-500/10 text-green-500">
-                                            New
-                                        </Badge>
-                                    </div>
-                                )}
-
                                 <CardHeader>
                                     <div className="flex justify-between items-start">
                                         <CardTitle className="text-2xl font-bold">

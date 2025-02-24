@@ -17,7 +17,7 @@ export const CopyButton = ({ content }: CopyButtonProps) => {
                     description: "Affiliate link copied to clipboard",
                 })
             }}
-            className="bg-black border-themeGray flex hover:bg-themeDarkGray gap-x-3"
+            className="bg-black border-themeGray flex hover:bg-themeDarkGray gap-x-3 mt-2"
             variant="outline"
         >
             <Copy size={20} />

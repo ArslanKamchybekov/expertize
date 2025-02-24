@@ -15,40 +15,43 @@ const IntegrationsPage = async ({
         stripe: payment ? true : false,
     }
     return (
-        <div className="flex-1 h-0 grid grid-cols-1 p-5 content-start lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {INTEGRATION_LIST_ITEMS.map((item) => (
-                <Card
-                    key={item.id}
-                    className="bg-themeBlack border-themeDarkGray"
-                >
-                    <CardContent className="flex flex-col p-5 gap-2">
-                        <div className="flex w-full justify-between items-start gap-x-20">
-                            <div className="">
-                                <div className="w-10 h-10 relative">
-                                    <Image
-                                        src={`/stripe.png`}
-                                        alt="Logo"
-                                        width={60}
-                                        height={60}
-                                    />
+        <div className="p-10 flex flex-col gap-y-10">
+            <h2 className="font-bold text-3xl">Integrations</h2>
+            <div className="flex-1 h-0 grid grid-cols-1 content-start lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                {INTEGRATION_LIST_ITEMS.map((item) => (
+                    <Card
+                        key={item.id}
+                        className="bg-themeBlack border-themeDarkGray"
+                    >
+                        <CardContent className="flex flex-col p-5 gap-2">
+                            <div className="flex w-full justify-between items-start gap-x-20">
+                                <div className="">
+                                    <div className="w-10 h-10 relative">
+                                        <Image
+                                            src={`/stripe.png`}
+                                            alt="Logo"
+                                            width={60}
+                                            height={60}
+                                        />
+                                    </div>
+                                    <h2 className="font-bold capitalize">
+                                        {item.name}
+                                    </h2>
                                 </div>
-                                <h2 className="font-bold capitalize">
-                                    {item.name}
-                                </h2>
+                                <IntegrationTrigger
+                                    connections={connections}
+                                    title={item.title}
+                                    descrioption={item.modalDescription}
+                                    logo={item.logo}
+                                    name={item.name}
+                                    groupid={params.groupid}
+                                />
                             </div>
-                            <IntegrationTrigger
-                                connections={connections}
-                                title={item.title}
-                                descrioption={item.modalDescription}
-                                logo={item.logo}
-                                name={item.name}
-                                groupid={params.groupid}
-                            />
-                        </div>
-                        <CardDescription>{item.description}</CardDescription>
-                    </CardContent>
-                </Card>
-            ))}
+                            <CardDescription>{item.description}</CardDescription>
+                        </CardContent>
+                    </Card>
+                ))}
+            </div>
         </div>
     )
 }

@@ -208,9 +208,10 @@ export const LeaderBoardCard = ({ light, className }: LeaderBoardCardProps) => {
                         <LoadingSkeleton />
                     ) : (
                         <div className="space-y-1">
-                            {users.map((user) => (
+                            {/* {users.map((user) => (
                                 <UserRankCard key={user.id} user={user} />
-                            ))}
+                            ))} */}
+                            In progress...
                         </div>
                     )}
                 </ScrollArea>

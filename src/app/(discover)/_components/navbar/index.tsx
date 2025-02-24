@@ -30,7 +30,12 @@ export const Navbar = async () => {
                     </span>
                 }
             >
-                <div>Content</div>
+                {user.status === 200 ? (
+                    // @ts-ignore
+                    <GroupDropDown members={groups.members} groups={groups} />
+                ) : (
+                    <p className="font-bold">Expertize.</p>
+                )}
             </GlassSheet>
             <div className="flex-1 lg:flex hidden justify-end gap-3">
                 <Link href={user.status === 200 ? `/group/create` : "/sign-in"}>

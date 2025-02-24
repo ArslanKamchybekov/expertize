@@ -38,7 +38,7 @@ export default async function UserProfilePage() {
 
     return (
         <div className="container mx-auto p-6 space-y-6">
-            <Card className="border-none shadow-lg">
+            <Card className="border-none shadow-lg bg-inherit">
                 <CardContent className="p-0">
                     {/* Hero Banner */}
                     <div className="relative h-48 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-t-lg">

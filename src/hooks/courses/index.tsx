@@ -224,8 +224,6 @@ export const useCourseModule = (courseId: string, groupid: string) => {
 
     const user = useUser()
 
-    const router = useRouter()
-
     const { variables, mutate, isPending } = useMutation({
         mutationFn: (data: { type: "NAME" | "DATA"; content: string }) =>
             onUpdateModule(moduleId!, data.type, data.content),

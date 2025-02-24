@@ -34,7 +34,7 @@ export default clerkMiddleware(async (auth, req) => {
                 )
             }
         } else {
-            console.error("Failed to fetch domain data:", await response.text())
+            console.error("Failed to fetch domain data")
         }
     }
 
