@@ -3,8 +3,9 @@
 import { DropDown } from "@/components/global/drop-down"
 import { Button } from "@/components/ui/button"
 import { CarotSort } from "@/icons"
-import { Group } from "lucide-react"
+import Image from "next/image"
 import Link from "next/link"
+import { getImageUrl } from "@/lib/utils"
 
 type GroupDropDownProps = {
     members?: {
@@ -37,6 +38,7 @@ type GroupDropDownProps = {
 
 export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
     const { groups: ownedGroups } = groups
+    console.log(ownedGroups?.[0]?.icon)
 
     return (
         <DropDown
@@ -53,9 +55,6 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
         >
             {ownedGroups && ownedGroups.length > 0 && (
                 <>
-                    {/* <h4 className="px-4 text-sm font-semibold text-themeTextGray">
-                        Owned Groups
-                    </h4> */}
                     {ownedGroups.map((item) => (
                         <Link
                             key={item.id}
@@ -65,6 +64,13 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                                 variant="ghost"
                                 className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                             >
+                                <Image 
+                                    src={getImageUrl(item.icon || "")} 
+                                    alt="group-icon" 
+                                    width={30} 
+                                    height={30} 
+                                    className="rounded-full"
+                                />
                                 {item.name}
                             </Button>
                         </Link>
@@ -72,13 +78,8 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                 </>
             )}
 
-            {/* <Separator orientation="horizontal" /> */}
-
             {members && members.length > 0 && (
                 <>
-                    {/* <h4 className="px-4 py-2 text-sm font-semibold text-themeTextGray">
-                        Member Groups
-                    </h4> */}
                     {members.map((member) => (
                         <Link
                             key={member.Group?.id}
@@ -88,12 +89,26 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                                 variant="ghost"
                                 className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                             >
-                                <Group />
+                                <Image
+                                    src={getImageUrl(member.Group?.icon || "")}
+                                    alt="group-icon"
+                                    width={30}
+                                    height={30}
+                                    className="rounded-full"
+                                />
                                 {member.Group?.name}
                             </Button>
                         </Link>
                     ))}
                 </>
+            )}
+
+            {groups.status !== 200 && (
+                <div className="p-4">
+                    <p className="text-sm text-themeGray">
+                        No groups found
+                    </p>
+                </div>  
             )}
         </DropDown>
     )

@@ -38,3 +38,7 @@ export const validateURLString = (url: string) => {
         }
     }
 }
+
+export const getImageUrl = (icon: string) => {
+    return `https://ucarecdn.com/${icon}/`
+}

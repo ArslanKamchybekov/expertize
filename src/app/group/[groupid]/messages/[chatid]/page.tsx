@@ -69,7 +69,7 @@ const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {
         <HydrationBoundary state={dehydrate(query)}>
             <div className="flex flex-col h-[calc(100vh-4rem)]">
                 {/* Chat Header */}
-                <Card className="rounded-none border-x-0 border-t-0">
+                <Card className="rounded-none border-x-0 border-t-0 bg-inherit">
                     <CardHeader className="p-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-4">

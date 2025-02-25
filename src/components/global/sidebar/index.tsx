@@ -11,6 +11,7 @@ import { memo, useMemo } from "react"
 import { v4 } from "uuid"
 import { DropDown } from "../drop-down"
 import SideBarMenu from "./menu"
+import { getImageUrl } from "@/lib/utils"
 
 export interface IChannels {
     id: string
@@ -98,7 +99,6 @@ interface Groups {
         | undefined
 }
 
-const getImageUrl = (icon: string) => `https://ucarecdn.com/${icon}/`
 
 // eslint-disable-next-line react/display-name
 const GroupsList = memo(
@@ -119,6 +119,16 @@ const GroupsList = memo(
                     className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                     aria-label={`Join ${item.name} group`}
                 >
+                    <Image
+                        src={getImageUrl(item.icon || "")}
+                        alt={`${item.name} icon`}
+                        width={30}
+                        height={30}
+                        className="rounded-lg"
+                        onError={(e) => {
+                            e.currentTarget.src = "/fallback-image.png"
+                        }}
+                    />
                     {item.name}
                 </Button>
             </Link>

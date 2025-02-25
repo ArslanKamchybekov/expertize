@@ -41,49 +41,49 @@ export const CourseContentForm = ({
         data?.section?.htmlContent || null,
     )
 
-    const [isEditing, setIsEditing] = useState(false)
-    const [transcriptText, setTranscriptText] = useState<string>("")
-    const [isTranscriptLoading, setIsTranscriptLoading] = useState(true)
+    // const [isEditing, setIsEditing] = useState(false)
+    // const [transcriptText, setTranscriptText] = useState<string>("")
+    // const [isTranscriptLoading, setIsTranscriptLoading] = useState(true)
 
-    const lectureContent = data?.section?.htmlContent || ""
+    // const lectureContent = data?.section?.htmlContent || ""
 
-    useEffect(() => {
-        const fetchTranscript = async () => {
-            const videoIdMatch = lectureContent.match(
-                /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
-            )
-            const videoId = videoIdMatch ? videoIdMatch[1] : null
+    // useEffect(() => {
+    //     const fetchTranscript = async () => {
+    //         const videoIdMatch = lectureContent.match(
+    //             /youtube\.com\/embed\/([a-zA-Z0-9_-]+)/,
+    //         )
+    //         const videoId = videoIdMatch ? videoIdMatch[1] : null
 
-            if (videoId) {
-                try {
-                    const transcript =
-                        await YoutubeTranscript.fetchTranscript(videoId)
-                    const combinedText = transcript
-                        .map((item) => item.text)
-                        .join(" ")
-                    setTranscriptText(combinedText)
-                } catch (error) {
-                    console.error("Failed to fetch transcript:", error)
-                } finally {
-                    setIsTranscriptLoading(false)
-                }
-            } else {
-                setIsTranscriptLoading(false)
-            }
-        }
+    //         if (videoId) {
+    //             try {
+    //                 const transcript =
+    //                     await YoutubeTranscript.fetchTranscript(videoId)
+    //                 const combinedText = transcript
+    //                     .map((item) => item.text)
+    //                     .join(" ")
+    //                 setTranscriptText(combinedText)
+    //             } catch (error) {
+    //                 console.error("Failed to fetch transcript:", error)
+    //             } finally {
+    //                 setIsTranscriptLoading(false)
+    //             }
+    //         } else {
+    //             setIsTranscriptLoading(false)
+    //         }
+    //     }
 
-        fetchTranscript()
-    }, [lectureContent])
+    //     fetchTranscript()
+    // }, [lectureContent])
 
-    const handleDescriptionClick = () => {
-        setIsEditing(true)
-    }
+    // const handleDescriptionClick = () => {
+    //     setIsEditing(true)
+    // }
 
-    const handleDescriptionBlur = () => {
-        setIsEditing(false)
-    }
+    // const handleDescriptionBlur = () => {
+    //     setIsEditing(false)
+    // }
 
-    if (isPending || isTranscriptLoading) {
+    if (isPending) {
         return (
             <div className="flex items-center justify-center min-h-screen">
                 <Loader loading>Loading...</Loader>
@@ -98,8 +98,8 @@ export const CourseContentForm = ({
             ref={editor}
         >
             <div
-                onClick={handleDescriptionClick}
-                onBlur={handleDescriptionBlur}
+                // onClick={handleDescriptionClick}
+                // onBlur={handleDescriptionBlur}
                 tabIndex={0}
             >
                 <BlockTextEditor
