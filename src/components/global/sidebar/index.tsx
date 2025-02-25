@@ -99,7 +99,6 @@ interface Groups {
         | undefined
 }
 
-
 // eslint-disable-next-line react/display-name
 const GroupsList = memo(
     ({

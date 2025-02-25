@@ -64,11 +64,11 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
                                 variant="ghost"
                                 className="flex gap-2 w-full justify-start hover:bg-themeGray items-center overflow-scroll"
                             >
-                                <Image 
-                                    src={getImageUrl(item.icon || "")} 
-                                    alt="group-icon" 
-                                    width={30} 
-                                    height={30} 
+                                <Image
+                                    src={getImageUrl(item.icon || "")}
+                                    alt="group-icon"
+                                    width={30}
+                                    height={30}
                                     className="rounded-full"
                                 />
                                 {item.name}
@@ -105,10 +105,8 @@ export const GroupDropDown = ({ groups, members }: GroupDropDownProps) => {
 
             {groups.status !== 200 && (
                 <div className="p-4">
-                    <p className="text-sm text-themeGray">
-                        No groups found
-                    </p>
-                </div>  
+                    <p className="text-sm text-themeGray">No groups found</p>
+                </div>
             )}
         </DropDown>
     )
