@@ -17,7 +17,7 @@ type GroupChatMenuProps = {
 
 export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
     const { members } = useAppSelector((state) => state.onlineTrackingReducer)
-    const { data, pathname, isLoading } = useGroupChat(groupid)
+    const { data } = useGroupChat(groupid)
     const router = useRouter()
     const [searchQuery, setSearchQuery] = useState("")
 
@@ -69,7 +69,7 @@ export const GroupChatMenu = ({ groupid }: GroupChatMenuProps) => {
     }
 
     return (
-        <Card className="h-full bg-inherit">
+        <Card className="h-full bg-themeBlack">
             <CardHeader className="space-y-4">
                 <div className="flex justify-between items-center">
                     <CardTitle className="flex items-center gap-2">

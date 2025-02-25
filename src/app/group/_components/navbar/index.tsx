@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { CheckBadge } from "@/icons"
 import { currentUser } from "@clerk/nextjs/server"
 import { Menu } from "lucide-react"
+import GroupMenu from "../../[groupid]/_components/group-navbar"
 import Link from "next/link"
 
 type NavbarProps = {
@@ -19,11 +20,12 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
             <GlassSheet trigger={<Menu className="md:hidden cursor-pointer" />}>
                 <SideBar groupid={groupid} userid={userid} mobile />
             </GlassSheet>
-            {/* <Search
-                searchType="POSTS"
-                className="rounded-full border-themeGray bg-black !opacity-100 px-3"
-                placeholder="Search..."
-            /> */}
+            <div className="hidden md:flex gap-5">
+                <GroupMenu
+                    orientation="desktop"
+                    groupid={groupid}
+                />
+            </div>
             <Link href={`/group/create`} className="hidden md:inline">
                 <Button
                     variant="outline"

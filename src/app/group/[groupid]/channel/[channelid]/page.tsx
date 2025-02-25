@@ -86,13 +86,6 @@ const GroupChannelPage = async ({ params }: Props) => {
 
                             {/* Main Content */}
                             <main className="lg:col-span-2 flex flex-col gap-y-5 py-5">
-                                <div className="hidden lg:block">
-                                    <Menu
-                                        orientation="desktop"
-                                        groupid={params.groupid}
-                                    />
-                                </div>
-
                                 <CreateNewPost
                                     userImage={user.imageUrl}
                                     channelid={params.channelid}

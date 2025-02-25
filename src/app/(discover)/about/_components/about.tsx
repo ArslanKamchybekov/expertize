@@ -42,7 +42,7 @@ const AboutGroup = ({ groupid, userid }: Props) => {
     return (
         <div className="flex flex-col gap-y-10">
             <div>
-                <h2 className="font-bold text-[56px] leading-none md:leading-normal">
+                <h2 className="font-bold text-5xl leading-none md:leading-normal">
                     {group.name}
                 </h2>
             </div>

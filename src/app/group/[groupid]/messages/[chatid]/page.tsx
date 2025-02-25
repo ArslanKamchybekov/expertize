@@ -5,13 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Separator } from "@/components/ui/separator"
-import {
     HydrationBoundary,
     QueryClient,
     dehydrate,
@@ -19,9 +12,6 @@ import {
 import {
     ArrowLeft,
     MessageSquare,
-    MoreVertical,
-    Phone,
-    Video,
 } from "lucide-react"
 import { ChatWindow } from "../_components/chat"
 
@@ -68,7 +58,6 @@ const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {
     return (
         <HydrationBoundary state={dehydrate(query)}>
             <div className="flex flex-col h-[calc(100vh-4rem)]">
-                {/* Chat Header */}
                 <Card className="rounded-none border-x-0 border-t-0 bg-inherit">
                     <CardHeader className="p-4">
                         <div className="flex items-center justify-between">
@@ -94,60 +83,15 @@ const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {
                                     </span>
                                 </div>
                             </div>
-
-                            <div className="flex items-center gap-2">
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-full"
-                                >
-                                    <Phone className="w-4 h-4" />
-                                </Button>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="rounded-full"
-                                >
-                                    <Video className="w-4 h-4" />
-                                </Button>
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="rounded-full"
-                                        >
-                                            <MoreVertical className="w-4 h-4" />
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent align="end">
-                                        <DropdownMenuItem>
-                                            View Profile
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            Search in Conversation
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            Mute Notifications
-                                        </DropdownMenuItem>
-                                        <Separator className="my-2" />
-                                        <DropdownMenuItem className="text-red-500">
-                                            Block User
-                                        </DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-                            </div>
                         </div>
                     </CardHeader>
                 </Card>
 
-                {/* Chat Window */}
                 <ChatWindow
                     userid={user.id!}
                     recieverid={member.member.User.id!}
                 />
 
-                {/* Chat Input */}
                 <HuddlesForm recieverid={member.member.User.id!} />
             </div>
         </HydrationBoundary>

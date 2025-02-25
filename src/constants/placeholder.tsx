@@ -1,6 +1,7 @@
 import {
+    Buisness,
     Chat,
-    Courses,
+    Check,
     Document,
     Grid,
     Heart,
@@ -43,17 +44,17 @@ export const CREATE_GROUP_PLACEHOLDER: CreateGroupPlaceholderProps[] = [
     },
     {
         id: "5",
-        label: "Access to Online Coding Editor",
-        icon: <Courses />,
-    },
-    {
-        id: "6",
         label: "Custom branding with white-label options",
         icon: <WhiteLabel />,
     },
     {
-        id: "7",
+        id: "6",
         label: "AI-driven educational tools",
         icon: <Tech />,
+    },
+    {
+        id: "7",
+        label: "Set pricing and manage subscriptions",
+        icon: <Buisness />,
     },
 ]

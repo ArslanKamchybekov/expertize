@@ -17,7 +17,7 @@ const SignInPage = () => {
                 </div>
                 <Separator orientation="horizontal" className="bg-themeGray" />
             </div>
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center gap-2 mb-4">
                 <p className="text-themeTextGray">
                     Don&apos;t have an account?
                 </p>
@@ -25,7 +25,7 @@ const SignInPage = () => {
                     Sign up
                 </a>
             </div>
-            {/* <GoogleAuthButton method="signin" /> */}
+            <GoogleAuthButton method="signup" />
         </>
     )
 }

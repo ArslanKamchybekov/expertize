@@ -41,7 +41,6 @@ const GroupSideWidget = memo(({ groupid, light, userid }: Props) => {
     const { group, error, isLoading } = useGroupInfo()
 
     if (isLoading) return <LoadingState />
-    // if (error) return <ErrorState error={error} />
     if (!group) return null
 
     return (
