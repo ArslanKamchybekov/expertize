@@ -9,10 +9,7 @@ import {
     QueryClient,
     dehydrate,
 } from "@tanstack/react-query"
-import {
-    ArrowLeft,
-    MessageSquare,
-} from "lucide-react"
+import { ArrowLeft, MessageSquare } from "lucide-react"
 import { ChatWindow } from "../_components/chat"
 
 const MemberChatPage = async ({ params }: { params: { chatid: string } }) => {

@@ -21,10 +21,7 @@ export const Navbar = async ({ groupid, userid }: NavbarProps) => {
                 <SideBar groupid={groupid} userid={userid} mobile />
             </GlassSheet>
             <div className="hidden md:flex gap-5">
-                <GroupMenu
-                    orientation="desktop"
-                    groupid={groupid}
-                />
+                <GroupMenu orientation="desktop" groupid={groupid} />
             </div>
             <Link href={`/group/create`} className="hidden md:inline">
                 <Button
